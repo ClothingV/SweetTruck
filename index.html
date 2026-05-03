@@ -76,26 +76,17 @@
       box-shadow: 0 0 16px rgba(212,190,138,0.25);
     }
     .nav-cta::after { display: none !important; }
-    .nav-cta-mobile {
-      display: inline-flex !important;
-      padding: 5px 12px !important; font-size: 9px !important;
-      letter-spacing: 0.5px !important; margin-left: 0 !important;
-      border-width: 1px !important;
-    }
-    @media (min-width: 768px) {
-      .nav-cta-mobile { display: none !important; }
-    }
     .hp-hamburger {
-      width: 24px; height: 18px; display: flex; flex-direction: column;
-      justify-content: space-between; cursor: pointer;
+      width: 44px; height: 44px; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; gap: 5px; cursor: pointer;
     }
     .hp-hamburger span {
-      display: block; height: 1.5px; background: var(--accent); border-radius: 2px;
+      display: block; width: 20px; height: 1.5px; background: var(--accent); border-radius: 2px;
       transition: all 0.25s; transform-origin: center;
     }
-    .hp-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hp-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hp-hamburger.open span:nth-child(2) { opacity: 0; }
-    .hp-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .hp-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     .mobile-menu {
       display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -239,7 +230,7 @@
       background: var(--bg-card); border: 1px solid var(--border-accent);
       border-radius: 14px; padding: 14px 12px; text-align: center;
       transition: all 0.3s; cursor: pointer;
-      min-width: calc(33.33% - 7px); flex-shrink: 0;
+      min-width: calc(50% - 5px); flex-shrink: 0;
       position: relative;
     }
     .event-type-box:hover {
@@ -531,7 +522,7 @@
       display: flex; align-items: center; gap: 14px; margin-top: 12px;
     }
     .carousel-arrow {
-      width: 32px; height: 32px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       background: rgba(212,190,138,0.08); border: 1px solid rgba(212,190,138,0.15);
       color: var(--accent); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -663,7 +654,6 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
       padding: 20px 16px;
     }
-    .footer-col { }
     .footer-col-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 16px; font-weight: 600; color: var(--accent); margin-bottom: 14px;
@@ -1455,7 +1445,6 @@
     .catering-section:last-of-type { border-bottom: none; }
     .catering-section .catering-text { order: 1; }
     .catering-section .catering-img,
-    .catering-section .ba-slider,
     .catering-section > div:first-child:not(.catering-text) { order: 2; }
     .catering-section.reverse { }
     .catering-img {
@@ -1508,8 +1497,7 @@
       .catering-section { flex-direction: row; gap: 32px; align-items: center; }
       .catering-section .catering-text,
       .catering-section .catering-img,
-      .catering-section .ba-slider,
-      .catering-section > div:first-child:not(.catering-text) { order: unset; }
+        .catering-section > div:first-child:not(.catering-text) { order: unset; }
       .catering-section.reverse { flex-direction: row-reverse; }
       .catering-img { max-width: 420px; min-height: 280px; }
       .catering-text h3 { font-size: 28px; }
@@ -1520,40 +1508,6 @@
       .catering-img { max-width: 480px; min-height: 320px; }
       .catering-text h3 { font-size: 32px; }
       .catering-text p { font-size: 15px; }
-    }
-
-    /* ── BEFORE/AFTER SLIDER ── */
-    .ba-slider {
-      position: relative; overflow: hidden; border-radius: 16px;
-      border: 1px solid var(--border-accent); max-width: 280px;
-      cursor: ew-resize; user-select: none;
-    }
-    .ba-slider img { width: 100%; display: block; }
-    .ba-after {
-      position: absolute; top: 0; left: 0; height: 100%;
-      overflow: hidden; width: 50%;
-    }
-    .ba-after img {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .ba-handle {
-      position: absolute; top: 0; bottom: 0; width: 3px;
-      background: var(--accent); left: 50%; z-index: 3;
-      cursor: ew-resize;
-    }
-    .ba-handle::after {
-      content: ''; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--accent); border: 2px solid var(--bg-primary);
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
-    }
-    .ba-handle::before {
-      content: '◀ ▶'; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 8px; color: var(--bg-primary); z-index: 4;
-      letter-spacing: 2px; font-weight: 700;
     }
 
     /* ── COOKIE BANNER ── */
@@ -1651,7 +1605,7 @@
     .partner-track {
       display: flex; gap: 40px; align-items: center;
       animation: partnerScroll 25s linear infinite;
-      width: max-content;
+      width: max-content; will-change: transform;
     }
     .partner-track:hover { animation-play-state: paused; }
     .partner-logo {
@@ -2380,7 +2334,6 @@
     <h3>2. Verantwortliche Stelle</h3>
     <p>Penelope's Sweetness World<br>
     88326 Aulendorf<br>
-    88326 Aulendorf<br>
     E-Mail: info@sweettruck.de</p>
     <h3>3. Datenerfassung auf dieser Website</h3>
     <p>Diese Website verwendet Cookies, um Ihre Präferenzen zu speichern. Es werden keine personenbezogenen Daten an Dritte weitergegeben. Sie können Cookies jederzeit über den Cookie-Banner ablehnen.</p>
@@ -2625,58 +2578,6 @@
     unlockBody();
   }
 
-  // Choco slider
-  let chocoIdx = 0;
-  setInterval(() => {
-    const slides = document.querySelectorAll('.choco-slide');
-    if (!slides.length) return;
-    slides[chocoIdx].style.display = 'none';
-    chocoIdx = (chocoIdx + 1) % slides.length;
-    slides[chocoIdx].style.display = 'block';
-  }, 3000);
-
-  // Before/After Slider with auto-reveal
-  const baSlider = document.getElementById('ba-slider');
-  if (baSlider) {
-    const baAfter = document.getElementById('ba-after');
-    const baHandle = document.getElementById('ba-handle');
-    let baDragging = false;
-    let baAutoActive = true;
-    let baPos = 0;
-    let baDir = 1;
-
-    function baSet(pos) {
-      baAfter.style.width = pos + '%';
-      baHandle.style.left = pos + '%';
-    }
-
-    function baMove(x) {
-      const rect = baSlider.getBoundingClientRect();
-      let pos = ((x - rect.left) / rect.width) * 100;
-      pos = Math.max(0, Math.min(100, pos));
-      baPos = pos;
-      baSet(pos);
-    }
-
-    // Auto-reveal animation
-    function baAutoReveal() {
-      if (baDragging || !baAutoActive) return;
-      baPos += baDir * 0.4;
-      if (baPos >= 100) { baPos = 100; baDir = -1; }
-      if (baPos <= 0) { baPos = 0; baDir = 1; }
-      baSet(baPos);
-      requestAnimationFrame(baAutoReveal);
-    }
-    requestAnimationFrame(baAutoReveal);
-
-    // Manual override
-    baSlider.addEventListener('mousedown', () => { baDragging = true; baAutoActive = false; });
-    document.addEventListener('mouseup', () => { if (baDragging) { baDragging = false; baAutoActive = true; requestAnimationFrame(baAutoReveal); } });
-    document.addEventListener('mousemove', e => { if (baDragging) baMove(e.clientX); });
-    baSlider.addEventListener('touchstart', () => { baDragging = true; baAutoActive = false; }, {passive:true});
-    document.addEventListener('touchend', () => { if (baDragging) { baDragging = false; baAutoActive = true; requestAnimationFrame(baAutoReveal); } });
-    document.addEventListener('touchmove', e => { if (baDragging) baMove(e.touches[0].clientX); }, {passive:true});
-  }
 
   let wafCatIdx = 0;
   setInterval(() => {
