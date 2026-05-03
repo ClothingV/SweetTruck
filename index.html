@@ -432,8 +432,8 @@
       left: 50%; top: 50%;
       margin-left: -85px; margin-top: -115px;
       border-radius: 16px; overflow: hidden;
-      background: var(--bg-card); border: 1px solid var(--border);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      background: var(--bg-card); border: 2px solid var(--accent-dark);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
       transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
       cursor: pointer;
     }
@@ -474,11 +474,10 @@
       .ci-back { padding: 28px; }
     }
     .carousel-item img {
-      width: 100%; height: 170px; object-fit: contain; display: block;
-      background: var(--bg-card);
+      width: 100%; height: 190px; object-fit: cover; display: block;
     }
     .carousel-item .ci-name {
-      padding: 8px 10px; text-align: center;
+      padding: 6px 8px; text-align: center; background: rgba(24,24,26,0.85);
       font-family: 'Cormorant Garamond', serif;
       font-size: 13px; font-weight: 600; color: var(--text-primary);
     }
@@ -491,8 +490,8 @@
 
     .carousel-item.ci-active {
       transform: translateZ(0) scale(1); opacity: 1; z-index: 3;
-      border-color: var(--border-accent);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15), 0 0 12px rgba(212,190,138,0.05);
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25), 0 0 14px rgba(212,190,138,0.15);
     }
     .carousel-item.ci-left {
       transform: translateX(-105px) translateZ(-100px) rotateY(22deg) scale(0.8);
@@ -548,7 +547,7 @@
         width: 240px; height: 310px;
         margin-left: -120px; margin-top: -155px; border-radius: 18px;
       }
-      .carousel-item img { height: 240px; }
+      .carousel-item img { height: 260px; }
       .carousel-item .ci-name { padding: 10px 14px; font-size: 16px; }
       .carousel-item .ci-sub { font-size: 9px; }
       .carousel-item.ci-left { transform: translateX(-150px) translateZ(-120px) rotateY(24deg) scale(0.82); }
@@ -564,7 +563,7 @@
         width: 320px; height: 400px;
         margin-left: -160px; margin-top: -200px; border-radius: 20px;
       }
-      .carousel-item img { height: 320px; }
+      .carousel-item img { height: 340px; }
       .carousel-item .ci-name { padding: 14px 16px; font-size: 20px; }
       .carousel-item .ci-sub { font-size: 11px; }
       .carousel-item.ci-left { transform: translateX(-200px) translateZ(-150px) rotateY(25deg) scale(0.85); }
