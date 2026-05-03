@@ -1,0 +1,3500 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SweetTruck — Preview</title>
+  <meta name="description" content="Sweet Truck — Bubble Waffeln, Crepes & Kaffeespezialitäten für dein Event. Catering in ganz Süddeutschland. Jetzt anfragen!">
+  <meta name="keywords" content="Sweet Truck, Bubble Waffeln, Food Truck, Catering, Aulendorf, Hochzeit, Firmenevent, Süddeutschland">
+  <meta property="og:title" content="Sweet Truck — Penelope's Sweetness World">
+  <meta property="og:description" content="Bubble Waffeln, Crepes & Kaffeespezialitäten — frisch zubereitet auf deinem Event.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.sweettruck.de">
+  <meta property="og:image" content="img/truck_hero.jpg">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="canonical" href="https://www.sweettruck.de">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Neutral dark gray — elegant, refined */
+      --bg-primary: #18181a;
+      --bg-secondary: #1e1e21;
+      --bg-card: #232327;
+      --bg-elevated: #2a2a2e;
+      --bg-warm: #1c1c1f;
+
+      /* Logo-matched warm beige-gold */
+      --accent: #d4be8a;
+      --accent-light: #e2d0a4;
+      --accent-dark: #b8a06a;
+      --accent-glow: rgba(212,190,138,0.12);
+      --accent-glow-strong: rgba(212,190,138,0.22);
+
+      /* Neutral text tones */
+      --text-primary: #f2f0ec;
+      --text-secondary: #f2f0ec;
+      --text-muted: #c0c0c4;
+
+      --border: #2f2f33;
+      --border-accent: rgba(212,190,138,0.18);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #131315; color: #fff; min-height: 100vh;
+    }
+
+    /* === TAB BAR === */
+    .tab-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      background: #18181a;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .tab-bar-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 24px; height: 56px;
+    }
+    .tab-logo { width: 28px; height: 28px; object-fit: contain; border-radius: 6px; }
+    .tab-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 600; color: var(--accent);
+      letter-spacing: 0.5px; margin-right: 24px;
+    }
+    .tab-pills { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .tab-pills::-webkit-scrollbar { display: none; }
+    .tab-pill {
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 7px 18px;
+      border-radius: 20px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.25s; font-family: inherit;
+      white-space: nowrap;
+    }
+    .tab-pill:hover { border-color: var(--border-accent); color: var(--text-primary); background: var(--bg-elevated); }
+    .tab-pill.active {
+      background: var(--accent); color: var(--bg-primary);
+      border-color: var(--accent); font-weight: 600;
+    }
+
+    /* === TAB CONTENT === */
+    .tab-content { display: none; padding-top: 56px; min-height: 100vh; }
+    .tab-content.active { display: block; animation: tabFadeIn 0.3s ease; }
+    @keyframes tabFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .tab-content-center {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: calc(100vh - 56px); padding: 30px;
+    }
+    .tab-view-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+      color: var(--accent); font-weight: 500; margin-bottom: 14px; text-align: center;
+    }
+
+    /* === SPLIT LAYOUT (original) === */
+    .split-container {
+      display: flex; gap: 50px; padding: 30px;
+      height: 100vh; height: 100dvh; align-items: center; justify-content: center;
+    }
+    .panel { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .panel-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+      color: var(--accent); font-weight: 500;
+    }
+
+    /* === PHONE FRAME === */
+    .phone-frame {
+      width: 375px; height: 760px;
+      border: 2px solid #35353a; border-radius: 44px;
+      overflow: hidden; background: var(--bg-primary);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(212,190,138,0.05);
+    }
+    .phone-frame-sm {
+      width: 320px; height: 640px;
+    }
+    .phone-notch {
+      width: 120px; height: 24px; background: #0d0d0f;
+      border-radius: 0 0 16px 16px; margin: 0 auto;
+      position: relative; z-index: 10;
+    }
+    .phone-content {
+      height: calc(100% - 24px); overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: #35353a transparent;
+      position: relative;
+    }
+
+    /* === DESKTOP FRAME === */
+    .desktop-frame {
+      width: 100%; max-width: 1200px; height: calc(100vh - 120px);
+      border: 2px solid #35353a; border-radius: 12px;
+      overflow: hidden; background: var(--bg-primary);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(212,190,138,0.05);
+    }
+    .desktop-frame-sm {
+      width: 600px; height: 480px;
+    }
+    .desktop-topbar {
+      height: 36px; background: #1c1c1f; display: flex;
+      align-items: center; padding: 0 14px; gap: 7px;
+      border-bottom: 1px solid #2a2a2e;
+    }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28ca41; }
+    .desktop-url {
+      flex: 1; margin-left: 14px; background: var(--bg-primary); border-radius: 6px;
+      padding: 4px 14px; font-size: 12px; color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .desktop-content {
+      height: calc(100% - 36px); overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: #35353a transparent;
+    }
+
+    /* -- NAV -- */
+    .hp-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px; background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-logo { display: flex; align-items: center; }
+    .hp-logo img { height: 40px; width: auto; }
+    .hp-nav-links { display: flex; gap: 28px; }
+    .hp-nav-links a {
+      text-decoration: none; color: var(--text-secondary); font-size: 13px;
+      font-weight: 400; letter-spacing: 0.5px; transition: color 0.3s;
+      cursor: pointer; position: relative; padding: 4px 0;
+    }
+    .hp-nav-links a:hover { color: var(--accent); }
+    .hp-nav-links a.active { color: var(--accent); }
+    .hp-nav-links a.active::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 100%; height: 1.5px; background: var(--accent);
+    }
+
+    /* -- MOBILE DROPDOWN -- */
+    .mobile-menu {
+      display: none; position: absolute; top: 58px; left: 0; right: 0;
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border);
+      z-index: 20; padding: 8px 0;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; padding: 12px 18px; color: var(--text-secondary);
+      font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover, .mobile-menu a.active {
+      color: var(--accent); background: var(--bg-card);
+    }
+    .hp-nav-mobile {
+      position: relative;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hp-hamburger.open span:nth-child(2) { opacity: 0; }
+    .hp-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .hp-hamburger span { transition: all 0.25s; transform-origin: center; }
+    .hp-logo-sm { display: flex; align-items: center; }
+    .hp-logo-sm img { height: 30px; width: auto; }
+    .hp-hamburger {
+      width: 24px; height: 18px; display: flex; flex-direction: column;
+      justify-content: space-between; cursor: pointer;
+    }
+    .hp-hamburger span {
+      display: block; height: 1.5px; background: var(--accent); border-radius: 2px;
+    }
+
+    /* -- HERO -- */
+    .hp-hero {
+      padding: 80px 32px 80px; text-align: center; position: relative;
+      border-bottom: 1px solid var(--border);
+      min-height: 480px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hp-hero::after {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background: url('img/hero_truck.webp') center center / cover no-repeat;
+      pointer-events: none;
+    }
+    .hp-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(18,18,20,0.6), rgba(20,20,23,0.75));
+      pointer-events: none;
+    }
+    .hp-hero > * { position: relative; z-index: 2; }
+    .hp-hero-icon {
+      margin-bottom: 24px; position: relative;
+    }
+    .hp-hero-icon img { width: 220px; height: auto; }
+    .hp-hero-mobile .hp-hero-icon img { width: 170px; height: auto; }
+    .hp-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 600; color: var(--text-primary);
+      line-height: 1.2; letter-spacing: -0.5px; position: relative;
+    }
+    .hp-hero h1 span { color: var(--accent); }
+    .hp-hero p {
+      font-size: 14px; color: var(--text-secondary); margin-top: 14px;
+      max-width: 400px; margin-inline: auto; line-height: 1.7;
+      position: relative; font-weight: 400;
+    }
+    .hp-hero-btn {
+      display: inline-block; margin-top: 28px; padding: 13px 34px;
+      background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 13px; letter-spacing: 0.8px;
+      transition: all 0.3s; position: relative;
+    }
+    .hp-hero-btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(212,190,138,0.2);
+    }
+
+    .hp-hero-mobile {
+      padding: 36px 20px 32px; text-align: center; position: relative;
+      background: linear-gradient(180deg, rgba(18,18,20,0.6), rgba(20,20,23,0.78)),
+        url('img/hero_truck.webp') center center / cover no-repeat;
+      background-attachment: scroll;
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-hero-mobile::before {
+      content: ''; position: absolute; top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px; height: 160px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hp-hero-mobile h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; color: var(--text-primary);
+      line-height: 1.2; position: relative;
+    }
+    .hp-hero-mobile h1 span { color: var(--accent); }
+    .hp-hero-mobile p {
+      font-size: 12px; color: var(--text-secondary); margin-top: 10px;
+      line-height: 1.7; position: relative; font-weight: 400;
+    }
+    .hp-hero-mobile .hp-hero-btn {
+      display: inline-block; margin-top: 20px; padding: 11px 26px;
+      background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 12px; letter-spacing: 0.8px;
+    }
+
+    /* -- SUBLINE -- */
+    .hp-subline {
+      text-align: center; padding: 20px 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-style: italic; color: var(--text-muted);
+      font-weight: 400; letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-subline-mobile {
+      text-align: center; padding: 14px 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-style: italic; color: var(--text-muted);
+      font-weight: 400;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* -- EVENT TYPE BOXES -- */
+    .event-types {
+      display: flex; gap: 14px; padding: 28px 32px;
+      overflow: hidden; position: relative;
+    }
+    .event-types-track {
+      display: flex; gap: 14px;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .event-type-box {
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: 16px; padding: 22px 16px; text-align: center;
+      transition: all 0.3s; cursor: pointer;
+      min-width: calc(20% - 12px); flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .event-type-box:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-elevated);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .etb-icon {
+      margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .etb-icon svg { width: 28px; height: 28px; }
+    .etb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .etb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-weight: 400; }
+
+    .event-types-mobile {
+      display: flex; gap: 10px; padding: 18px 16px;
+      overflow: hidden; position: relative;
+    }
+    .event-types-track-m {
+      display: flex; gap: 10px;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .event-type-box-sm {
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: 14px; padding: 12px 10px; text-align: center;
+      min-width: 150px; flex-shrink: 0;
+      cursor: pointer; transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .event-type-box-sm:active { transform: scale(0.96); }
+    .event-type-box-sm:hover { border-color: var(--border-accent); }
+    .event-type-box-sm .etb-icon {
+      margin: 0 auto 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .event-type-box-sm .etb-icon svg { width: 22px; height: 22px; }
+    .event-type-box-sm .etb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px; font-weight: 600; color: var(--text-primary);
+    }
+
+    .etb-bg-icon {
+      position: absolute; right: 8px; bottom: 8px;
+      width: 60px; height: 60px;
+      opacity: 0.07; pointer-events: none;
+      color: var(--text-primary);
+    }
+    .etb-bg-icon svg { width: 100%; height: 100%; }
+    .event-type-box-sm .etb-bg-icon {
+      width: 45px; height: 45px;
+    }
+
+    /* -- SECTIONS -- */
+    .hp-section { padding: 28px 32px; }
+    .hp-section-mobile { padding: 22px 16px; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; text-align: center;
+      margin-bottom: 6px; color: var(--text-primary);
+    }
+    .section-title span { color: var(--accent); }
+    .section-sub {
+      text-align: center; font-size: 12px; color: var(--text-muted);
+      margin-bottom: 22px; font-weight: 400;
+    }
+    .section-title-sm {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; text-align: center;
+      margin-bottom: 4px; color: var(--text-primary);
+    }
+    .section-title-sm span { color: var(--accent); }
+    .section-sub-sm {
+      text-align: center; font-size: 11px; color: var(--text-muted);
+      margin-bottom: 16px; font-weight: 400;
+    }
+
+    /* -- CALENDAR -- */
+    /* ── Calendar: Glassmorphism + Waffle Texture ── */
+    /* ── CALENDAR FRAME ── */
+    .calendar {
+      max-width: 900px; width: 100%; margin: 0 auto;
+      background: rgba(35, 35, 39, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(212, 190, 138, 0.12);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .calendar::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(212,190,138,0.04) 2px, transparent 2px);
+      background-size: 18px 18px;
+      pointer-events: none; z-index: 0;
+    }
+    .calendar > * { position: relative; z-index: 1; }
+
+    /* Header inside truck */
+    .cal-header {
+      background: linear-gradient(135deg, rgba(42,42,46,0.95), rgba(35,35,39,0.98));
+      padding: 16px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(212,190,138,0.1);
+    }
+    .cal-header-left {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cal-header-logo {
+      height: 28px; width: auto; object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(212,190,138,0.4));
+    }
+    .cal-header-brand {
+      font-size: 10px; font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-left: 1px solid rgba(212,190,138,0.2);
+      padding-left: 10px;
+    }
+    .cal-header-center {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cal-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--accent);
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      min-width: 140px; text-align: center;
+    }
+    .cal-nav-btn {
+      background: rgba(212,190,138,0.08);
+      border: 1px solid rgba(212,190,138,0.15);
+      color: var(--accent);
+      width: 32px; height: 32px; border-radius: 50%;
+      cursor: pointer; font-size: 16px; font-weight: 500;
+      transition: all 0.25s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cal-nav-btn:hover {
+      background: rgba(212,190,138,0.18);
+      border-color: rgba(212,190,138,0.3);
+      transform: scale(1.08);
+    }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 5px; padding: 16px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .cal-grid.transitioning {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    .cal-day-name {
+      text-align: center; font-size: 11px; font-weight: 700;
+      color: var(--accent); padding: 8px 0;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+    .cal-day {
+      min-height: 56px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 3px;
+      border-radius: 12px; font-size: 14px; color: var(--text-secondary);
+      cursor: default; position: relative; transition: all 0.25s;
+      padding: 6px 4px;
+    }
+    .cal-day.has-event {
+      cursor: pointer;
+      background: rgba(212,190,138,0.12);
+      border: 1.5px solid rgba(212,190,138,0.25);
+      box-shadow: 0 2px 10px rgba(212,190,138,0.1);
+    }
+    .cal-day.has-event:hover {
+      background: rgba(212,190,138,0.22);
+      border-color: rgba(212,190,138,0.4);
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(212,190,138,0.18);
+    }
+    .cal-day .day-num {
+      font-weight: 600; font-size: 14px; line-height: 1; margin-bottom: 2px;
+      color: var(--text-primary);
+    }
+    .cal-day.empty .day-num { color: var(--text-muted); font-weight: 400; }
+    .cal-day .waffles { display: flex; gap: 3px; margin-top: 3px; }
+    .cal-day .waffles svg {
+      width: 20px; height: 20px;
+      filter: drop-shadow(0 0 6px rgba(212,190,138,0.8));
+    }
+    .cal-day.today {
+      background: rgba(212,190,138,0.12);
+      border: 1.5px solid rgba(212,190,138,0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 16px rgba(212,190,138,0.1);
+    }
+    .cal-day.today .day-num {
+      background: var(--accent); color: var(--bg-primary);
+      width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-weight: 700;
+      box-shadow: 0 0 14px rgba(212,190,138,0.5);
+    }
+    .cal-day.empty { pointer-events: none; }
+    .cal-event-pill {
+      display: block;
+      font-size: 8px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+      line-height: 1.4;
+      max-width: 100%;
+    }
+    .cal-event-pill.t-markt { background: #33b679; }
+    .cal-event-pill.t-festival { background: #039be5; }
+    .cal-event-pill.t-privat { background: #7986cb; }
+    .cal-event-pill.t-firmen { background: var(--accent); color: var(--bg-primary); }
+    .cal-event-pill.t-default { background: #8e24aa; }
+    .cal-more { font-size: 8px; color: var(--text-muted); text-align: center; }
+    .cal-tooltip {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      bottom: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      min-width: 160px;
+      max-width: min(220px, calc(100vw - 20px));
+      z-index: 50;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+    .cal-day.has-event:hover .cal-tooltip { display: block; }
+    .cal-tooltip-event {
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cal-tooltip-event:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .cal-tooltip-title { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+    .cal-tooltip-info { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .cal-next-event {
+      display: flex; align-items: center; gap: 12px;
+      margin: 16px auto 0; padding: 12px 20px;
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: 14px; cursor: pointer;
+      transition: all 0.2s; max-width: 900px; width: 100%;
+    }
+    .cal-next-event:hover {
+      background: var(--accent-glow); border-color: var(--accent);
+    }
+    .cal-next-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212,190,138,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(212,190,138,0); }
+    }
+    .cal-next-info { flex: 1; }
+    .cal-next-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 500; }
+    .cal-next-title { font-size: 12px; color: var(--text-primary); font-weight: 500; margin-top: 1px; }
+    .cal-next-arrow { color: var(--accent); font-size: 16px; }
+    /* -- ABOUT SECTION -- */
+    .about-section {
+      padding: 36px 32px; text-align: center;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+    }
+    .about-photos {
+      display: flex; gap: 16px; justify-content: center; align-items: flex-end;
+      margin-bottom: 20px;
+    }
+    .about-photo {
+      border-radius: 16px; overflow: hidden;
+      border: 2px solid var(--accent-dark);
+      background: var(--bg-elevated);
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-photo-side {
+      width: 220px; height: 280px;
+    }
+    .about-photo-center {
+      width: 280px; height: 380px;
+      border-color: var(--accent-dark);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .about-photo-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--accent); font-weight: 600;
+      margin-top: 6px; text-align: center;
+    }
+    .about-photo-role {
+      font-size: 10px; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .about-text-block { max-width: 500px; margin: 0 auto; }
+    .about-text-block h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;
+    }
+    .about-text-block h3 span { color: var(--accent); }
+    .about-text-block p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.7; font-weight: 400;
+    }
+
+    .about-section-mobile {
+      padding: 22px 16px; text-align: center;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+    }
+    .about-section-mobile .about-photos {
+      gap: 8px; margin-bottom: 14px;
+    }
+    .about-section-mobile .about-photo-side {
+      width: 100px; height: 140px;
+    }
+    .about-section-mobile .about-photo-center {
+      width: 140px; height: 190px;
+    }
+    .about-section-mobile .about-photo-label { font-size: 13px; }
+    .about-section-mobile h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; color: var(--text-primary); margin-bottom: 6px; font-weight: 600;
+    }
+    .about-section-mobile h3 span { color: var(--accent); }
+    .about-section-mobile p {
+      font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-weight: 400;
+    }
+
+    /* -- PRODUCT GALLERY (kept for mobile) -- */
+    .product-scroll {
+      display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .product-card {
+      min-width: 140px; flex-shrink: 0; border-radius: 16px;
+      overflow: hidden; background: var(--bg-card); border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .product-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .product-card img { width: 140px; height: 120px; object-fit: cover; display: block; }
+    .product-card .pc-name {
+      padding: 8px 10px; font-size: 11px; color: var(--text-primary);
+      font-weight: 500; text-align: center;
+    }
+
+    /* -- 3D CAROUSEL -- */
+    .carousel-wrap {
+      perspective: 1000px;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .carousel-stage {
+      width: 380px; height: 440px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .carousel-item {
+      position: absolute;
+      width: 320px; height: 400px;
+      left: 50%; top: 50%;
+      margin-left: -160px; margin-top: -200px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      cursor: pointer;
+      backface-visibility: hidden;
+    }
+    .carousel-item img {
+      width: 100%; height: 320px; object-fit: contain; display: block;
+      background: var(--bg-card);
+    }
+    .carousel-item .ci-name {
+      padding: 14px 16px; text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: var(--text-primary);
+    }
+    .carousel-item .ci-sub {
+      font-size: 11px; color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400; margin-top: 2px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* Active (center) */
+    .carousel-item.ci-active {
+      transform: translateZ(0) scale(1);
+      opacity: 1; z-index: 3;
+      border-color: var(--border-accent);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.5), 0 0 30px rgba(212,190,138,0.08);
+    }
+
+    /* Left */
+    .carousel-item.ci-left {
+      transform: translateX(-200px) translateZ(-150px) rotateY(25deg) scale(0.85);
+      opacity: 0.6; z-index: 2;
+      filter: blur(1px) brightness(0.7);
+    }
+
+    /* Right */
+    .carousel-item.ci-right {
+      transform: translateX(200px) translateZ(-150px) rotateY(-25deg) scale(0.85);
+      opacity: 0.6; z-index: 2;
+      filter: blur(1px) brightness(0.7);
+    }
+
+    /* Far left */
+    .carousel-item.ci-far-left {
+      transform: translateX(-340px) translateZ(-280px) rotateY(35deg) scale(0.7);
+      opacity: 0.25; z-index: 1;
+      filter: blur(2px) brightness(0.5);
+    }
+
+    /* Far right */
+    .carousel-item.ci-far-right {
+      transform: translateX(340px) translateZ(-280px) rotateY(-35deg) scale(0.7);
+      opacity: 0.25; z-index: 1;
+      filter: blur(2px) brightness(0.5);
+    }
+
+    /* Hidden */
+    .carousel-item.ci-hidden {
+      transform: translateZ(-300px) scale(0.5);
+      opacity: 0; z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Steam effect on active */
+    .carousel-item.ci-active::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 20%; right: 20%; height: 60px;
+      background: linear-gradient(to top,
+        transparent 0%,
+        rgba(255,255,255,0.03) 30%,
+        rgba(255,255,255,0.06) 60%,
+        transparent 100%);
+      animation: steamRise 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 5;
+    }
+    @keyframes steamRise {
+      0%, 100% { opacity: 0; transform: translateY(0) scaleX(1); }
+      30% { opacity: 1; }
+      70% { opacity: 0.5; }
+      100% { opacity: 0; transform: translateY(-40px) scaleX(1.3); }
+    }
+
+    /* Nav arrows */
+    .carousel-nav {
+      display: flex; align-items: center; gap: 20px; margin-top: 16px;
+    }
+    .carousel-arrow {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(212,190,138,0.08);
+      border: 1px solid rgba(212,190,138,0.15);
+      color: var(--accent); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: all 0.25s;
+    }
+    .carousel-arrow:hover {
+      background: rgba(212,190,138,0.18);
+      border-color: rgba(212,190,138,0.3);
+      transform: scale(1.08);
+    }
+    .carousel-dots {
+      display: flex; gap: 6px;
+    }
+    .carousel-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); transition: all 0.3s; cursor: pointer;
+    }
+    .carousel-dot.active {
+      background: var(--accent); width: 20px; border-radius: 4px;
+      box-shadow: 0 0 8px rgba(212,190,138,0.4);
+    }
+
+    /* Mobile carousel — kompakter */
+    .carousel-mobile .carousel-stage {
+      width: 200px; height: 260px;
+    }
+    .carousel-mobile .carousel-item {
+      width: 170px; height: 230px;
+      margin-left: -85px; margin-top: -115px;
+      border-radius: 16px;
+    }
+    .carousel-mobile .carousel-item img {
+      height: 170px;
+    }
+    .carousel-mobile .carousel-item .ci-name {
+      padding: 8px 10px; font-size: 13px;
+    }
+    .carousel-mobile .carousel-item .ci-sub {
+      font-size: 8px;
+    }
+    .carousel-mobile .carousel-item.ci-left {
+      transform: translateX(-105px) translateZ(-100px) rotateY(22deg) scale(0.8);
+    }
+    .carousel-mobile .carousel-item.ci-right {
+      transform: translateX(105px) translateZ(-100px) rotateY(-22deg) scale(0.8);
+    }
+    .carousel-mobile .carousel-item.ci-far-left {
+      transform: translateX(-170px) translateZ(-180px) rotateY(30deg) scale(0.65);
+    }
+    .carousel-mobile .carousel-item.ci-far-right {
+      transform: translateX(170px) translateZ(-180px) rotateY(-30deg) scale(0.65);
+    }
+    .carousel-mobile .carousel-arrow {
+      width: 32px; height: 32px; font-size: 15px;
+    }
+    .carousel-mobile .carousel-nav { gap: 14px; margin-top: 12px; }
+    .product-card-sm { min-width: 110px; }
+    .product-card-sm img { width: 110px; height: 95px; }
+    .product-card-sm .pc-name { padding: 6px 8px; font-size: 10px; }
+
+    /* -- TESTIMONIALS -- */
+    .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .testimonial {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px;
+    }
+    .test-stars { color: var(--accent); font-size: 13px; margin-bottom: 8px; letter-spacing: 3px; }
+    .test-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-style: italic;
+    }
+    .test-author { font-size: 13px; color: var(--text-muted); margin-top: 10px; font-weight: 500; }
+
+    .testimonial-mobile {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px; margin-bottom: 10px;
+    }
+
+    /* -- CTA -- */
+    .cta-section {
+      padding: 40px 32px; text-align: center;
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; color: var(--text-primary); margin-bottom: 10px; font-weight: 600;
+    }
+    .cta-section h2 span { color: var(--accent); }
+    .cta-section p { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; font-weight: 400; }
+    .cta-btn {
+      display: inline-block; padding: 13px 38px;
+      background: transparent; color: var(--accent);
+      border: 1.5px solid var(--accent); border-radius: 50px;
+      font-weight: 600; text-decoration: none; font-size: 13px;
+      letter-spacing: 0.8px; transition: all 0.3s;
+    }
+    .cta-btn:hover {
+      background: var(--accent); color: var(--bg-primary);
+      box-shadow: 0 8px 24px rgba(212,190,138,0.2);
+    }
+
+    .cta-section-mobile {
+      padding: 28px 16px; text-align: center;
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section-mobile h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;
+    }
+    .cta-section-mobile h2 span { color: var(--accent); }
+    .cta-section-mobile p { font-size: 12px; color: var(--text-secondary); margin-bottom: 18px; font-weight: 400; }
+    .cta-btn-sm {
+      display: inline-block; padding: 11px 28px;
+      background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 12px; letter-spacing: 0.8px;
+    }
+
+    /* -- FOOTER -- */
+    .hp-footer {
+      text-align: center; padding: 20px; background: var(--bg-secondary);
+      border-top: 1px solid var(--border); font-size: 11px;
+      color: var(--text-muted); font-weight: 400;
+    }
+    .hp-footer span { color: var(--accent); }
+
+    /* -- LEGAL OVERLAYS -- */
+    .legal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(12,12,14,0.85); backdrop-filter: blur(8px);
+      z-index: 2000; align-items: center; justify-content: center;
+    }
+    .legal-overlay.active { display: flex; }
+    .legal-content {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px; max-width: 600px;
+      width: 92%; max-height: 80vh; overflow-y: auto;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: modalIn 0.25s ease;
+      scrollbar-width: thin; scrollbar-color: #35353a transparent;
+    }
+    .legal-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; color: var(--accent); margin-bottom: 18px;
+    }
+    .legal-content h3 {
+      font-size: 14px; font-weight: 600; color: var(--text-primary);
+      margin: 16px 0 6px;
+    }
+    .legal-content p, .legal-content li {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .legal-content ul { padding-left: 18px; }
+    .legal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 14px; cursor: pointer; color: var(--text-secondary);
+      transition: all 0.2s; z-index: 10;
+    }
+    .legal-close:hover { border-color: var(--accent); color: var(--accent); }
+    @media (max-width: 480px) {
+      .legal-content { padding: 24px 18px; max-height: 85vh; border-radius: 16px; }
+      .legal-content h2 { font-size: 19px; }
+    }
+
+    /* -- MODAL -- */
+    .modal-overlay {
+      display: none; position: absolute; inset: 0;
+      background: rgba(12,12,14,0.85); backdrop-filter: blur(6px);
+      z-index: 200; align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px; max-width: 380px;
+      width: 90%; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.95) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .modal-logo {
+      text-align: center; margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-accent);
+    }
+    .modal-logo img { height: 50px; width: auto; }
+    .modal-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 18px;
+    }
+    .modal-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: var(--accent);
+    }
+    .modal-close {
+      background: var(--bg-card); border: 1px solid var(--border);
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 14px; cursor: pointer; color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-events { display: flex; flex-direction: column; gap: 12px; max-height: 60vh; overflow-y: auto; }
+    .modal-event {
+      background: var(--bg-card); border-radius: 14px; padding: 0;
+      overflow: hidden; display: flex;
+      border: 1px solid var(--border); transition: all 0.3s;
+      animation: modalCardIn 0.3s ease-out both;
+    }
+    .modal-event:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .modal-event:nth-child(1) { animation-delay: 0.05s; }
+    .modal-event:nth-child(2) { animation-delay: 0.1s; }
+    .modal-event:nth-child(3) { animation-delay: 0.15s; }
+    .modal-event:nth-child(4) { animation-delay: 0.2s; }
+    @keyframes modalCardIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-event-bar {
+      width: 4px; flex-shrink: 0;
+    }
+    .modal-event-bar.t-markt { background: #33b679; }
+    .modal-event-bar.t-festival { background: #039be5; }
+    .modal-event-bar.t-privat { background: #7986cb; }
+    .modal-event-bar.t-firmen { background: var(--accent); }
+    .modal-event-bar.t-default { background: #8e24aa; }
+    .modal-event-body {
+      padding: 16px; flex: 1;
+    }
+    .me-type-badge {
+      display: inline-block;
+      font-size: 9px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      padding: 3px 8px; border-radius: 4px; margin-bottom: 6px;
+    }
+    .me-type-badge.t-markt { background: rgba(51,182,121,0.15); color: #33b679; }
+    .me-type-badge.t-festival { background: rgba(3,155,229,0.15); color: #039be5; }
+    .me-type-badge.t-privat { background: rgba(121,134,203,0.15); color: #7986cb; }
+    .me-type-badge.t-firmen { background: var(--accent-glow); color: var(--accent); }
+    .me-type-badge.t-default { background: rgba(142,36,170,0.15); color: #8e24aa; }
+    .me-countdown {
+      font-size: 10px; color: var(--accent); font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .modal-event .me-type {
+      font-size: 10px; color: var(--accent); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .modal-event .me-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 600; margin: 4px 0;
+      color: var(--text-primary);
+    }
+    .modal-event .me-row {
+      font-size: 12px; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 6px; margin-top: 4px;
+      font-weight: 400;
+    }
+    .modal-event .me-label {
+      color: var(--accent); font-weight: 500; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.5px; min-width: 34px;
+    }
+    .modal-event-actions {
+      display: flex; gap: 6px; margin-top: 12px; padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .me-action {
+      flex: 1; text-align: center; padding: 7px 8px;
+      font-size: 11px; color: var(--accent); cursor: pointer;
+      border-radius: 8px; background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      text-decoration: none; transition: all 0.2s;
+      font-weight: 500; display: block;
+    }
+    .me-action:hover {
+      background: var(--accent-glow-strong);
+    }
+
+    /* -- CATEGORY MODAL -- */
+    .cat-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--text-secondary); line-height: 1.6;
+      margin-bottom: 16px; font-style: italic;
+    }
+    .cat-features {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;
+      padding: 14px 16px; background: var(--bg-card); border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .cat-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12px; color: var(--text-primary); font-weight: 400;
+    }
+    .cat-feature svg {
+      width: 14px; height: 14px; color: var(--accent); flex-shrink: 0;
+    }
+    .cat-price {
+      text-align: center; font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 600; color: var(--accent);
+      padding: 10px; margin-bottom: 16px;
+      background: var(--accent-glow); border-radius: 10px;
+      border: 1px solid var(--border-accent);
+    }
+    .cat-upcoming-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-muted); font-weight: 500;
+      margin-bottom: 8px; padding-top: 4px;
+    }
+    .cat-cta-row {
+      display: flex; gap: 10px; margin-top: 16px;
+    }
+    .cat-cta {
+      flex: 1; text-align: center;
+      padding: 12px 10px; border-radius: 50px;
+      font-weight: 600; text-decoration: none;
+      font-size: 12px; letter-spacing: 0.5px; transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .cat-cta-email {
+      background: var(--accent); color: var(--bg-primary);
+    }
+    .cat-cta-email:hover {
+      background: var(--accent-light);
+      box-shadow: 0 8px 24px rgba(212,190,138,0.2);
+    }
+    .cat-cta-wa {
+      background: #25D366; color: #fff;
+    }
+    .cat-cta-wa:hover {
+      background: #20bd5a;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.25);
+    }
+
+    /* -- ADMIN / EDIT -- */
+    .admin-toggle {
+      position: fixed; bottom: 20px; right: 20px; z-index: 900;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--bg-elevated); border: 1px solid var(--border-accent);
+      color: var(--accent); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4); transition: all 0.2s;
+    }
+    .admin-toggle:hover { background: var(--accent); color: var(--bg-primary); }
+    .admin-toggle.active { background: var(--accent); color: var(--bg-primary); }
+    .admin-badge {
+      display: none; position: fixed; top: 64px; left: 50%; transform: translateX(-50%);
+      z-index: 900; background: var(--accent); color: var(--bg-primary);
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 4px 16px; border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 12px rgba(212,190,138,0.3);
+    }
+    body.admin-mode .admin-badge { display: block; }
+    body.admin-mode .event-type-box,
+    body.admin-mode .event-type-box-sm {
+      outline: 1.5px dashed var(--border-accent); outline-offset: 2px;
+    }
+    .etb-actions {
+      display: none; justify-content: center; gap: 6px; margin-top: 10px;
+    }
+    body.admin-mode .etb-actions { display: flex; }
+    .etb-btn {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 4px 10px; border-radius: 6px;
+      font-size: 10px; cursor: pointer; transition: all 0.2s;
+      font-family: inherit; letter-spacing: 0.5px;
+    }
+    .etb-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .etb-btn-danger:hover { color: #ff7a72; border-color: #ff7a72; }
+    .add-category-tile {
+      background: var(--bg-warm); border: 1.5px dashed var(--border-accent);
+      border-radius: 16px; padding: 22px 16px; text-align: center;
+      cursor: pointer; transition: all 0.3s; display: none;
+      color: var(--accent);
+    }
+    body.admin-mode .add-category-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .add-category-tile:hover { background: var(--bg-card); border-color: var(--accent); }
+    .add-tile-plus { font-size: 28px; font-weight: 400; margin-bottom: 4px; }
+    .add-tile-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-weight: 600;
+    }
+
+    /* -- FORM -- */
+    .cat-form { display: flex; flex-direction: column; gap: 14px; }
+    .cat-form label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-muted); font-weight: 500; margin-bottom: 4px; display: block;
+    }
+    .cat-form input, .cat-form textarea, .cat-form select {
+      width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px; color: var(--text-primary);
+      font-family: inherit; font-size: 13px; transition: border-color 0.2s;
+    }
+    .cat-form textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+    .cat-form input:focus, .cat-form textarea:focus, .cat-form select:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .feature-row { display: flex; gap: 6px; margin-bottom: 6px; }
+    .feature-row input { flex: 1; }
+    .feature-row button {
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-muted); width: 32px; border-radius: 8px;
+      cursor: pointer; font-size: 14px; transition: all 0.2s;
+    }
+    .feature-row button:hover { color: #ff7a72; border-color: #ff7a72; }
+    .add-feature-btn {
+      background: transparent; border: 1px dashed var(--border-accent);
+      color: var(--accent); width: 100%; padding: 8px; border-radius: 8px;
+      cursor: pointer; font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: all 0.2s;
+    }
+    .add-feature-btn:hover { background: var(--accent-glow); }
+    .form-actions { display: flex; gap: 10px; margin-top: 6px; }
+    .btn-primary, .btn-secondary {
+      flex: 1; padding: 11px; border-radius: 50px; font-weight: 600;
+      font-size: 12px; letter-spacing: 0.8px; cursor: pointer; border: none;
+      text-transform: uppercase; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-primary { background: var(--accent); color: var(--bg-primary); }
+    .btn-primary:hover { background: var(--accent-light); }
+    .btn-secondary {
+      background: transparent; border: 1.5px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ============================================= */
+    /* ===  TAB 3 & 4: KALENDER / SYNC VIEWS     === */
+    /* ============================================= */
+
+    .sync-split {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap; padding: 30px;
+    }
+    .sync-split-col {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+
+    /* Google Calendar Mockup — Realistic */
+    .gcal-mockup {
+      width: 520px; background: #fff; border-radius: 12px;
+      overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border: 2px solid #35353a;
+    }
+    .gcal-topbar {
+      background: #fff; padding: 8px 16px;
+      border-bottom: 1px solid #dadce0;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .gcal-hamburger { width: 18px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; }
+    .gcal-hamburger span { height: 2px; background: #5f6368; border-radius: 1px; }
+    .gcal-glogo {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gcal-glogo-icon {
+      width: 32px; height: 32px; position: relative;
+    }
+    .gcal-glogo-icon .gcal-cal-box {
+      width: 32px; height: 32px; border-radius: 4px; border: 2px solid #4285f4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #4285f4;
+      background: #fff; position: relative;
+    }
+    .gcal-glogo-icon .gcal-cal-box::before {
+      content: ''; position: absolute; top: -4px; left: 7px;
+      width: 4px; height: 6px; background: #4285f4; border-radius: 1px;
+    }
+    .gcal-glogo-icon .gcal-cal-box::after {
+      content: ''; position: absolute; top: -4px; right: 7px;
+      width: 4px; height: 6px; background: #4285f4; border-radius: 1px;
+    }
+    .gcal-glogo-text {
+      font-size: 18px; color: #3c4043;
+      font-family: 'Google Sans', 'Product Sans', 'DM Sans', sans-serif;
+      font-weight: 400;
+    }
+    .gcal-glogo-text b { font-weight: 400; }
+    .gcal-glogo-text .g1 { color: #4285f4; }
+    .gcal-glogo-text .g2 { color: #ea4335; }
+    .gcal-glogo-text .g3 { color: #fbbc04; }
+    .gcal-glogo-text .g4 { color: #4285f4; }
+    .gcal-glogo-text .g5 { color: #34a853; }
+    .gcal-glogo-text .g6 { color: #ea4335; }
+    .gcal-nav {
+      display: flex; align-items: center; gap: 8px; margin-left: auto;
+    }
+    .gcal-today-btn {
+      border: 1px solid #dadce0; background: #fff; color: #3c4043;
+      padding: 5px 14px; border-radius: 4px; font-size: 13px;
+      font-weight: 500; cursor: pointer; font-family: inherit;
+    }
+    .gcal-today-btn:hover { background: #f1f3f4; }
+    .gcal-arrow {
+      width: 28px; height: 28px; border-radius: 50%; border: none;
+      background: transparent; color: #5f6368; cursor: pointer;
+      font-size: 16px; display: flex; align-items: center; justify-content: center;
+    }
+    .gcal-arrow:hover { background: #f1f3f4; }
+    .gcal-month-label { font-size: 18px; color: #3c4043; font-weight: 400; }
+    .gcal-body {
+      display: flex;
+    }
+    .gcal-sidebar {
+      width: 60px; background: #f8f9fa; border-right: 1px solid #dadce0;
+      padding: 8px 0; display: flex; flex-direction: column; align-items: center;
+    }
+    .gcal-add-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #fff; border: none; cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px; transition: box-shadow 0.2s;
+    }
+    .gcal-add-btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .gcal-add-btn svg { width: 28px; height: 28px; }
+    .gcal-main {
+      flex: 1; padding: 0;
+    }
+    .gcal-schedule {
+      max-height: 360px; overflow-y: auto;
+    }
+    .gcal-time-row {
+      display: flex; min-height: 48px; border-bottom: 1px solid #f1f3f4;
+    }
+    .gcal-time-label {
+      width: 52px; font-size: 10px; color: #70757a;
+      text-align: right; padding: 4px 8px 0 0; flex-shrink: 0;
+    }
+    .gcal-time-content {
+      flex: 1; border-left: 1px solid #dadce0; padding: 2px 8px;
+      position: relative;
+    }
+    .gcal-event {
+      padding: 4px 8px; margin: 2px 0; border-radius: 4px;
+      font-size: 12px; font-weight: 500; cursor: default;
+      transition: all 0.3s;
+    }
+    .gcal-event.ev-blue { background: #039be5; color: #fff; }
+    .gcal-event.ev-green { background: #33b679; color: #fff; }
+    .gcal-event.ev-purple { background: #7986cb; color: #fff; }
+    .gcal-event.ev-red { background: #d50000; color: #fff; }
+    .gcal-event.ev-yellow { background: #f6bf26; color: #333; }
+    .gcal-event.event-new {
+      animation: eventPulseGcal 1s ease-out 3;
+    }
+    @keyframes eventPulseGcal {
+      0% { box-shadow: 0 0 0 0 rgba(3,155,229,0.5); }
+      70% { box-shadow: 0 0 0 8px rgba(3,155,229,0); }
+      100% { box-shadow: 0 0 0 0 rgba(3,155,229,0); }
+    }
+    .gcal-event-info { flex: 1; }
+    .gcal-event-title { font-size: 12px; font-weight: 500; }
+    .gcal-event-time { font-size: 10px; opacity: 0.8; }
+    .gcal-event-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #039be5; flex-shrink: 0;
+    }
+
+    /* Google Calendar Phone Mockup (Tab 4) */
+    .gcal-phone-mockup {
+      background: #fff; border-radius: 16px;
+      overflow: hidden; width: 100%; height: 100%;
+    }
+    .gcal-phone-header {
+      background: #1a73e8; padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .gcal-phone-header-title {
+      color: #fff; font-size: 16px; font-weight: 500;
+    }
+    .gcal-phone-toolbar {
+      padding: 10px 16px; background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .gcal-phone-month { font-size: 14px; font-weight: 500; color: #3c4043; }
+    .gcal-phone-events {
+      padding: 10px 16px; overflow-y: auto; max-height: 400px;
+      background: #fff;
+    }
+    .gcal-phone-event {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px; margin-bottom: 6px; border-radius: 8px;
+      background: #e8f0fe; border-left: 3px solid #1a73e8;
+    }
+    .gcal-phone-event-title { font-size: 12px; font-weight: 500; color: #1a73e8; }
+    .gcal-phone-event-time { font-size: 10px; color: #5f6368; margin-top: 1px; }
+    .gcal-fab {
+      position: absolute; bottom: 20px; right: 20px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #1a73e8; color: #fff; border: none;
+      font-size: 24px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(26,115,232,0.4);
+      transition: all 0.2s;
+    }
+    .gcal-fab:hover { background: #1565c0; transform: scale(1.05); }
+
+    /* Sync Line */
+    .sync-connector {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .sync-line {
+      position: relative;
+      width: 120px; height: 2px;
+      border-top: 2px dashed var(--border-accent);
+    }
+    .sync-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      top: -5px;
+      animation: syncFlow 1.5s ease-in-out infinite;
+    }
+    .sync-dot:nth-child(2) { animation-delay: 0.5s; }
+    .sync-dot:nth-child(3) { animation-delay: 1s; }
+    @keyframes syncFlow {
+      0% { left: 0; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    .sync-status {
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .sync-status.synced { color: #4ade80; }
+
+    /* Event pulse for synced events */
+    @keyframes eventPulse {
+      0% { box-shadow: 0 0 0 0 rgba(212,190,138,0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(212,190,138,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,190,138,0); }
+    }
+    .event-new-cal { animation: eventPulse 1s ease-out 3; }
+
+    /* Tab 3/4 description text */
+    .sync-description {
+      text-align: center; max-width: 600px; margin: 24px auto 0;
+      font-size: 14px; color: var(--text-secondary); line-height: 1.7;
+      font-weight: 400;
+    }
+    .sync-description strong { color: var(--accent); font-weight: 600; }
+
+    /* Typing animation */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .typing-cursor {
+      display: inline-block; width: 2px; height: 14px;
+      background: #1a73e8; margin-left: 2px; vertical-align: middle;
+      animation: blink 0.8s infinite;
+    }
+
+    /* Phone frame inner relative for FAB */
+    .phone-frame-inner-rel {
+      position: relative; height: calc(100% - 24px); overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: #35353a transparent;
+    }
+    /* ── WAFFLE LOADER ── */
+    .waffle-loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #131315;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s;
+    }
+    .waffle-loader.done {
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+    .waffle-loader-content {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 24px;
+    }
+    .waffle-loader-waffle {
+      position: relative;
+      animation: waffleFloat 2s ease-in-out infinite;
+    }
+    @keyframes waffleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .waffle-svg {
+      filter: drop-shadow(0 0 8px rgba(212,190,138,0.12));
+    }
+
+    /* Each bubble fills up sequentially */
+    .wb {
+      fill: rgba(212,190,138,0.08);
+      stroke: rgba(212,190,138,0.15);
+      stroke-width: 1;
+      animation: bubbleFill 2.4s ease-in-out infinite;
+      animation-delay: calc(var(--d) * 0.2s);
+    }
+
+    @keyframes bubbleFill {
+      0%, 100% { fill: rgba(212,190,138,0.08); stroke: rgba(212,190,138,0.15); }
+      40%, 60% { fill: rgba(212,190,138,0.7); stroke: rgba(212,190,138,0.9); }
+    }
+
+    /* Steam wisps above waffle */
+    .waffle-loader-waffle::before,
+    .waffle-loader-waffle::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.06), transparent);
+      animation: steamWisp 2s ease-in-out infinite;
+    }
+    .waffle-loader-waffle::before {
+      top: -20px; left: 30%;
+      animation-delay: 0s;
+    }
+    .waffle-loader-waffle::after {
+      top: -25px; right: 30%;
+      animation-delay: 0.8s;
+    }
+    @keyframes steamWisp {
+      0% { opacity: 0; transform: translateY(0) scaleX(0.8); }
+      30% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-30px) scaleX(1.5); }
+    }
+
+    .waffle-loader-logo {
+      height: 50px; width: auto;
+      filter: drop-shadow(0 0 12px rgba(212,190,138,0.3));
+      animation: logoFadeIn 1s 0.5s ease both;
+    }
+    @keyframes logoFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .waffle-loader-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; color: var(--text-muted);
+      font-weight: 400; letter-spacing: 1px;
+      animation: logoFadeIn 1s 0.8s ease both;
+    }
+
+    .waffle-loader-dots::after {
+      content: '';
+      animation: loadingDots 1.5s steps(3) infinite;
+    }
+    @keyframes loadingDots {
+      0% { content: ''; }
+      33% { content: '.'; }
+      66% { content: '..'; }
+      100% { content: '...'; }
+    }
+
+    /* ── MENU SECTION ── */
+    .menu-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
+    .menu-tab {
+      padding: 8px 20px; border-radius: 50px; font-size: 12px;
+      font-weight: 500; letter-spacing: 0.8px; cursor: pointer;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--text-secondary); transition: all 0.2s;
+      font-family: inherit; text-transform: uppercase;
+    }
+    .menu-tab.active, .menu-tab:hover {
+      background: var(--accent); color: var(--bg-primary);
+      border-color: var(--accent);
+    }
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .menu-item {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 14px 16px; border-radius: 14px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .menu-item:hover { border-color: var(--border-accent); transform: translateY(-1px); }
+    .menu-item-info { flex: 1; }
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+    .menu-item-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 600; color: var(--accent);
+      white-space: nowrap; margin-left: 12px;
+    }
+    .menu-note { text-align: center; font-size: 10px; color: var(--text-muted); margin-top: 16px; font-weight: 400; }
+
+    /* Mobile menu overrides */
+    .hp-section-mobile .menu-grid { grid-template-columns: 1fr; }
+    .hp-section-mobile .menu-tab { font-size: 10px; padding: 6px 14px; }
+    .hp-section-mobile .menu-item-name { font-size: 15px; }
+    .hp-section-mobile .menu-item-price { font-size: 15px; }
+    .hp-section-mobile .menu-item-desc { font-size: 10px; }
+
+    /* -- STATS ROW -- */
+    .stats-row { display: flex; justify-content: center; gap: 32px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+    .stats-row-mobile { display: flex; justify-content: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .stats-row-mobile .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--accent); }
+    .stats-row-mobile .stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+    .stats-row-mobile .stat-item { text-align: center; }
+
+    /* -- CONTACT CARDS -- */
+    .contact-cards { display: flex; justify-content: center; gap: 14px; margin: 20px 0; flex-wrap: wrap; }
+    .contact-card {
+      background: rgba(35,35,39,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212,190,138,0.12); border-radius: 14px;
+      padding: 16px 20px; text-align: center; min-width: 140px;
+      transition: all 0.3s;
+    }
+    .contact-card:hover { border-color: rgba(212,190,138,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .contact-card-icon { font-size: 22px; margin-bottom: 6px; }
+    .contact-card-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+    .contact-card-value { font-size: 13px; color: var(--text-primary); font-weight: 500; }
+    .contact-card-value a { color: var(--accent); text-decoration: none; }
+    .contact-card-value a:hover { text-decoration: underline; }
+    .whatsapp-btn {
+      display: inline-block; padding: 8px 18px; background: #25D366; color: #fff;
+      border-radius: 50px; font-size: 12px; font-weight: 600; text-decoration: none;
+      transition: all 0.3s; border: none;
+    }
+    .whatsapp-btn:hover { background: #20bd5a; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,211,102,0.3); }
+    .contact-note { font-size: 11px; color: var(--text-muted); margin-top: 14px; font-style: italic; }
+
+    /* Mobile contact cards */
+    .contact-cards-sm { display: flex; justify-content: center; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+    .contact-card-sm {
+      background: rgba(35,35,39,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212,190,138,0.12); border-radius: 12px;
+      padding: 12px 14px; text-align: center; min-width: 90px; flex: 1;
+    }
+    .contact-card-sm .contact-card-icon { font-size: 18px; margin-bottom: 4px; }
+    .contact-card-sm .contact-card-label { font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .contact-card-sm .contact-card-value { font-size: 11px; color: var(--text-primary); font-weight: 500; }
+    .contact-card-sm .contact-card-value a { color: var(--accent); text-decoration: none; }
+    .whatsapp-btn-sm {
+      display: inline-block; padding: 6px 12px; background: #25D366; color: #fff;
+      border-radius: 50px; font-size: 10px; font-weight: 600; text-decoration: none;
+    }
+
+    /* -- FOOTER SOCIAL -- */
+    .footer-social { display: flex; justify-content: center; gap: 14px; margin-top: 10px; }
+    .footer-social a { color: var(--accent); transition: all 0.3s; display: inline-flex; }
+    .footer-social a:hover { filter: drop-shadow(0 0 6px rgba(212,190,138,0.5)); transform: scale(1.1); }
+    .footer-social svg { width: 20px; height: 20px; }
+    .footer-legal { margin-top: 8px; }
+    .footer-legal a { color: var(--text-muted); text-decoration: none; font-size: 12px; cursor: pointer; }
+    .footer-legal a:hover { color: var(--accent); }
+
+    /* -- ABOUT HIGHLIGHT -- */
+    .about-highlight {
+      margin-top: 10px; padding: 8px 14px;
+      background: var(--accent-glow); border: 1px solid var(--border-accent);
+      border-radius: 10px; font-size: 12px; color: var(--accent); font-weight: 500;
+      display: inline-block;
+    }
+
+    /* -- CALENDAR PAGE -- */
+    .calendar-page {
+      display: none; position: absolute; inset: 0; z-index: 100;
+      background: var(--bg-primary);
+      overflow-y: auto;
+      animation: tabFadeIn 0.3s ease;
+    }
+    .calendar-page.active { display: block; }
+    .calendar-page-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px; border-bottom: 1px solid var(--border);
+      background: var(--bg-primary); position: sticky; top: 0; z-index: 10;
+    }
+    .cal-page-back {
+      background: var(--bg-card); border: 1px solid var(--border);
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 16px; cursor: pointer; color: var(--accent);
+      transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+    }
+    .cal-page-back:hover { border-color: var(--accent); background: var(--bg-elevated); }
+    .calendar-page-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: var(--accent);
+    }
+    .calendar-page-body {
+      padding: 24px 16px;
+    }
+    .calendar-page-body .calendar { margin-bottom: 20px; }
+    /* Desktop calendar page */
+    .desktop-content .calendar-page-header { padding: 20px 32px; }
+    .desktop-content .calendar-page-header h2 { font-size: 24px; }
+    .desktop-content .calendar-page-body { max-width: 700px; margin: 0 auto; padding: 32px 24px; }
+    .desktop-content .cal-page-back { width: 36px; height: 36px; font-size: 18px; }
+
+    /* -- FLOATING WHATSAPP -- */
+    .wa-float {
+      position: absolute; bottom: 24px; right: 24px; z-index: 800;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 12px rgba(37,211,102,0.3);
+      transition: all 0.3s;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(37,211,102,0.5);
+    }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(37,211,102,0.3); }
+      50% { box-shadow: 0 0 20px rgba(37,211,102,0.5), 0 0 0 8px rgba(37,211,102,0.08); }
+    }
+    .phone-content .wa-float { width: 40px; height: 40px; }
+    .phone-content .wa-float svg { width: 20px; height: 20px; }
+
+    /* -- MOBILE MODAL OVERRIDES -- */
+    .phone-content .modal {
+      max-width: 320px;
+      width: 92%;
+      padding: 18px;
+      max-height: 85%;
+      overflow-y: auto;
+      border-radius: 16px;
+    }
+    .phone-content .modal-logo img { height: 35px; }
+    .phone-content .modal-logo { margin-bottom: 8px; padding-bottom: 8px; }
+    .phone-content .modal-header { margin-bottom: 12px; }
+    .phone-content .modal-header h3 { font-size: 16px; }
+    .phone-content .modal-close { width: 28px; height: 28px; font-size: 12px; }
+    .phone-content .cat-intro { font-size: 12px; }
+    .phone-content .cat-feature { font-size: 11px; }
+    .phone-content .cat-feature svg { width: 14px; height: 14px; }
+    .phone-content .cat-cta-row { flex-direction: column; gap: 8px; }
+    .phone-content .cat-cta { padding: 10px 8px; font-size: 11px; border-radius: 30px; }
+    .phone-content .modal-events-el { max-height: 50vh; }
+
+    /* -- REDUCED MOTION -- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ===== WAFFLE LOADER ===== -->
+<div class="waffle-loader" id="waffle-loader">
+  <div class="waffle-loader-content">
+    <div class="waffle-loader-waffle">
+      <svg viewBox="0 0 200 200" width="120" height="120" class="waffle-svg">
+        <!-- Outer circle -->
+        <circle cx="100" cy="100" r="90" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.2"/>
+        <!-- Bubble grid — each fills up as loading -->
+        <circle class="wb" cx="60" cy="55" r="18" style="--d:0"/>
+        <circle class="wb" cx="100" cy="55" r="18" style="--d:1"/>
+        <circle class="wb" cx="140" cy="55" r="18" style="--d:2"/>
+        <circle class="wb" cx="60" cy="95" r="18" style="--d:3"/>
+        <circle class="wb" cx="100" cy="95" r="18" style="--d:4"/>
+        <circle class="wb" cx="140" cy="95" r="18" style="--d:5"/>
+        <circle class="wb" cx="60" cy="135" r="18" style="--d:6"/>
+        <circle class="wb" cx="100" cy="135" r="18" style="--d:7"/>
+        <circle class="wb" cx="140" cy="135" r="18" style="--d:8"/>
+      </svg>
+    </div>
+    <img src="logo.png" alt="Sweet Truck" class="waffle-loader-logo">
+    <div class="waffle-loader-text">Wird frisch zubereitet<span class="waffle-loader-dots"></span></div>
+  </div>
+</div>
+
+<!-- ===== TAB BAR ===== -->
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <img src="logo.png" alt="Sweet Truck Logo" class="tab-logo">
+    <span class="tab-brand">Sweet Truck</span>
+    <div class="tab-pills">
+      <button type="button" class="tab-pill active" data-tab="mobile" onclick="switchTab('mobile')">&#x1F4F1; Mobile</button>
+      <button type="button" class="tab-pill" data-tab="desktop" onclick="switchTab('desktop')">&#x1F5A5;&#xFE0F; Desktop</button>
+      <button type="button" class="tab-pill" data-tab="sync" onclick="switchTab('sync')">&#x1F504; Live-Sync</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 1: MOBILE ===== -->
+<div class="tab-content active" id="tab-mobile">
+  <div class="tab-content-center">
+    <div class="tab-view-label">Mobile Ansicht</div>
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-content" id="phone-scroller-1">
+
+        <!-- Mobile Calendar Page -->
+        <div class="calendar-page" id="calendar-page-m">
+          <div class="calendar-page-header">
+            <button type="button" class="cal-page-back" aria-label="Zurück" onclick="closeCalendarPage()">&#8249;</button>
+            <img src="logo.png" alt="Sweet Truck" style="height:28px;width:auto">
+            <h2>Kalender</h2>
+          </div>
+          <div class="calendar-page-body">
+            <div style="text-align:center;margin-bottom:16px;font-size:12px;color:var(--text-secondary)">Klick auf eine Waffel für Details</div>
+            <div class="calendar">
+              <div class="cal-header">
+                <button type="button" class="cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+                <h3 id="cal-month-label-m">April 2026</h3>
+                <button type="button" class="cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+              </div>
+              <div class="cal-grid" id="cal-grid-m"></div>
+            </div>
+            <div class="cal-next-event" id="cal-next-event-m" onclick="goToNextEvent()" style="display:none;">
+              <span class="cal-next-dot"></span>
+              <div class="cal-next-info">
+                <div class="cal-next-label">Nächstes Event</div>
+                <div class="cal-next-title" id="cal-next-title-m"></div>
+              </div>
+              <span class="cal-next-arrow">&rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hp-nav-mobile">
+          <div class="hp-logo-sm"><img src="logo.png" alt="Sweet Truck"></div>
+          <div class="hp-hamburger" id="hamburger-m" onclick="toggleMobileMenu()" role="button" tabindex="0" aria-label="Menü öffnen" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mobile-menu" id="mobile-menu">
+            <a data-scroll="home-m" class="active">Home</a>
+            <a href="#" onclick="event.preventDefault();openCalendarPage()">Kalender</a>
+            <a data-scroll="catering-m">Catering</a>
+            <a data-scroll="about-m">Über uns</a>
+            <a data-scroll="kontakt-m">Kontakt</a>
+          </div>
+        </div>
+
+        <div class="hp-hero-mobile" id="home-m">
+          <h1><span>Sweet Truck</span> on the Road</h1>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--text-secondary);font-style:italic;margin-top:6px;font-weight:400;letter-spacing:0.5px;position:relative">Wo süße Träume wahr werden.</p>
+          <a href="#" class="hp-hero-btn" onclick="event.preventDefault();openCalendarPage()">Nächstes Event</a>
+        </div>
+
+        <div class="hp-subline-mobile">Penelope's Sweetness World</div>
+
+        <div class="event-types-mobile" id="catering-m"></div>
+        <div style="border-bottom: 1px solid var(--border); margin: 0 16px;"></div>
+
+        <div class="about-section-mobile" id="about-m">
+          <h3>Wir sind <span>Sweet Truck</span></h3>
+          <div class="about-photos">
+            <div>
+              <div class="about-photo about-photo-side"><img src="img/penelope.jpg" alt="Penelope" loading="lazy"></div>
+              <div class="about-photo-label">Penelope</div>
+            </div>
+            <div>
+              <div class="about-photo about-photo-center"><img src="img/team_together.jpg" alt="Sweet Truck Team" loading="lazy"></div>
+            </div>
+            <div>
+              <div class="about-photo about-photo-side"><img src="img/tivadar.jpg" alt="Tivadar" loading="lazy"></div>
+              <div class="about-photo-label">Tivadar</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hp-section-mobile">
+          <div class="section-title-sm">Unsere <span>Bubble Waffeln</span></div>
+          <div class="section-sub-sm">Frisch vom Truck</div>
+          <div class="carousel-wrap carousel-mobile" id="carousel-mobile">
+            <div class="carousel-stage" id="carousel-stage-m">
+              <div class="carousel-item" data-ci="0"><img src="img/w_apple_crumble.png" alt="Apple Crumble" loading="lazy"><div class="ci-name">Apple Crumble Waffel<div class="ci-sub">Apfel · Streusel · Sahne</div></div></div>
+              <div class="carousel-item" data-ci="1"><img src="img/w_cookies_n_cream.png" alt="Cookies &amp; Cream" loading="lazy"><div class="ci-name">Cookies &amp; Cream Waffel<div class="ci-sub">Oreo · Creme · Schoko</div></div></div>
+              <div class="carousel-item" data-ci="2"><img src="img/w_dubai.png" alt="Dubai" loading="lazy"><div class="ci-name">Dubai Waffel<div class="ci-sub">Pistazie · Kadayif · Schoko</div></div></div>
+              <div class="carousel-item" data-ci="3"><img src="img/w_karamell_traum.png" alt="Karamell Traum" loading="lazy"><div class="ci-name">Karamell Traum Waffel<div class="ci-sub">Karamell · Nüsse · Eis</div></div></div>
+              <div class="carousel-item" data-ci="4"><img src="img/w_nutella_banane.png" alt="Nutella Banane" loading="lazy"><div class="ci-name">Nutella Banane Waffel<div class="ci-sub">Nutella · Banane · Sahne</div></div></div>
+              <div class="carousel-item" data-ci="5"><img src="img/w_pistazie.png" alt="Pistazie" loading="lazy"><div class="ci-name">Pistazie Waffel<div class="ci-sub">Pistaziencreme · Crunch</div></div></div>
+              <div class="carousel-item" data-ci="6"><img src="img/w_raffaello.png" alt="Raffaello" loading="lazy"><div class="ci-name">Raffaello Waffel<div class="ci-sub">Kokos · Weiße Schoko · Mandel</div></div></div>
+              <div class="carousel-item" data-ci="7"><img src="img/w_schocko_banane.png" alt="Schoko Banane" loading="lazy"><div class="ci-name">Schoko Banane Waffel<div class="ci-sub">Schokolade · Banane · Sahne</div></div></div>
+              <div class="carousel-item" data-ci="8"><img src="img/w_sweet_berry.png" alt="Mascarpone" loading="lazy"><div class="ci-name">Mascarpone Waffel<div class="ci-sub">Beeren · Mascarpone · Creme</div></div></div>
+              <div class="carousel-item" data-ci="9"><img src="img/w_barbie.png" alt="Barbie" loading="lazy"><div class="ci-name">Barbie Waffel<div class="ci-sub">Erdbeere · Rosa Schoko · Creme</div></div></div>
+            </div>
+            <div class="carousel-nav">
+              <button class="carousel-arrow" type="button" aria-label="Vorherige Waffel" onclick="carouselPrevM()">&#8249;</button>
+              <div class="carousel-dots" id="carousel-dots-m"></div>
+              <button class="carousel-arrow" type="button" aria-label="Nächste Waffel" onclick="carouselNextM()">&#8250;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hp-section-mobile">
+          <div class="section-title-sm">Das sagen <span>unsere Gäste</span></div>
+          <div class="section-sub-sm">Echte Stimmen, echte Events</div>
+          <div class="testimonial-mobile">
+            <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="test-text">"Die besten Waffeln ever! Alle Gäste waren begeistert."</div>
+            <div class="test-author">— Lisa M., Hochzeit</div>
+          </div>
+          <div class="testimonial-mobile">
+            <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="test-text">"Super unkompliziert und mega lecker. Kommt wieder!"</div>
+            <div class="test-author">— Thomas K., Firmenevent</div>
+          </div>
+          <div class="testimonial-mobile">
+            <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="test-text">"Absolute Empfehlung! Die Waffeln waren das Highlight auf unserem Stadtfest. Mega freundliches Team!"</div>
+            <div class="test-author">— Sandra W., Stadtfest</div>
+          </div>
+          <div class="testimonial-mobile">
+            <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="test-text">"Wir hatten den Sweet Truck für unser Firmenevent — 200 Leute, alle begeistert. Top Service!"</div>
+            <div class="test-author">— Marco B., Firmenevent</div>
+          </div>
+        </div>
+
+        <div class="cta-section-mobile" id="kontakt-m">
+          <h2>Dein Event.<br><span>Unsere Waffeln.</span></h2>
+          <p>Schreib uns und wir rollen an — egal ob Hochzeit, Firmenevent oder Stadtfest.</p>
+          <div class="contact-cards-sm">
+            <div class="contact-card-sm">
+              <div class="contact-card-icon">&#128222;</div>
+              <div class="contact-card-label">Telefon</div>
+              <div class="contact-card-value"><a href="tel:+491759553996">+49 175 9553996</a></div>
+            </div>
+            <div class="contact-card-sm">
+              <div class="contact-card-icon">&#9993;&#65039;</div>
+              <div class="contact-card-label">Email</div>
+              <div class="contact-card-value"><a href="mailto:info@sweettruck.de">info@sweettruck.de</a></div>
+            </div>
+            <div class="contact-card-sm">
+              <div class="contact-card-icon">&#128172;</div>
+              <div class="contact-card-label">WhatsApp</div>
+              <div class="contact-card-value"><a href="https://wa.me/491759553996" target="_blank" rel="noopener noreferrer" class="whatsapp-btn-sm">Chat starten</a></div>
+            </div>
+          </div>
+          <a href="mailto:info@sweettruck.de" class="cta-btn-sm" style="margin-top:10px;">Jetzt anfragen</a>
+          <div class="contact-note">Wir melden uns innerhalb von 24 Stunden</div>
+        </div>
+
+        <div class="hp-footer">
+          &copy; 2026 <span>Sweet Truck</span> — Penelope's Sweetness World
+          <div class="footer-social">
+            <a href="https://www.instagram.com/penelopes_sweetness_world/" target="_blank" rel="noopener noreferrer" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sweetnesstruck/" target="_blank" rel="noopener noreferrer" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+          <div class="footer-legal">
+            <a href="#" onclick="event.preventDefault();document.getElementById('impressum-overlay').classList.add('active')">Impressum</a> &middot; <a href="#" onclick="event.preventDefault();document.getElementById('datenschutz-overlay').classList.add('active')">Datenschutz</a>
+          </div>
+        </div>
+
+        <!-- Mobile Modal -->
+        <div class="modal-overlay" id="modal-overlay-m" onclick="closeModal(event)">
+          <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-logo"><img src="logo.png" alt="Sweet Truck"></div>
+            <div class="modal-header">
+              <h3 class="modal-title-el">Events</h3>
+              <button class="modal-close" type="button" aria-label="Schließen" onclick="closeModal()">&#10005;</button>
+            </div>
+            <div class="modal-events-el"></div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/491759553996?text=Hallo%20Sweet%20Truck!%20Ich%20habe%20eine%20Frage." target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="WhatsApp Chat starten" style="position:sticky;bottom:16px;right:16px;float:right;margin-right:12px;margin-bottom:12px">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.52 5.86L0 24l6.335-1.652A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.97 0-3.837-.53-5.445-1.453l-.39-.232-3.758.98.998-3.648-.254-.404A9.72 9.72 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"/></svg>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 2: DESKTOP ===== -->
+<div class="tab-content" id="tab-desktop">
+  <div style="width:100%;height:calc(100vh - 56px);overflow-y:auto;background:var(--bg-primary);position:relative" id="desktop-scroller-2">
+
+        <!-- Desktop Calendar Page -->
+        <div class="calendar-page" id="calendar-page-d">
+          <div class="calendar-page-header">
+            <button type="button" class="cal-page-back" aria-label="Zurück" onclick="closeCalendarPage()">&#8249;</button>
+            <img src="logo.png" alt="Sweet Truck" style="height:32px;width:auto">
+            <h2>Kalender</h2>
+          </div>
+          <div class="calendar-page-body">
+            <div style="text-align:center;margin-bottom:20px;font-size:14px;color:var(--text-secondary)">Klick auf eine Waffel für Details zum Event</div>
+            <div class="calendar">
+              <div class="cal-header">
+                <button type="button" class="cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+                <h3 id="cal-month-label">April 2026</h3>
+                <button type="button" class="cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+              </div>
+              <div class="cal-grid" id="cal-grid"></div>
+            </div>
+            <div class="cal-next-event" id="cal-next-event-d" onclick="goToNextEvent()" style="display:none;">
+              <span class="cal-next-dot"></span>
+              <div class="cal-next-info">
+                <div class="cal-next-label">Nächstes Event</div>
+                <div class="cal-next-title" id="cal-next-title-d"></div>
+              </div>
+              <span class="cal-next-arrow">&rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="hp-nav">
+          <div class="hp-logo"><img src="logo.png" alt="Sweet Truck"></div>
+          <div class="hp-nav-links">
+            <a data-scroll="home-d" class="active">Home</a>
+            <a href="#" onclick="event.preventDefault();openCalendarPage()">Kalender</a>
+            <a data-scroll="catering-d">Catering</a>
+            <a data-scroll="about-d">Über uns</a>
+            <a data-scroll="kontakt-d">Kontakt</a>
+          </div>
+        </nav>
+
+        <div class="hp-hero" id="home-d">
+          <h1 style="font-size:56px"><span>Sweet Truck</span> on the Road</h1>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--text-secondary);font-style:italic;margin-top:12px;font-weight:400;letter-spacing:0.5px;position:relative">Wo süße Träume wahr werden.</p>
+          <a href="#" class="hp-hero-btn" onclick="event.preventDefault();openCalendarPage()">Nächstes Event</a>
+        </div>
+
+        <div class="hp-subline">Penelope's Sweetness World — Bubble Waffeln aus Aulendorf, unterwegs in ganz Süddeutschland</div>
+
+        <div class="event-types" id="catering-d"></div>
+        <div style="border-bottom: 1px solid var(--border); margin: 0 32px;"></div>
+
+        <div class="about-section" id="about-d">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--text-primary);margin-bottom:20px">Wir sind <span style="color:var(--accent)">Sweet Truck</span></h3>
+          <div class="about-photos">
+            <div>
+              <div class="about-photo about-photo-side"><img src="img/penelope.jpg" alt="Penelope" loading="lazy"></div>
+              <div class="about-photo-label">Penelope</div>
+            </div>
+            <div>
+              <div class="about-photo about-photo-center"><img src="img/team_together.jpg" alt="Sweet Truck Team" loading="lazy"></div>
+            </div>
+            <div>
+              <div class="about-photo about-photo-side"><img src="img/tivadar.jpg" alt="Tivadar" loading="lazy"></div>
+              <div class="about-photo-label">Tivadar</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hp-section">
+          <div class="section-title">Unsere <span>Bubble Waffeln</span></div>
+          <div class="section-sub">Frisch zubereitet — direkt vom Truck</div>
+          <div class="carousel-wrap" id="carousel-desktop">
+            <div class="carousel-stage" id="carousel-stage">
+              <div class="carousel-item" data-ci="0"><img src="img/w_apple_crumble.png" alt="Apple Crumble" loading="lazy"><div class="ci-name">Apple Crumble Waffel<div class="ci-sub">Apfel · Streusel · Sahne</div></div></div>
+              <div class="carousel-item" data-ci="1"><img src="img/w_cookies_n_cream.png" alt="Cookies &amp; Cream" loading="lazy"><div class="ci-name">Cookies &amp; Cream Waffel<div class="ci-sub">Oreo · Creme · Schoko</div></div></div>
+              <div class="carousel-item" data-ci="2"><img src="img/w_dubai.png" alt="Dubai" loading="lazy"><div class="ci-name">Dubai Waffel<div class="ci-sub">Pistazie · Kadayif · Schoko</div></div></div>
+              <div class="carousel-item" data-ci="3"><img src="img/w_karamell_traum.png" alt="Karamell Traum" loading="lazy"><div class="ci-name">Karamell Traum Waffel<div class="ci-sub">Karamell · Nüsse · Eis</div></div></div>
+              <div class="carousel-item" data-ci="4"><img src="img/w_nutella_banane.png" alt="Nutella Banane" loading="lazy"><div class="ci-name">Nutella Banane Waffel<div class="ci-sub">Nutella · Banane · Sahne</div></div></div>
+              <div class="carousel-item" data-ci="5"><img src="img/w_pistazie.png" alt="Pistazie" loading="lazy"><div class="ci-name">Pistazie Waffel<div class="ci-sub">Pistaziencreme · Crunch</div></div></div>
+              <div class="carousel-item" data-ci="6"><img src="img/w_raffaello.png" alt="Raffaello" loading="lazy"><div class="ci-name">Raffaello Waffel<div class="ci-sub">Kokos · Weiße Schoko · Mandel</div></div></div>
+              <div class="carousel-item" data-ci="7"><img src="img/w_schocko_banane.png" alt="Schoko Banane" loading="lazy"><div class="ci-name">Schoko Banane Waffel<div class="ci-sub">Schokolade · Banane · Sahne</div></div></div>
+              <div class="carousel-item" data-ci="8"><img src="img/w_sweet_berry.png" alt="Mascarpone" loading="lazy"><div class="ci-name">Mascarpone Waffel<div class="ci-sub">Beeren · Mascarpone · Creme</div></div></div>
+              <div class="carousel-item" data-ci="9"><img src="img/w_barbie.png" alt="Barbie" loading="lazy"><div class="ci-name">Barbie Waffel<div class="ci-sub">Erdbeere · Rosa Schoko · Creme</div></div></div>
+            </div>
+            <div class="carousel-nav">
+              <button class="carousel-arrow" type="button" aria-label="Vorherige Waffel" onclick="carouselPrev()">&#8249;</button>
+              <div class="carousel-dots" id="carousel-dots"></div>
+              <button class="carousel-arrow" type="button" aria-label="Nächste Waffel" onclick="carouselNext()">&#8250;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hp-section">
+          <div class="section-title">Das sagen <span>unsere Gäste</span></div>
+          <div class="section-sub">Echte Stimmen von echten Events</div>
+          <div class="testimonials">
+            <div class="testimonial">
+              <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="test-text">"Die besten Waffeln die wir je hatten! Alle Gäste waren begeistert. Absolut empfehlenswert."</div>
+              <div class="test-author">— Lisa M., Hochzeit</div>
+            </div>
+            <div class="testimonial">
+              <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="test-text">"Super unkomplizierte Planung und mega leckeres Ergebnis. Kommt definitiv wieder!"</div>
+              <div class="test-author">— Thomas K., Firmenevent</div>
+            </div>
+            <div class="testimonial">
+              <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="test-text">"Absolute Empfehlung! Die Waffeln waren das Highlight auf unserem Stadtfest. Mega freundliches Team!"</div>
+              <div class="test-author">— Sandra W., Stadtfest</div>
+            </div>
+            <div class="testimonial">
+              <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="test-text">"Wir hatten den Sweet Truck für unser Firmenevent — 200 Leute, alle begeistert. Top Service!"</div>
+              <div class="test-author">— Marco B., Firmenevent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section" id="kontakt-d">
+          <h2>Dein Event. <span>Unsere Waffeln.</span></h2>
+          <p>Schreib uns — wir kümmern uns um den Rest. Egal ob Hochzeit, Firmenevent oder Stadtfest.</p>
+          <div class="contact-cards">
+            <div class="contact-card">
+              <div class="contact-card-icon">&#128222;</div>
+              <div class="contact-card-label">Telefon</div>
+              <div class="contact-card-value"><a href="tel:+491759553996">+49 175 9553996</a></div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-card-icon">&#9993;&#65039;</div>
+              <div class="contact-card-label">Email</div>
+              <div class="contact-card-value"><a href="mailto:info@sweettruck.de">info@sweettruck.de</a></div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-card-icon">&#128172;</div>
+              <div class="contact-card-label">WhatsApp</div>
+              <div class="contact-card-value"><a href="https://wa.me/491759553996" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">Chat starten</a></div>
+            </div>
+          </div>
+          <a href="mailto:info@sweettruck.de" class="cta-btn" style="margin-top:10px;">Jetzt anfragen</a>
+          <div class="contact-note">Wir melden uns innerhalb von 24 Stunden</div>
+        </div>
+
+        <div class="hp-footer">
+          &copy; 2026 <span>Sweet Truck</span> — Penelope's Sweetness World
+          <div class="footer-social">
+            <a href="https://www.instagram.com/penelopes_sweetness_world/" target="_blank" rel="noopener noreferrer" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sweetnesstruck/" target="_blank" rel="noopener noreferrer" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+          <div class="footer-legal">
+            <a href="#" onclick="event.preventDefault();document.getElementById('impressum-overlay').classList.add('active')">Impressum</a> &middot; <a href="#" onclick="event.preventDefault();document.getElementById('datenschutz-overlay').classList.add('active')">Datenschutz</a>
+          </div>
+        </div>
+
+        <!-- Desktop Modal -->
+        <div class="modal-overlay" id="modal-overlay-d" onclick="closeModal(event)">
+          <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-logo"><img src="logo.png" alt="Sweet Truck"></div>
+            <div class="modal-header">
+              <h3 class="modal-title-el">Events</h3>
+              <button class="modal-close" type="button" aria-label="Schließen" onclick="closeModal()">&#10005;</button>
+            </div>
+            <div class="modal-events-el"></div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/491759553996?text=Hallo%20Sweet%20Truck!%20Ich%20habe%20eine%20Frage." target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="WhatsApp Chat starten" style="position:sticky;bottom:24px;float:right;margin-right:24px;margin-bottom:16px">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.52 5.86L0 24l6.335-1.652A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.97 0-3.837-.53-5.445-1.453l-.39-.232-3.758.98.998-3.648-.254-.404A9.72 9.72 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"/></svg>
+        </a>
+
+      </div>
+  </div>
+</div>
+
+<!-- ===== TAB 3: KALENDER ===== -->
+<div class="tab-content" id="tab-kalender">
+  <div class="tab-content-center" style="padding-top:20px; padding-bottom:20px;">
+    <div class="tab-view-label">Google Calendar &rarr; Website</div>
+    <div class="sync-split">
+      <!-- LEFT: Google Calendar Mockup (realistic) -->
+      <div class="sync-split-col">
+        <div class="gcal-mockup">
+          <!-- Top bar -->
+          <div class="gcal-topbar">
+            <div class="gcal-hamburger"><span></span><span></span><span></span></div>
+            <div class="gcal-glogo">
+              <div class="gcal-glogo-icon"><div class="gcal-cal-box">28</div></div>
+              <span class="gcal-glogo-text">
+                <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span> Calendar
+              </span>
+            </div>
+            <div class="gcal-nav">
+              <button type="button" class="gcal-today-btn">Heute</button>
+              <button type="button" class="gcal-arrow">‹</button>
+              <button type="button" class="gcal-arrow">›</button>
+              <span class="gcal-month-label">April 2026</span>
+            </div>
+          </div>
+          <!-- Body -->
+          <div class="gcal-body">
+            <div class="gcal-sidebar">
+              <button type="button" class="gcal-add-btn" id="gcal-add-btn" onclick="gcalAddEvent()" title="Event erstellen">
+                <svg viewBox="0 0 36 36" width="28" height="28">
+                  <path d="M18 2v14H4v4h14v14h4V20h14v-4H22V2z" fill="#1a73e8" opacity=".15"/>
+                  <path d="M18 8v8h-8v4h8v8h4v-8h8v-4h-8V8z" fill="none" stroke="#1a73e8" stroke-width="1.5"/>
+                </svg>
+              </button>
+            </div>
+            <div class="gcal-main">
+              <div class="gcal-schedule" id="gcal-events"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE: Sync animation -->
+      <div class="sync-connector">
+        <div class="sync-line">
+          <div class="sync-dot"></div>
+          <div class="sync-dot"></div>
+          <div class="sync-dot"></div>
+        </div>
+        <div class="sync-status" id="sync-status-3">Verbunden</div>
+      </div>
+
+      <!-- RIGHT: Website Calendar in phone frame -->
+      <div class="sync-split-col">
+        <div class="phone-frame phone-frame-sm">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <div class="hp-nav-mobile">
+              <div class="hp-logo-sm"><img src="logo.png" alt="Sweet Truck"></div>
+            </div>
+            <div class="hp-section-mobile">
+              <div class="section-title-sm">Wo <span>findest du uns?</span></div>
+              <div class="section-sub-sm">Klick auf eine Waffel für Details</div>
+              <div class="calendar">
+                <div class="cal-header">
+                  <button type="button" class="cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+                  <h3 id="cal-month-label-k">April 2026</h3>
+                  <button type="button" class="cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+                </div>
+                <div class="cal-grid" id="cal-grid-k"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sync-description">
+      Trage Events in <strong>Google Calendar</strong> ein — sie erscheinen automatisch auf deiner Website.<br>
+      Klicke <strong>"+ Event erstellen"</strong> um die Synchronisation live zu testen.
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 4: LIVE-SYNC ===== -->
+<div class="tab-content" id="tab-sync">
+  <div class="tab-content-center" style="padding-top:20px; padding-bottom:20px;">
+    <div class="tab-view-label">Handy &rarr; Website — Echtzeit</div>
+    <div class="sync-split">
+      <!-- LEFT: Phone with Google Calendar app -->
+      <div class="sync-split-col">
+        <div class="phone-frame phone-frame-sm" style="position:relative;">
+          <div class="phone-notch"></div>
+          <div class="phone-frame-inner-rel">
+            <div class="gcal-phone-mockup">
+              <div class="gcal-phone-header">
+                <svg viewBox="0 0 24 24" width="22" height="22">
+                  <rect x="2" y="3" width="20" height="19" rx="3" fill="#fff" opacity="0.3"/>
+                  <rect x="5" y="1" width="3" height="4" rx="1" fill="#fff" opacity="0.4"/>
+                  <rect x="16" y="1" width="3" height="4" rx="1" fill="#fff" opacity="0.4"/>
+                  <text x="12" y="15" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">28</text>
+                </svg>
+                <span class="gcal-phone-header-title">Google Calendar</span>
+              </div>
+              <div class="gcal-phone-toolbar">
+                <span class="gcal-phone-month">April 2026</span>
+              </div>
+              <div class="gcal-phone-events" id="gcal-phone-events"></div>
+            </div>
+            <button type="button" class="gcal-fab" id="sync-fab" onclick="startSyncDemo()" title="Neues Event">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE: Sync animation -->
+      <div class="sync-connector" id="sync-connector-4">
+        <div class="sync-line">
+          <div class="sync-dot"></div>
+          <div class="sync-dot"></div>
+          <div class="sync-dot"></div>
+        </div>
+        <div class="sync-status" id="sync-status-4">Verbunden</div>
+      </div>
+
+      <!-- RIGHT: Desktop frame with website -->
+      <div class="sync-split-col">
+        <div class="desktop-frame desktop-frame-sm">
+          <div class="desktop-topbar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <div class="desktop-url">sweettruck.de</div>
+          </div>
+          <div class="desktop-content">
+            <nav class="hp-nav" style="padding:12px 20px;">
+              <div class="hp-logo"><img src="logo.png" alt="Sweet Truck" style="height:28px;"></div>
+            </nav>
+            <div class="hp-section" style="padding:16px 20px;">
+              <div class="section-title" style="font-size:20px;">Wo <span>findest du uns?</span></div>
+              <div class="section-sub">Automatisch synchronisiert</div>
+              <div class="calendar">
+                <div class="cal-header">
+                  <button type="button" class="cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+                  <h3 id="cal-month-label-s">April 2026</h3>
+                  <button type="button" class="cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+                </div>
+                <div class="cal-grid" id="cal-grid-s"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sync-description">
+      Vom Handy direkt auf die Website — <strong>in Echtzeit</strong>.<br>
+      Klicke den <strong>+</strong> Button auf dem Handy oder warte 3 Sekunden.
+    </div>
+  </div>
+</div>
+
+<!-- IMPRESSUM OVERLAY -->
+<div class="legal-overlay" id="impressum-overlay" onclick="if(event.target===this)this.classList.remove('active')" role="dialog" aria-modal="true" aria-labelledby="impressum-title" style="position:relative">
+  <div class="legal-content">
+    <button class="legal-close" type="button" aria-label="Schließen" onclick="document.getElementById('impressum-overlay').classList.remove('active')">&#10005;</button>
+    <h2 id="impressum-title">Impressum</h2>
+    <h3>Angaben gemäß § 5 TMG</h3>
+    <p>Penelope's Sweetness World<br>
+    Inhaberin: Penelope [Nachname]<br>
+    [Straße Nr.]<br>
+    88326 Aulendorf</p>
+    <h3>Kontakt</h3>
+    <p>Telefon: +49 175 9553996<br>
+    E-Mail: info@sweettruck.de</p>
+    <h3>Umsatzsteuer-ID</h3>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: [USt-IdNr. eintragen]</p>
+    <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+    <p>Penelope [Nachname]<br>[Adresse wie oben]</p>
+    <h3>Streitschlichtung</h3>
+    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </div>
+</div>
+
+<!-- DATENSCHUTZ OVERLAY -->
+<div class="legal-overlay" id="datenschutz-overlay" onclick="if(event.target===this)this.classList.remove('active')" role="dialog" aria-modal="true" aria-labelledby="datenschutz-title" style="position:relative">
+  <div class="legal-content">
+    <button class="legal-close" type="button" aria-label="Schließen" onclick="document.getElementById('datenschutz-overlay').classList.remove('active')">&#10005;</button>
+    <h2 id="datenschutz-title">Datenschutzerklärung</h2>
+    <h3>1. Datenschutz auf einen Blick</h3>
+    <p>Wir nehmen den Schutz Ihrer persönlichen Daten ernst. Diese Datenschutzerklärung informiert Sie über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten auf dieser Website.</p>
+    <h3>2. Verantwortliche Stelle</h3>
+    <p>Penelope's Sweetness World<br>
+    [Adresse]<br>
+    88326 Aulendorf<br>
+    E-Mail: info@sweettruck.de</p>
+    <h3>3. Datenerfassung auf dieser Website</h3>
+    <p>Diese Website verwendet keine Cookies und kein Tracking. Es werden keine personenbezogenen Daten automatisch erfasst.</p>
+    <h3>4. Kontaktaufnahme</h3>
+    <p>Wenn Sie uns per E-Mail oder WhatsApp kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert. Eine Weitergabe an Dritte erfolgt nicht.</p>
+    <h3>5. Hosting</h3>
+    <p>Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert.</p>
+    <h3>6. Ihre Rechte</h3>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Kontaktieren Sie uns hierzu unter info@sweettruck.de.</p>
+  </div>
+</div>
+
+<script>
+  // ========== TAB SWITCHING ==========
+  let currentTab = 'mobile';
+  let syncAutoTimer = null;
+
+  // Carousel pause/resume helpers
+  function pauseCarousels() {
+    clearInterval(carouselAuto);
+    clearInterval(carouselAutoM);
+  }
+  function resumeCarousel(tab) {
+    clearInterval(carouselAuto);
+    clearInterval(carouselAutoM);
+    if (tab === 'desktop') carouselAuto = setInterval(carouselNext, 4000);
+    if (tab === 'mobile') carouselAutoM = setInterval(carouselNextM, 4500);
+  }
+
+  function switchTab(tabName) {
+    pauseCarousels();
+    currentTab = tabName;
+    // Update pills
+    document.querySelectorAll('.tab-pill').forEach(p => {
+      p.classList.toggle('active', p.dataset.tab === tabName);
+    });
+    // Update content
+    document.querySelectorAll('.tab-content').forEach(tc => {
+      tc.classList.remove('active');
+    });
+    const target = document.getElementById('tab-' + tabName);
+    if (target) {
+      target.classList.add('active');
+    }
+    resumeCarousel(tabName);
+    // Re-render calendars after tab switch
+    setTimeout(() => renderCalendar(), 50);
+
+    // Tab 3: populate gcal events
+    if (tabName === 'kalender') {
+      renderGcalEvents();
+    }
+    // Tab 4: populate phone events & auto-play
+    if (tabName === 'sync') {
+      renderGcalPhoneEvents();
+      clearTimeout(syncAutoTimer);
+      syncAutoTimer = setTimeout(() => {
+        if (currentTab === 'sync') startSyncDemo();
+      }, 3000);
+    } else {
+      clearTimeout(syncAutoTimer);
+    }
+  }
+
+  // SVG waffle icon
+  // Bubble Waffle SVG icon — golden circle with prominent bubble pattern
+  const WAFFLE_MINI = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="11.5" fill="#d4be8a" stroke="#c4a870" stroke-width="0.5"/><circle cx="7" cy="7" r="2.5" fill="#a3884e"/><circle cx="12" cy="7" r="2.5" fill="#a3884e"/><circle cx="17" cy="7" r="2.5" fill="#a3884e"/><circle cx="7" cy="12" r="2.5" fill="#a3884e"/><circle cx="12" cy="12" r="2.5" fill="#a3884e"/><circle cx="17" cy="12" r="2.5" fill="#a3884e"/><circle cx="7" cy="17" r="2.5" fill="#a3884e"/><circle cx="12" cy="17" r="2.5" fill="#a3884e"/><circle cx="17" cy="17" r="2.5" fill="#a3884e"/></svg>';
+
+
+  // ========== GOOGLE CALENDAR CONFIG ==========
+  const GCAL_CONFIG = {
+    API_KEY: '',
+    CALENDAR_ID: '',
+    USE_GOOGLE: false,
+  };
+
+  // ========== DATA ==========
+  let events = [
+    { id: 1, type: 'Markt', title: 'Wochenmarkt Altstadt', date: '2026-04-28', time: '09:00', location: 'Marktplatz 1, Aulendorf', note: 'Stammplatz' },
+    { id: 2, type: 'Festival', title: 'Street Food Festival', date: '2026-04-30', time: '14:00', location: 'Stadtpark, Ravensburg', note: '' },
+    { id: 3, type: 'Privat', title: 'Hochzeit Schmidt', date: '2026-05-03', time: '16:00', location: 'Schloss Aulendorf', note: '80 Gäste' },
+    { id: 4, type: 'Firmen', title: 'Sommerfest TechCorp', date: '2026-05-07', time: '11:00', location: 'Messeplatz, Friedrichshafen', note: '200 Personen' },
+    { id: 5, type: 'Markt', title: 'Feierabendmarkt', date: '2026-05-07', time: '16:00', location: 'Marienplatz, Ravensburg', note: '' },
+    { id: 6, type: 'Festival', title: 'Stadtfest Weingarten', date: '2026-05-10', time: '12:00', location: 'Münsterplatz, Weingarten', note: '2 Tage' },
+    { id: 7, type: 'Privat', title: 'Geburtstag Müller', date: '2026-05-15', time: '15:00', location: 'Seestraße 12, Friedrichshafen', note: '40 Gäste' },
+    { id: 8, type: 'Markt', title: 'Bauernmarkt', date: '2026-05-20', time: '08:00', location: 'Karlstraße, Biberach', note: '' },
+  ];
+  let nextId = 9;
+
+  const today = new Date();
+  let currentMonth = today.getMonth();
+  let currentYear = today.getFullYear();
+
+  // ========== GOOGLE CALENDAR FETCH ==========
+  async function fetchGoogleCalendar() {
+    if (!GCAL_CONFIG.USE_GOOGLE || !GCAL_CONFIG.API_KEY || !GCAL_CONFIG.CALENDAR_ID) return;
+    try {
+      const now = new Date();
+      const timeMin = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
+      const timeMax = new Date(now.getFullYear(), now.getMonth() + 6, 0).toISOString();
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_CONFIG.CALENDAR_ID)}/events?` +
+        `key=${GCAL_CONFIG.API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime&maxResults=100`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Google Calendar API Fehler: ' + res.status);
+      const data = await res.json();
+      if (data.items && data.items.length > 0) {
+        events = data.items.map((item, i) => {
+          const start = item.start.dateTime || item.start.date;
+          const dt = new Date(start);
+          const dateStr = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+          const timeStr = item.start.dateTime ? String(dt.getHours()).padStart(2, '0') + ':' + String(dt.getMinutes()).padStart(2, '0') : 'Ganztags';
+          const desc = (item.description || '').toLowerCase();
+          const title = (item.summary || '').toLowerCase();
+          let type = 'Markt';
+          if (desc.includes('privat') || desc.includes('hochzeit') || desc.includes('geburtstag') || title.includes('hochzeit') || title.includes('geburtstag')) type = 'Privat';
+          else if (desc.includes('firma') || desc.includes('firmen') || title.includes('firmen') || title.includes('sommerfest')) type = 'Firmen';
+          else if (desc.includes('festival') || desc.includes('stadtfest') || title.includes('festival') || title.includes('street food')) type = 'Festival';
+          const typeMatch = (item.description || '').match(/\[Typ:\s*(\w+)\]/i);
+          if (typeMatch) type = typeMatch[1];
+          return {
+            id: i + 1, type, title: item.summary || 'Event', date: dateStr, time: timeStr,
+            location: item.location || 'Standort folgt',
+            note: item.description ? item.description.replace(/\[Typ:.*?\]/gi, '').trim() : '',
+          };
+        });
+        nextId = events.length + 1;
+        renderCalendar();
+      }
+    } catch (err) {
+      // Silent fail — Google Calendar optional
+    }
+  }
+  fetchGoogleCalendar();
+  if (GCAL_CONFIG.USE_GOOGLE) setInterval(fetchGoogleCalendar, 5 * 60 * 1000);
+
+  const monthNames = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  const dayNames = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+
+  function renderCalendar() {
+    renderCalendarTo('cal-grid', 'cal-month-label');
+    renderCalendarTo('cal-grid-m', 'cal-month-label-m');
+    renderCalendarTo('cal-grid-k', 'cal-month-label-k');
+    renderCalendarTo('cal-grid-s', 'cal-month-label-s');
+    if (typeof renderNextEvent === 'function') renderNextEvent();
+  }
+
+  function openCalendarPage() {
+    const id = currentTab === 'mobile' ? 'calendar-page-m' : 'calendar-page-d';
+    document.getElementById(id).classList.add('active');
+    renderCalendar();
+  }
+  function closeCalendarPage() {
+    document.getElementById('calendar-page-m').classList.remove('active');
+    document.getElementById('calendar-page-d').classList.remove('active');
+  }
+
+  function getEventTypeClass(type) {
+    const t = (type || '').toLowerCase();
+    if (t === 'markt') return 't-markt';
+    if (t === 'festival') return 't-festival';
+    if (t === 'privat') return 't-privat';
+    if (t === 'firmen') return 't-firmen';
+    return 't-default';
+  }
+
+  function renderCalendarTo(gridId, labelId) {
+    const grid = document.getElementById(gridId);
+    const label = document.getElementById(labelId);
+    if (!grid || !label) return;
+    label.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    let startDay = firstDay.getDay() - 1;
+    if (startDay < 0) startDay = 6;
+    const td = new Date();
+
+    let html = dayNames.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+
+    for (let i = 0; i < startDay; i++) {
+      html += '<div class="cal-day empty"></div>';
+    }
+
+    for (let d = 1; d <= lastDay.getDate(); d++) {
+      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const dayEvents = events.filter(e => e.date === dateStr);
+      const isToday = td.getDate() === d && td.getMonth() === currentMonth && td.getFullYear() === currentYear;
+
+      const classes = ['cal-day'];
+      if (dayEvents.length > 0) classes.push('has-event');
+      if (isToday) classes.push('today');
+
+      const waffles = dayEvents.length > 0
+        ? `<div class="waffles">${WAFFLE_MINI.repeat(Math.min(dayEvents.length, 3))}</div>`
+        : '';
+
+      let tooltipHtml = '';
+      if (dayEvents.length > 0) {
+        tooltipHtml = `<div class="cal-tooltip">${dayEvents.map(e =>
+          `<div class="cal-tooltip-event"><div class="cal-tooltip-title">${e.title}</div><div class="cal-tooltip-info">${e.time} Uhr · ${e.location}</div></div>`
+        ).join('')}</div>`;
+      }
+
+      const onclick = dayEvents.length > 0 ? `onclick="showModal('${dateStr}')"` : '';
+
+      html += `<div class="${classes.join(' ')}" ${onclick}>
+        <div class="day-num">${d}</div>
+        ${waffles}
+        ${tooltipHtml}
+      </div>`;
+    }
+
+    grid.innerHTML = html;
+  }
+
+  function changeMonth(dir) {
+    // Add transition class to all grids
+    const grids = document.querySelectorAll('.cal-grid');
+    grids.forEach(g => g.classList.add('transitioning'));
+
+    setTimeout(() => {
+      currentMonth += dir;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      renderCalendar();
+      if (currentTab === 'kalender') renderGcalEvents();
+      if (currentTab === 'sync') renderGcalPhoneEvents();
+
+      // Remove transition class after render
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.cal-grid').forEach(g => g.classList.remove('transitioning'));
+      });
+    }, 200);
+  }
+
+  // Icon SVG library
+  const ICON_SVGS = {
+    cake: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8H4v8"/><path d="M3 13h18l-1-5H4l-1 5z"/><path d="M12 8V5"/><path d="M10 5a2 2 0 114 0c0 1-1 1.5-2 3-1-1.5-2-2-2-3z"/></svg>',
+    briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M3 13h18"/></svg>',
+    tent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21L12 4l9 17H3z"/><path d="M8 21l4-7 4 7"/><path d="M12 4v4"/></svg>',
+    rings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="15" r="5"/><circle cx="15" cy="15" r="5"/><path d="M7 7l2 3M17 7l-2 3"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>',
+    star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.6 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 8.9 8.6 12 2"/></svg>',
+    calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+    truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>'
+  };
+
+  // Background decoration SVGs per category key
+  const BG_SVGS = {
+    weihnachtsfeier: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l1.5 3.5L17 7l-3.5 1.5L12 12l-1.5-3.5L7 7l3.5-1.5L12 2z"/><path d="M5 14l1 2 2 .5-2 .5L5 19l-1-2-2-.5 2-.5L5 14z"/><path d="M19 14l1 2 2 .5-2 .5-1 2-1-2-2-.5 2-.5 1-2z"/></svg>',
+    firmenevents: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="10" width="16" height="11" rx="1"/><rect x="9" y="3" width="6" height="7"/><path d="M9 15h6v6H9z"/><path d="M4 10V9a1 1 0 011-1h14a1 1 0 011 1v1"/></svg>',
+    hochzeiten: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="14" r="5"/><circle cx="16" cy="14" r="5"/><path d="M10 5c0-1.7 1.3-3 3-3s3 1.3 3 3"/><path d="M8 5c0-1.7-1.3-3-3-3S2 3.3 2 5"/></svg>',
+    festivals: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 21L12 4l9 17H3z"/><path d="M8 21l4-7 4 7"/><path d="M12 4v4"/></svg>',
+    jubilaeen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 9H4.5a2.5 2.5 0 010-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 000-5C17 4 17 7 17 7"/><rect x="5" y="9" width="14" height="10" rx="1"/><path d="M12 9v10"/><path d="M5 14h14"/></svg>',
+    abschlussfeiern: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/><path d="M22 10v6"/></svg>',
+    gartenpartys: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22V10"/><path d="M17 9c0 3-5 3-5 0 0-3 5-6 5-3z"/><path d="M7 9c0 3 5 3 5 0 0-3-5-6-5-3z"/><path d="M12 10c-3 0-6-2-3-5"/><path d="M12 10c3 0 6-2 3-5"/></svg>',
+    geburtstage: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-8H4v8"/><path d="M3 13h18l-1-5H4l-1 5z"/><path d="M12 8V5"/><path d="M8 8V6"/><path d="M16 8V6"/><path d="M12 5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg>',
+    sommerfest: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/></svg>',
+    feiertage: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="8" width="14" height="13" rx="2"/><path d="M12 8V6"/><path d="M8 8c0-2 1-4 4-4s4 2 4 4"/><path d="M5 12h14"/><path d="M12 12v9"/></svg>'
+  };
+
+  // Default category data
+  const DEFAULT_CATEGORIES = {
+    weihnachtsfeier: {
+      title: 'Weihnachtsfeier', shortTitle: 'Weihnachten', icon: 'star',
+      intro: 'Bubble Waffeln & heiße Getränke — der süße Abschluss für eure Weihnachtsfeier.',
+      desc: 'Süßer Abschluss für eure Weihnachtsfeier.',
+      features: ['Winterliche Spezialwaffeln', 'Heiße Schokolade & Glühwein-Option', 'Stimmungsvolle Truck-Beleuchtung', 'Inkl. Aufbau & Abbau'],
+      types: ['Privat', 'Firmen'], priceHint: 'Auf Anfrage'
+    },
+    firmenevents: {
+      title: 'Firmenevents', shortTitle: 'Firmen', icon: 'briefcase',
+      intro: 'Team-Event, Messe oder Kundenempfang — professionell, unkompliziert, lecker.',
+      desc: 'Team-Event, Messe — professionell & lecker.',
+      features: ['Ab 50 Personen', 'Firmenbranding möglich', 'Rechnungsstellung', 'Bis 300 km Anfahrt'],
+      types: ['Firmen'], priceHint: 'Paket ab 450 \u20AC'
+    },
+    hochzeiten: {
+      title: 'Hochzeiten', shortTitle: 'Hochzeit', icon: 'rings',
+      intro: 'Der süße Moment auf eurer Feier — unvergesslich für alle Gäste.',
+      desc: 'Der süße Moment — unvergesslich für alle Gäste.',
+      features: ['Bis 200 Gäste', 'Personalisiertes Menü', 'Late-Night Snack Option', 'Foto-freundlicher Truck'],
+      types: ['Privat'], priceHint: 'Paket ab 650 \u20AC'
+    },
+    festivals: {
+      title: 'Festivals', shortTitle: 'Festival', icon: 'tent',
+      intro: 'Street Food, Stadtfest, Open Air — wir sind mit dem Truck dabei.',
+      desc: 'Street Food, Stadtfest — wir sind dabei.',
+      features: ['GEMA & Gewerbe geregelt', 'Eigener Strom möglich', 'Mehrtägig verfügbar', 'Event-erfahren'],
+      types: ['Festival'], priceHint: 'Standgebühr nach Absprache'
+    },
+    jubilaeen: {
+      title: 'Jubiläen', shortTitle: 'Jubiläum', icon: 'star',
+      intro: 'Ob Firmenjubiläum oder Silberhochzeit — wir machen euren Ehrentag süß.',
+      desc: 'Euren Ehrentag süß machen.',
+      features: ['Individuelles Menü', 'Ab 30 Gäste', 'Persönliche Absprache', 'Inkl. Aufbau & Abbau'],
+      types: ['Privat', 'Firmen'], priceHint: 'Auf Anfrage'
+    },
+    abschlussfeiern: {
+      title: 'Abschlussfeiern', shortTitle: 'Abschluss', icon: 'cake',
+      intro: 'Abi, Studium, Ausbildung geschafft? Feiert mit Bubble Waffeln vom Truck!',
+      desc: 'Feiert euren Abschluss mit uns.',
+      features: ['Jugendliche Vibes', 'Flexible Menü-Auswahl', 'Foto-Spot am Truck', 'Ab 20 Gäste'],
+      types: ['Privat'], priceHint: 'ab 8 \u20AC pro Gast'
+    },
+    gartenpartys: {
+      title: 'Gartenpartys', shortTitle: 'Garten', icon: 'cake',
+      intro: 'Bubble Waffeln im Grünen — der Sweet Truck kommt direkt zu dir nach Hause.',
+      desc: 'Der Truck kommt zu dir nach Hause.',
+      features: ['Ab 20 Gäste', 'Eigener Strom möglich', 'Flexible Standzeit', 'Frisch vom Truck'],
+      types: ['Privat'], priceHint: 'ab 8 \u20AC pro Gast'
+    },
+    geburtstage: {
+      title: 'Geburtstage', shortTitle: 'Geburtstag', icon: 'cake',
+      intro: 'Ob 18., 30. oder 50. — mit dem Sweet Truck wird jeder Geburtstag besonders.',
+      desc: 'Jeder Geburtstag wird besonders.',
+      features: ['Ab 20 Gäste', 'Wunsch-Waffeln möglich', 'Überraschungseffekt garantiert', 'Inkl. Aufbau & Abbau'],
+      types: ['Privat'], priceHint: 'ab 8 \u20AC pro Gast'
+    },
+    sommerfest: {
+      title: 'Sommerfest', shortTitle: 'Sommer', icon: 'tent',
+      intro: 'Sonne, gute Laune und frische Bubble Waffeln — perfekt für euer Sommerfest.',
+      desc: 'Perfekt für euer Sommerfest.',
+      features: ['Outdoor-erprobt', 'Große Gruppen willkommen', 'Erfrischende Getränke', 'Bis 300 km Anfahrt'],
+      types: ['Firmen', 'Festival'], priceHint: 'Paket ab 450 \u20AC'
+    },
+    feiertage: {
+      title: 'Feiertage', shortTitle: 'Feiertag', icon: 'star',
+      intro: 'Ostern, Muttertag, Vatertag — süße Überraschungen für besondere Tage.',
+      desc: 'Süße Überraschungen für besondere Tage.',
+      features: ['Saisonale Spezialwaffeln', 'Kleine & große Gruppen', 'Flexible Buchung', 'Frisch zubereitet'],
+      types: ['Privat'], priceHint: 'Auf Anfrage'
+    }
+  };
+
+  // Reset cached categories to load new 10 Anlässe
+  localStorage.removeItem('sweettruck_categories');
+  let categories;
+  try {
+    categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+  } catch(e) {
+    categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+  }
+  function saveCategories() {
+    try { localStorage.setItem('sweettruck_categories', JSON.stringify(categories)); } catch(e) {}
+  }
+
+  // Admin mode
+  let adminMode = false;
+  function toggleAdmin() {
+    adminMode = !adminMode;
+    document.body.classList.toggle('admin-mode', adminMode);
+    document.getElementById('admin-toggle').classList.toggle('active', adminMode);
+    renderCategories();
+  }
+
+  let catSlideD = 0, catSlideM = 0;
+  let catAutoD, catAutoM;
+
+  function renderCategories() {
+    const desktop = document.getElementById('catering-d');
+    const mobile = document.getElementById('catering-m');
+    if (!desktop || !mobile) return;
+
+    const entries = Object.entries(categories);
+
+    // Desktop: 5 sichtbar, auto-slide
+    const dCards = entries.map(([key, cat]) => `
+      <div class="event-type-box" onclick="${adminMode ? `editCategory('${key}')` : `showCategory('${key}')`}">
+        <div class="etb-title">${cat.title}</div>
+        <div class="etb-desc">${cat.desc || cat.intro}</div>
+        <div class="etb-actions" onclick="event.stopPropagation()">
+          <button class="etb-btn" onclick="editCategory('${key}')">BEARBEITEN</button>
+          <button class="etb-btn etb-btn-danger" onclick="deleteCategory('${key}')">LÖSCHEN</button>
+        </div>
+        <div class="etb-bg-icon">${BG_SVGS[key] || ''}</div>
+      </div>
+    `).join('');
+    desktop.innerHTML = `<div class="event-types-track" id="cat-track-d">${dCards}</div>`;
+
+    // Mobile: 2 sichtbar, auto-slide
+    const mCards = entries.map(([key, cat]) => `
+      <div class="event-type-box-sm" onclick="${adminMode ? `editCategory('${key}')` : `showCategory('${key}')`}">
+        <div class="etb-title">${cat.shortTitle || cat.title}</div>
+        <div class="etb-bg-icon">${BG_SVGS[key] || ''}</div>
+      </div>
+    `).join('');
+    mobile.innerHTML = `<div class="event-types-track-m" id="cat-track-m">${mCards}</div>`;
+
+    catSlideD = 0; catSlideM = 0;
+    startCatAutoSlide();
+  }
+
+  function slideCatD() {
+    const track = document.getElementById('cat-track-d');
+    if (!track) return;
+    const total = track.children.length;
+    const visible = 5;
+    const maxSlide = total - visible;
+    catSlideD++;
+    if (catSlideD > maxSlide) catSlideD = 0;
+    const boxW = track.children[0].offsetWidth + 14;
+    track.style.transform = `translateX(-${catSlideD * boxW}px)`;
+  }
+
+  function slideCatM() {
+    const track = document.getElementById('cat-track-m');
+    if (!track) return;
+    const total = track.children.length;
+    const visible = 2;
+    const maxSlide = total - visible;
+    catSlideM++;
+    if (catSlideM > maxSlide) catSlideM = 0;
+    const boxW = track.children[0].offsetWidth + 10;
+    track.style.transform = `translateX(-${catSlideM * boxW}px)`;
+  }
+
+  function startCatAutoSlide() {
+    clearInterval(catAutoD); clearInterval(catAutoM);
+    catAutoD = setInterval(slideCatD, 5000);
+    catAutoM = setInterval(slideCatM, 5000);
+  }
+
+  function addCategory() {
+    const key = 'cat_' + Date.now();
+    categories[key] = {
+      title: 'Neue Kategorie', shortTitle: 'Neu', icon: 'star',
+      intro: 'Beschreibung hier einfügen.', desc: 'Kurzbeschreibung.',
+      features: ['Feature 1'], types: [], priceHint: 'Auf Anfrage'
+    };
+    saveCategories(); renderCategories(); editCategory(key);
+  }
+
+  function deleteCategory(key) {
+    if (!confirm(`Kategorie "${categories[key].title}" wirklich löschen?`)) return;
+    delete categories[key]; saveCategories(); renderCategories();
+  }
+
+  function editCategory(key) {
+    const cat = categories[key];
+    if (!cat) return;
+    const m = getActiveModal();
+    m.title.textContent = 'Kategorie bearbeiten';
+    m.events.innerHTML = `
+      <form class="cat-form" onsubmit="saveCategoryForm(event, '${key}')">
+        <div><label>Titel (lang)</label><input name="title" value="${escapeAttr(cat.title)}" required></div>
+        <div><label>Titel (kurz, mobile)</label><input name="shortTitle" value="${escapeAttr(cat.shortTitle || '')}"></div>
+        <div><label>Icon</label><select name="icon">${Object.keys(ICON_SVGS).map(i => `<option value="${i}" ${cat.icon===i?'selected':''}>${i}</option>`).join('')}</select></div>
+        <div><label>Kurzbeschreibung (Tile)</label><textarea name="desc" rows="2">${escapeAttr(cat.desc || '')}</textarea></div>
+        <div><label>Intro (Detail-Ansicht)</label><textarea name="intro" rows="3">${escapeAttr(cat.intro)}</textarea></div>
+        <div><label>Features</label><div id="feature-list">${cat.features.map((f, i) => featureRow(f, i)).join('')}</div><button type="button" class="add-feature-btn" onclick="addFeatureRow()">+ Feature hinzufügen</button></div>
+        <div><label>Preis-Hinweis</label><input name="priceHint" value="${escapeAttr(cat.priceHint || '')}"></div>
+        <div><label>Event-Typen (Komma-getrennt)</label><input name="types" value="${escapeAttr((cat.types || []).join(', '))}"></div>
+        <div class="form-actions"><button type="button" class="btn-secondary" onclick="closeModal()">Abbrechen</button><button type="submit" class="btn-primary">Speichern</button></div>
+      </form>
+    `;
+    m.overlay.classList.add('active');
+  }
+
+  function featureRow(value, idx) {
+    return `<div class="feature-row"><input name="feature" value="${escapeAttr(value)}" placeholder="z.B. Ab 20 Gäste"><button type="button" onclick="this.parentElement.remove()">\u00D7</button></div>`;
+  }
+  function addFeatureRow() {
+    const list = document.getElementById('feature-list');
+    const wrap = document.createElement('div');
+    wrap.innerHTML = featureRow('', list.children.length);
+    list.appendChild(wrap.firstElementChild);
+  }
+
+  function saveCategoryForm(e, key) {
+    e.preventDefault();
+    const form = e.target;
+    const features = [...form.querySelectorAll('input[name="feature"]')].map(i => i.value.trim()).filter(Boolean);
+    const types = form.types.value.split(',').map(s => s.trim()).filter(Boolean);
+    categories[key] = {
+      title: form.title.value.trim(),
+      shortTitle: form.shortTitle.value.trim() || form.title.value.trim(),
+      icon: form.icon.value, desc: form.desc.value.trim(), intro: form.intro.value.trim(),
+      features, types, priceHint: form.priceHint.value.trim()
+    };
+    saveCategories(); renderCategories(); closeModal();
+  }
+
+  function escapeAttr(s) {
+    return String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function showCategory(key) {
+    const cat = categories[key];
+    if (!cat) return;
+    const m = getActiveModal();
+    m.title.textContent = cat.title;
+    m.events.innerHTML = `
+      <div class="cat-intro">${cat.intro}</div>
+      <div class="cat-features">${cat.features.map(f => `<div class="cat-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>${f}</span></div>`).join('')}</div>
+      <div class="cat-cta-row">
+        <a href="mailto:info@sweettruck.de?subject=${encodeURIComponent(cat.title + ' — Anfrage')}" class="cat-cta cat-cta-email"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Per E-Mail</a>
+        <a href="https://wa.me/491759553996?text=${encodeURIComponent('Hallo Sweet Truck! Ich interessiere mich für: ' + cat.title + '. Könnt ihr mir mehr Infos geben?')}" target="_blank" rel="noopener noreferrer" class="cat-cta cat-cta-wa"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.52 5.86L0 24l6.335-1.652A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.97 0-3.837-.53-5.445-1.453l-.39-.232-3.758.98.998-3.648-.254-.404A9.72 9.72 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"/></svg> Per WhatsApp</a>
+      </div>
+    `;
+    m.overlay.classList.add('active');
+  }
+
+  function getCountdown(dateStr) {
+    const d = new Date(dateStr);
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    d.setHours(0,0,0,0);
+    const diff = Math.ceil((d - now) / (1000*60*60*24));
+    if (diff === 0) return 'Heute';
+    if (diff === 1) return 'Morgen';
+    if (diff < 0) return 'Vergangen';
+    return 'In ' + diff + ' Tagen';
+  }
+
+  function escJS(s) { return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function addToCalendar(e) {
+    const dtStart = e.date.replace(/-/g,'') + 'T' + e.time.replace(':','') + '00';
+    // Compute DTEND 1 hour after DTSTART
+    const hh = parseInt(e.time.split(':')[0], 10);
+    const mm = e.time.split(':')[1] || '00';
+    const endHH = String((hh + 1) % 24).padStart(2, '0');
+    const dtEnd = e.date.replace(/-/g,'') + 'T' + endHH + mm + '00';
+    const ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//SweetTruck//DE\nBEGIN:VEVENT\nSUMMARY:' + e.title + '\nLOCATION:' + e.location + '\nDTSTART;TZID=Europe/Berlin:' + dtStart + '\nDTEND;TZID=Europe/Berlin:' + dtEnd + '\nEND:VEVENT\nEND:VCALENDAR';
+    const blob = new Blob([ics], {type:'text/calendar'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = e.title.replace(/\s+/g,'_') + '.ics';
+    a.click();
+  }
+
+  function openRoute(location) {
+    window.open('https://www.google.com/maps/search/' + encodeURIComponent(location), '_blank');
+  }
+
+  function showModal(dateStr) {
+    const dayEvents = events.filter(e => e.date === dateStr);
+    if (dayEvents.length === 0) return;
+    const m = getActiveModal();
+    m.title.textContent = formatDate(dateStr);
+    m.events.innerHTML = dayEvents.map(e => {
+      const tc = getEventTypeClass(e.type);
+      return `
+      <div class="modal-event">
+        <div class="modal-event-bar ${tc}"></div>
+        <div class="modal-event-body">
+          <div class="me-type-badge ${tc}">${e.type}</div>
+          <div class="me-countdown">${getCountdown(e.date)}</div>
+          <div class="me-title">${e.title}</div>
+          <div class="me-row"><span class="me-label">Wann</span> ${e.time} Uhr</div>
+          <div class="me-row"><span class="me-label">Wo</span> ${e.location}</div>
+          ${e.note ? `<div class="me-row"><span class="me-label">Info</span> ${e.note}</div>` : ''}
+          <div class="modal-event-actions">
+            <a class="me-action" onclick="event.stopPropagation();addToCalendar({title:'${escJS(e.title)}',location:'${escJS(e.location)}',date:'${e.date}',time:'${e.time}'})" title="Zum Kalender hinzufügen">&#x1F4C5; Kalender</a>
+            <a class="me-action" onclick="event.stopPropagation();openRoute('${escJS(e.location)}')" title="Route planen">&#x1F5FA;&#xFE0F; Route</a>
+            <a class="me-action" href="mailto:info@sweettruck.de" title="Anfragen" onclick="event.stopPropagation();">&#x2709;&#xFE0F; Anfragen</a>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    m.overlay.classList.add('active');
+  }
+
+  function getActiveModal() {
+    const suffix = currentTab === 'mobile' ? '-m' : '-d';
+    return {
+      overlay: document.getElementById('modal-overlay' + suffix),
+      title: document.querySelector('#modal-overlay' + suffix + ' .modal-title-el'),
+      events: document.querySelector('#modal-overlay' + suffix + ' .modal-events-el')
+    };
+  }
+
+  function closeModal(e) {
+    const m = getActiveModal();
+    if (!e || e.target === m.overlay) {
+      m.overlay.classList.remove('active');
+    }
+  }
+
+  function formatDate(dateStr) {
+    const [y, m, d] = dateStr.split('-');
+    return `${d}.${m}.${y}`;
+  }
+
+  function renderNextEvent() {
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    const upcoming = events
+      .filter(e => { const d = new Date(e.date); d.setHours(0,0,0,0); return d >= now; })
+      .sort((a,b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+    const next = upcoming[0];
+    ['m','d'].forEach(suffix => {
+      const widget = document.getElementById('cal-next-event-' + suffix);
+      const titleEl = document.getElementById('cal-next-title-' + suffix);
+      if (!widget || !titleEl) return;
+      if (next) {
+        const [y,m,d] = next.date.split('-');
+        titleEl.textContent = next.title + ' \u2014 ' + d + '.' + m + '.';
+        widget.style.display = 'flex';
+      } else {
+        widget.style.display = 'none';
+      }
+    });
+  }
+
+  function goToNextEvent() {
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    const upcoming = events
+      .filter(e => { const d = new Date(e.date); d.setHours(0,0,0,0); return d >= now; })
+      .sort((a,b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+    const next = upcoming[0];
+    if (!next) return;
+    const nd = new Date(next.date);
+    currentMonth = nd.getMonth();
+    currentYear = nd.getFullYear();
+    renderCalendar();
+    showModal(next.date);
+  }
+
+  // Upgrade calendars to Food Truck frame
+  document.querySelectorAll('.calendar').forEach(cal => {
+    // Upgrade header
+    const header = cal.querySelector('.cal-header');
+    if (header) {
+      const h3 = header.querySelector('h3');
+      if (h3) {
+        header.innerHTML = `
+          <div class="cal-header-left">
+            <img src="logo.png" alt="Sweet Truck" class="cal-header-logo">
+            <span class="cal-header-brand">ON TOUR</span>
+          </div>
+          <div class="cal-header-center">
+            <button type="button" class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+            <h3 id="${h3.id}">${h3.textContent}</h3>
+            <button type="button" class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+          </div>
+        `;
+      }
+    }
+
+    // Calendar frame is clean glassmorphism
+  });
+
+  renderCalendar();
+  renderCategories();
+  renderNextEvent();
+
+  // ========== WAFFLE LOADER ==========
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('waffle-loader').classList.add('done');
+    }, 1200);
+  });
+
+  // ========== NAV SCROLL ==========
+  function scrollToSection(id, scroller, links) {
+    const target = document.getElementById(id);
+    if (!target || !scroller) return;
+    const top = target.offsetTop - 8;
+    scroller.scrollTo({ top, behavior: 'smooth' });
+    links.forEach(l => l.classList.toggle('active', l.dataset.scroll === id));
+  }
+
+  const desktopScroller = document.getElementById('desktop-scroller-2');
+  const desktopLinks = document.querySelectorAll('#tab-desktop .hp-nav-links a');
+  desktopLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToSection(link.dataset.scroll, desktopScroller, desktopLinks);
+    });
+  });
+
+  const mobileScroller = document.querySelector('#tab-mobile .phone-content');
+  const mobileLinks = document.querySelectorAll('#tab-mobile .mobile-menu a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToSection(link.dataset.scroll, mobileScroller, mobileLinks);
+      toggleMobileMenu();
+    });
+  });
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger-m');
+    menu.classList.toggle('open');
+    burger.classList.toggle('open');
+    burger.setAttribute('aria-expanded', menu.classList.contains('open'));
+    burger.setAttribute('aria-label', menu.classList.contains('open') ? 'Menü schließen' : 'Menü öffnen');
+  }
+
+  function updateActive(scroller, links, suffix) {
+    const pos = scroller.scrollTop + 60;
+    let current = links[0]?.dataset.scroll;
+    links.forEach(l => {
+      const el = document.getElementById(l.dataset.scroll);
+      if (el && el.offsetTop <= pos) current = l.dataset.scroll;
+    });
+    links.forEach(l => l.classList.toggle('active', l.dataset.scroll === current));
+  }
+  desktopScroller?.addEventListener('scroll', () => updateActive(desktopScroller, desktopLinks, 'd'));
+  mobileScroller?.addEventListener('scroll', () => updateActive(mobileScroller, mobileLinks, 'm'));
+
+  // ========== 3D CAROUSEL ==========
+  const carouselItems = document.querySelectorAll('#carousel-stage .carousel-item');
+  const totalItems = carouselItems.length;
+  let carouselIndex = 0;
+
+  function updateCarousel() {
+    carouselItems.forEach((item, i) => {
+      item.className = 'carousel-item';
+      const diff = i - carouselIndex;
+      const wrappedDiff = ((diff + totalItems + Math.floor(totalItems/2)) % totalItems) - Math.floor(totalItems/2);
+
+      if (wrappedDiff === 0) item.classList.add('ci-active');
+      else if (wrappedDiff === -1) item.classList.add('ci-left');
+      else if (wrappedDiff === 1) item.classList.add('ci-right');
+      else if (wrappedDiff === -2) item.classList.add('ci-far-left');
+      else if (wrappedDiff === 2) item.classList.add('ci-far-right');
+      else item.classList.add('ci-hidden');
+    });
+
+    // Update dots
+    const dotsEl = document.getElementById('carousel-dots');
+    if (dotsEl) {
+      dotsEl.innerHTML = '';
+      for (let i = 0; i < totalItems; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
+        dot.onclick = () => { carouselIndex = i; updateCarousel(); };
+        dotsEl.appendChild(dot);
+      }
+    }
+  }
+
+  function carouselNext() {
+    carouselIndex = (carouselIndex + 1) % totalItems;
+    updateCarousel();
+  }
+
+  function carouselPrev() {
+    carouselIndex = (carouselIndex - 1 + totalItems) % totalItems;
+    updateCarousel();
+  }
+
+  // Click on side items to navigate
+  carouselItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = parseInt(item.dataset.ci);
+      if (idx !== carouselIndex) {
+        carouselIndex = idx;
+        updateCarousel();
+      }
+    });
+  });
+
+  // Auto-rotate every 4 seconds
+  let carouselAuto = setInterval(carouselNext, 4000);
+
+  // Pause on hover
+  const carouselWrap = document.getElementById('carousel-desktop');
+  if (carouselWrap) {
+    carouselWrap.addEventListener('mouseenter', () => clearInterval(carouselAuto));
+    carouselWrap.addEventListener('mouseleave', () => { carouselAuto = setInterval(carouselNext, 4000); });
+  }
+
+  // Touch swipe support
+  let touchStartX = 0;
+  if (carouselWrap) {
+    carouselWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carouselWrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) carouselPrev(); else carouselNext();
+      }
+    }, { passive: true });
+  }
+
+  updateCarousel();
+
+  // ========== MOBILE CAROUSEL ==========
+  const carouselItemsM = document.querySelectorAll('#carousel-stage-m .carousel-item');
+  const totalItemsM = carouselItemsM.length;
+  let carouselIndexM = 0;
+
+  function updateCarouselM() {
+    carouselItemsM.forEach((item, i) => {
+      item.className = 'carousel-item';
+      const diff = i - carouselIndexM;
+      const wrappedDiff = ((diff + totalItemsM + Math.floor(totalItemsM/2)) % totalItemsM) - Math.floor(totalItemsM/2);
+
+      if (wrappedDiff === 0) item.classList.add('ci-active');
+      else if (wrappedDiff === -1) item.classList.add('ci-left');
+      else if (wrappedDiff === 1) item.classList.add('ci-right');
+      else if (wrappedDiff === -2) item.classList.add('ci-far-left');
+      else if (wrappedDiff === 2) item.classList.add('ci-far-right');
+      else item.classList.add('ci-hidden');
+    });
+
+    const dotsEl = document.getElementById('carousel-dots-m');
+    if (dotsEl) {
+      dotsEl.innerHTML = '';
+      for (let i = 0; i < totalItemsM; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === carouselIndexM ? ' active' : '');
+        dot.onclick = () => { carouselIndexM = i; updateCarouselM(); };
+        dotsEl.appendChild(dot);
+      }
+    }
+  }
+
+  function carouselNextM() {
+    carouselIndexM = (carouselIndexM + 1) % totalItemsM;
+    updateCarouselM();
+  }
+
+  function carouselPrevM() {
+    carouselIndexM = (carouselIndexM - 1 + totalItemsM) % totalItemsM;
+    updateCarouselM();
+  }
+
+  carouselItemsM.forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = parseInt(item.dataset.ci);
+      if (idx !== carouselIndexM) { carouselIndexM = idx; updateCarouselM(); }
+    });
+  });
+
+  // Auto-rotate mobile
+  let carouselAutoM = setInterval(carouselNextM, 4500);
+  const carouselWrapM = document.getElementById('carousel-mobile');
+  if (carouselWrapM) {
+    carouselWrapM.addEventListener('mouseenter', () => clearInterval(carouselAutoM));
+    carouselWrapM.addEventListener('mouseleave', () => { carouselAutoM = setInterval(carouselNextM, 4500); });
+    // Touch swipe
+    let touchStartXM = 0;
+    carouselWrapM.addEventListener('touchstart', e => { touchStartXM = e.touches[0].clientX; }, { passive: true });
+    carouselWrapM.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - touchStartXM;
+      if (Math.abs(diff) > 30) { if (diff > 0) carouselPrevM(); else carouselNextM(); }
+    }, { passive: true });
+  }
+
+  updateCarouselM();
+
+  // ========== TAB 3: GOOGLE CALENDAR MOCKUP ==========
+  function getEventsForCurrentMonth() {
+    return events.filter(e => {
+      const [y, m] = e.date.split('-').map(Number);
+      return y === currentYear && m === (currentMonth + 1);
+    }).sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+  }
+
+  const evColors = ['ev-blue','ev-green','ev-purple','ev-red','ev-yellow'];
+  function renderGcalEvents() {
+    const container = document.getElementById('gcal-events');
+    if (!container) return;
+    const evts = getEventsForCurrentMonth();
+
+    // Group by date
+    const byDate = {};
+    evts.forEach(e => {
+      if (!byDate[e.date]) byDate[e.date] = [];
+      byDate[e.date].push(e);
+    });
+
+    // Build time-slot schedule
+    let html = '';
+    const hours = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'];
+
+    // Show events grouped by date
+    Object.keys(byDate).sort().forEach(date => {
+      const dayEvts = byDate[date];
+      const [y,m,d] = date.split('-');
+      const dayName = ['So','Mo','Di','Mi','Do','Fr','Sa'][new Date(y,m-1,d).getDay()];
+
+      html += `<div style="padding:6px 12px;font-size:11px;color:#70757a;font-weight:500;background:#f8f9fa;border-bottom:1px solid #dadce0">${dayName}, ${d}.${m}.</div>`;
+
+      dayEvts.forEach((e, i) => {
+        const col = evColors[i % evColors.length];
+        html += `<div class="gcal-time-row">
+          <div class="gcal-time-label">${e.time}</div>
+          <div class="gcal-time-content">
+            <div class="gcal-event ${col}" id="gcal-ev-${e.id}">
+              <div class="gcal-event-title">${e.title}</div>
+              <div class="gcal-event-time">${e.location}</div>
+            </div>
+          </div>
+        </div>`;
+      });
+    });
+
+    if (!html) html = '<div style="padding:40px;text-align:center;color:#70757a;font-size:13px">Keine Events in diesem Monat</div>';
+    container.innerHTML = html;
+  }
+
+  let gcalAddCount = 0;
+  const fakeEvents = [
+    { type: 'Markt', title: 'Abendmarkt Aulendorf', time: '17:00', location: 'Hauptstraße, Aulendorf' },
+    { type: 'Privat', title: 'Kindergeburtstag Weber', time: '14:00', location: 'Am Park 5, Ravensburg' },
+    { type: 'Festival', title: 'Seefest Konstanz', time: '11:00', location: 'Hafenstraße, Konstanz' },
+  ];
+
+  function gcalAddEvent() {
+    const fake = fakeEvents[gcalAddCount % fakeEvents.length];
+    gcalAddCount++;
+    // Pick a date in current month that doesn't have too many events
+    const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let day = 10 + gcalAddCount * 3;
+    if (day > lastDay) day = lastDay;
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    // Show syncing status
+    const status = document.getElementById('sync-status-3');
+    if (status) { status.textContent = 'Synchronisiert...'; status.className = 'sync-status'; }
+
+    // Add to gcal list with animation
+    const container = document.getElementById('gcal-events');
+    const noEvents = container.querySelector('div[style*="text-align:center"]');
+    if (noEvents) noEvents.remove();
+    const row = document.createElement('div');
+    row.className = 'gcal-time-row';
+    row.innerHTML = `
+      <div class="gcal-time-label">${fake.time}</div>
+      <div class="gcal-time-content">
+        <div class="gcal-event ev-blue event-new">
+          <div class="gcal-event-title">${fake.title}</div>
+          <div class="gcal-event-time">${fake.location}</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(row);
+    row.scrollIntoView({ behavior: 'smooth' });
+
+    // After delay, add to events and update calendar
+    setTimeout(() => {
+      const newEvent = {
+        id: nextId++, type: fake.type, title: fake.title,
+        date: dateStr, time: fake.time, location: fake.location, note: 'Neu synchronisiert'
+      };
+      events.push(newEvent);
+      renderCalendar();
+      // Pulse the calendar day
+      setTimeout(() => {
+        const calGrid = document.getElementById('cal-grid-k');
+        if (calGrid) {
+          const days = calGrid.querySelectorAll('.cal-day.has-event');
+          days.forEach(d => {
+            if (d.getAttribute('onclick') && d.getAttribute('onclick').includes(dateStr)) {
+              d.classList.add('event-new-cal');
+              setTimeout(() => d.classList.remove('event-new-cal'), 3000);
+            }
+          });
+        }
+      }, 100);
+
+      if (status) {
+        status.innerHTML = '\u2705 Synchronisiert';
+        status.className = 'sync-status synced';
+        setTimeout(() => { status.textContent = 'Verbunden'; status.className = 'sync-status'; }, 3000);
+      }
+    }, 1500);
+  }
+
+  // ========== TAB 4: LIVE-SYNC ==========
+  function renderGcalPhoneEvents() {
+    const container = document.getElementById('gcal-phone-events');
+    if (!container) return;
+    const evts = getEventsForCurrentMonth();
+    container.innerHTML = evts.map(e => `
+      <div class="gcal-phone-event" id="gcal-phone-ev-${e.id}">
+        <div class="gcal-event-dot"></div>
+        <div>
+          <div class="gcal-phone-event-title">${e.title}</div>
+          <div class="gcal-phone-event-time">${formatDate(e.date)} \u00B7 ${e.time}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  let syncDemoRunning = false;
+  let syncDemoCount = 0;
+  const syncFakeEvents = [
+    { type: 'Privat', title: 'Gartenparty Hofmann', time: '15:00', location: 'Blumenweg 8, Aulendorf' },
+    { type: 'Firmen', title: 'Team-Lunch StartupXY', time: '12:00', location: 'Innovationspark, Ulm' },
+    { type: 'Markt', title: 'Flohmarkt am See', time: '09:00', location: 'Seepromenade, Friedrichshafen' },
+  ];
+
+  function startSyncDemo() {
+    if (syncDemoRunning) return;
+    syncDemoRunning = true;
+
+    const fake = syncFakeEvents[syncDemoCount % syncFakeEvents.length];
+    syncDemoCount++;
+    const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let day = 8 + syncDemoCount * 4;
+    if (day > lastDay) day = lastDay;
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    const status = document.getElementById('sync-status-4');
+    const phoneContainer = document.getElementById('gcal-phone-events');
+
+    // Step 1: Typing animation on phone
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'gcal-phone-event';
+    typingDiv.style.background = '#fff3cd';
+    typingDiv.style.borderLeftColor = '#f59e0b';
+    typingDiv.innerHTML = `
+      <div class="gcal-event-dot" style="background:#f59e0b"></div>
+      <div>
+        <div class="gcal-phone-event-title" id="typing-title" style="color:#92400e;"></div>
+        <div class="gcal-phone-event-time" id="typing-time" style="color:#92400e;"></div>
+      </div>
+    `;
+    phoneContainer.appendChild(typingDiv);
+    typingDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Animate typing
+    const titleEl = document.getElementById('typing-title');
+    const timeEl = document.getElementById('typing-time');
+    let charIdx = 0;
+    const fullTitle = fake.title;
+    titleEl.innerHTML = '<span class="typing-cursor"></span>';
+
+    const typeInterval = setInterval(() => {
+      charIdx++;
+      if (charIdx <= fullTitle.length) {
+        titleEl.innerHTML = fullTitle.substring(0, charIdx) + '<span class="typing-cursor"></span>';
+      } else {
+        clearInterval(typeInterval);
+        titleEl.textContent = fullTitle;
+        timeEl.textContent = `${String(day).padStart(2,'0')}.${String(currentMonth+1).padStart(2,'0')}.${currentYear} \u00B7 ${fake.time}`;
+
+        // Step 2: Finalize phone event
+        setTimeout(() => {
+          typingDiv.style.background = '#e8f0fe';
+          typingDiv.style.borderLeftColor = '#1a73e8';
+          typingDiv.querySelector('.gcal-event-dot').style.background = '#1a73e8';
+          titleEl.style.color = '#1a73e8';
+          timeEl.style.color = '#5f6368';
+
+          // Step 3: Sync animation
+          if (status) { status.textContent = 'Synchronisiert...'; status.className = 'sync-status'; }
+
+          setTimeout(() => {
+            // Add event to data
+            const newEvent = {
+              id: nextId++, type: fake.type, title: fake.title,
+              date: dateStr, time: fake.time, location: fake.location, note: 'Live synchronisiert'
+            };
+            events.push(newEvent);
+            renderCalendar();
+
+            // Pulse calendar day on website side
+            setTimeout(() => {
+              const calGrid = document.getElementById('cal-grid-s');
+              if (calGrid) {
+                const days = calGrid.querySelectorAll('.cal-day.has-event');
+                days.forEach(d => {
+                  if (d.getAttribute('onclick') && d.getAttribute('onclick').includes(dateStr)) {
+                    d.classList.add('event-new-cal');
+                    setTimeout(() => d.classList.remove('event-new-cal'), 3000);
+                  }
+                });
+              }
+            }, 100);
+
+            // Step 4: Green checkmark
+            if (status) {
+              status.innerHTML = '\u2705 Synchronisiert';
+              status.className = 'sync-status synced';
+              setTimeout(() => {
+                status.textContent = 'Verbunden';
+                status.className = 'sync-status';
+              }, 3000);
+            }
+            syncDemoRunning = false;
+          }, 1500);
+        }, 500);
+      }
+    }, 60);
+  }
+
+  // ========== Fix 13: ESC to close modal ==========
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+
+  // ========== Fix 22: Pause carousels when page hidden ==========
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseCarousels();
+    else resumeCarousel(currentTab);
+  });
+
+  // ========== Fix 24: Keyboard nav for carousel ==========
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { currentTab === 'mobile' ? carouselPrevM() : carouselPrev(); }
+    if (e.key === 'ArrowRight') { currentTab === 'mobile' ? carouselNextM() : carouselNext(); }
+  });
+
+  // ========== Fix 25: Swipe for calendar month ==========
+  document.querySelectorAll('.cal-grid').forEach(grid => {
+    let sx = 0;
+    grid.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+    grid.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - sx;
+      if (Math.abs(diff) > 50) { changeMonth(diff > 0 ? -1 : 1); }
+    }, {passive:true});
+  });
+
+  // ========== MENU TAB SWITCHING ==========
+  function switchMenuTab(tab, view) {
+    const suffix = view === 'm' ? '-m' : '-d';
+    const menuTabs = ['waffeln', 'extras', 'drinks'];
+    menuTabs.forEach(c => {
+      const grid = document.getElementById('menu-' + c + suffix);
+      if (grid) grid.style.display = (c === tab) ? '' : 'none';
+    });
+    const section = document.getElementById('karte' + suffix);
+    if (section) {
+      section.querySelectorAll('.menu-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-menu') === tab);
+      });
+    }
+  }
+
+  // ========== Fix 26: Parallax hero ==========
+  if (desktopScroller) {
+    desktopScroller.addEventListener('scroll', () => {
+      const hero = desktopScroller.querySelector('.hp-hero');
+      if (hero) hero.style.backgroundPositionY = (desktopScroller.scrollTop * 0.3) + 'px';
+    });
+  }
+</script>
+
+</body>
+</html>
+m

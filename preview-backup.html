@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SweetTruck — Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Neutral dark gray — elegant, refined */
+      --bg-primary: #18181a;
+      --bg-secondary: #1e1e21;
+      --bg-card: #232327;
+      --bg-elevated: #2a2a2e;
+      --bg-warm: #1c1c1f;
+
+      /* Logo-matched warm beige-gold */
+      --accent: #d4be8a;
+      --accent-light: #e2d0a4;
+      --accent-dark: #b8a06a;
+      --accent-glow: rgba(212,190,138,0.12);
+      --accent-glow-strong: rgba(212,190,138,0.22);
+
+      /* Neutral text tones */
+      --text-primary: #f2f0ec;
+      --text-secondary: #a0a0a5;
+      --text-muted: #6a6a70;
+
+      --border: #2f2f33;
+      --border-accent: rgba(212,190,138,0.18);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #131315; color: #fff; min-height: 100vh;
+    }
+
+    /* === SPLIT LAYOUT === */
+    .split-container {
+      display: flex; gap: 50px; padding: 30px;
+      height: 100vh; align-items: center; justify-content: center;
+    }
+    .panel { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .panel-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+      color: var(--accent); font-weight: 500;
+    }
+
+    /* === PHONE FRAME === */
+    .phone-frame {
+      width: 375px; height: 760px;
+      border: 2px solid #35353a; border-radius: 44px;
+      overflow: hidden; background: var(--bg-primary);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(212,190,138,0.05);
+    }
+    .phone-notch {
+      width: 120px; height: 24px; background: #0d0d0f;
+      border-radius: 0 0 16px 16px; margin: 0 auto;
+      position: relative; z-index: 10;
+    }
+    .phone-content {
+      height: calc(100% - 24px); overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: #35353a transparent;
+    }
+
+    /* === DESKTOP FRAME === */
+    .desktop-frame {
+      width: 860px; height: 600px;
+      border: 2px solid #35353a; border-radius: 12px;
+      overflow: hidden; background: var(--bg-primary);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(212,190,138,0.05);
+    }
+    .desktop-topbar {
+      height: 36px; background: #1c1c1f; display: flex;
+      align-items: center; padding: 0 14px; gap: 7px;
+      border-bottom: 1px solid #2a2a2e;
+    }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28ca41; }
+    .desktop-url {
+      flex: 1; margin-left: 14px; background: var(--bg-primary); border-radius: 6px;
+      padding: 4px 14px; font-size: 12px; color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .desktop-content {
+      height: calc(100% - 36px); overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: #35353a transparent;
+    }
+
+    /* -- NAV -- */
+    .hp-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px; background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-logo { display: flex; align-items: center; }
+    .hp-logo img { height: 40px; width: auto; }
+    .hp-nav-links { display: flex; gap: 28px; }
+    .hp-nav-links a {
+      text-decoration: none; color: var(--text-secondary); font-size: 13px;
+      font-weight: 400; letter-spacing: 0.5px; transition: color 0.3s;
+      cursor: pointer; position: relative; padding: 4px 0;
+    }
+    .hp-nav-links a:hover { color: var(--accent); }
+    .hp-nav-links a.active { color: var(--accent); }
+    .hp-nav-links a.active::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 100%; height: 1.5px; background: var(--accent);
+    }
+
+    /* -- MOBILE DROPDOWN -- */
+    .mobile-menu {
+      display: none; position: absolute; top: 58px; left: 0; right: 0;
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border);
+      z-index: 20; padding: 8px 0;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; padding: 12px 18px; color: var(--text-secondary);
+      font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover, .mobile-menu a.active {
+      color: var(--accent); background: var(--bg-card);
+    }
+    .hp-nav-mobile { position: relative; }
+    .hp-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hp-hamburger.open span:nth-child(2) { opacity: 0; }
+    .hp-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .hp-hamburger span { transition: all 0.25s; transform-origin: center; }
+
+    .hp-nav-mobile {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-logo-sm { display: flex; align-items: center; }
+    .hp-logo-sm img { height: 30px; width: auto; }
+    .hp-hamburger {
+      width: 24px; height: 18px; display: flex; flex-direction: column;
+      justify-content: space-between; cursor: pointer;
+    }
+    .hp-hamburger span {
+      display: block; height: 1.5px; background: var(--accent); border-radius: 2px;
+    }
+
+    /* -- HERO -- */
+    .hp-hero {
+      background: linear-gradient(180deg, rgba(24,24,26,0.85), rgba(28,28,31,0.9)),
+        url('img/truck_hero.jpg') center/cover;
+      padding: 56px 32px 48px; text-align: center; position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-hero::before {
+      content: ''; position: absolute; top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; height: 250px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hp-hero-icon {
+      margin-bottom: 24px; position: relative;
+    }
+    .hp-hero-icon img { width: 220px; height: auto; }
+    .hp-hero-mobile .hp-hero-icon img { width: 170px; height: auto; }
+    .hp-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 600; color: var(--text-primary);
+      line-height: 1.2; letter-spacing: -0.5px; position: relative;
+    }
+    .hp-hero h1 span { color: var(--accent); }
+    .hp-hero p {
+      font-size: 14px; color: var(--text-secondary); margin-top: 14px;
+      max-width: 400px; margin-inline: auto; line-height: 1.7;
+      position: relative; font-weight: 300;
+    }
+    .hp-hero-btn {
+      display: inline-block; margin-top: 28px; padding: 13px 34px;
+      background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 13px; letter-spacing: 0.8px;
+      transition: all 0.3s; position: relative;
+    }
+    .hp-hero-btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(212,190,138,0.2);
+    }
+
+    .hp-hero-mobile {
+      padding: 36px 20px 32px; text-align: center; position: relative;
+      background: linear-gradient(180deg, rgba(24,24,26,0.85), rgba(28,28,31,0.92)),
+        url('img/truck_hero.jpg') center/cover;
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-hero-mobile::before {
+      content: ''; position: absolute; top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px; height: 160px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hp-hero-mobile h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; color: var(--text-primary);
+      line-height: 1.2; position: relative;
+    }
+    .hp-hero-mobile h1 span { color: var(--accent); }
+    .hp-hero-mobile p {
+      font-size: 12px; color: var(--text-secondary); margin-top: 10px;
+      line-height: 1.7; position: relative; font-weight: 300;
+    }
+    .hp-hero-mobile .hp-hero-btn {
+      display: inline-block; margin-top: 20px; padding: 11px 26px;
+      background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 12px; letter-spacing: 0.8px;
+    }
+
+    /* -- SUBLINE -- */
+    .hp-subline {
+      text-align: center; padding: 20px 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-style: italic; color: var(--text-muted);
+      font-weight: 400; letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hp-subline-mobile {
+      text-align: center; padding: 14px 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-style: italic; color: var(--text-muted);
+      font-weight: 400;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* -- EVENT TYPE BOXES -- */
+    .event-types {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      padding: 28px 32px;
+    }
+    .event-type-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px 16px; text-align: center;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .event-type-box:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-elevated);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .etb-icon {
+      margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .etb-icon svg { width: 28px; height: 28px; }
+    .etb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .etb-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; font-weight: 300; }
+
+    .event-types-mobile {
+      display: flex; gap: 10px; padding: 18px 16px; overflow-x: auto;
+    }
+    .event-type-box-sm {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 14px; text-align: center;
+      min-width: 95px; flex-shrink: 0;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .event-type-box-sm:active { transform: scale(0.96); }
+    .event-type-box-sm:hover { border-color: var(--border-accent); }
+    .event-type-box-sm .etb-icon {
+      margin: 0 auto 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .event-type-box-sm .etb-icon svg { width: 22px; height: 22px; }
+    .event-type-box-sm .etb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-weight: 600; color: var(--text-primary);
+    }
+
+    /* -- SECTIONS -- */
+    .hp-section { padding: 28px 32px; }
+    .hp-section-mobile { padding: 22px 16px; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; text-align: center;
+      margin-bottom: 6px; color: var(--text-primary);
+    }
+    .section-title span { color: var(--accent); }
+    .section-sub {
+      text-align: center; font-size: 12px; color: var(--text-muted);
+      margin-bottom: 22px; font-weight: 300;
+    }
+    .section-title-sm {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; text-align: center;
+      margin-bottom: 4px; color: var(--text-primary);
+    }
+    .section-title-sm span { color: var(--accent); }
+    .section-sub-sm {
+      text-align: center; font-size: 11px; color: var(--text-muted);
+      margin-bottom: 16px; font-weight: 300;
+    }
+
+    /* -- CALENDAR -- */
+    .calendar {
+      max-width: 560px; margin: 0 auto; background: var(--bg-card);
+      border-radius: 16px; border: 1px solid var(--border); overflow: hidden;
+    }
+    .cal-header {
+      background: var(--bg-elevated);
+      color: var(--accent); padding: 14px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .cal-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 600;
+    }
+    .cal-nav-btn {
+      background: var(--accent-glow); border: 1px solid var(--border-accent);
+      color: var(--accent);
+      width: 30px; height: 30px; border-radius: 50%;
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .cal-nav-btn:hover { background: var(--accent-glow-strong); }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 3px; padding: 12px;
+    }
+    .cal-day-name {
+      text-align: center; font-size: 10px; font-weight: 500;
+      color: var(--text-muted); padding: 6px 0;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .cal-day {
+      aspect-ratio: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      border-radius: 10px; font-size: 13px; color: var(--text-secondary);
+      cursor: default; position: relative; transition: all 0.2s;
+    }
+    .cal-day.has-event {
+      cursor: pointer; background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+    }
+    .cal-day.has-event:hover {
+      background: var(--accent-glow-strong);
+      transform: scale(1.05);
+    }
+    .cal-day .day-num { font-weight: 500; font-size: 12px; }
+    .cal-day .waffles { display: flex; gap: 1px; margin-top: 2px; }
+    .cal-day .waffles svg { width: 11px; height: 11px; }
+    .cal-day.today .day-num {
+      background: var(--accent); color: var(--bg-primary); width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-weight: 600;
+    }
+    .cal-day.empty { pointer-events: none; }
+
+    /* -- ABOUT SECTION -- */
+    .about-section {
+      padding: 36px 32px; display: flex; gap: 28px; align-items: center;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+    }
+    .about-img {
+      width: 170px; height: 170px; border-radius: 16px;
+      background: var(--bg-elevated); flex-shrink: 0;
+      border: 1px solid var(--border); overflow: hidden;
+    }
+    .about-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .about-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;
+    }
+    .about-text h3 span { color: var(--accent); }
+    .about-text p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.7; font-weight: 300;
+    }
+
+    .about-section-mobile {
+      padding: 22px 16px; text-align: center;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+    }
+    .about-img-sm {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--bg-elevated); overflow: hidden;
+      margin: 0 auto 10px;
+      border: 1px solid var(--border);
+    }
+    .about-img-sm img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .about-section-mobile h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; color: var(--text-primary); margin-bottom: 6px; font-weight: 600;
+    }
+    .about-section-mobile h3 span { color: var(--accent); }
+    .about-section-mobile p {
+      font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-weight: 300;
+    }
+
+    /* -- PRODUCT GALLERY -- */
+    .product-scroll {
+      display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .product-card {
+      min-width: 140px; flex-shrink: 0; border-radius: 16px;
+      overflow: hidden; background: var(--bg-card); border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .product-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .product-card img { width: 140px; height: 120px; object-fit: cover; display: block; }
+    .product-card .pc-name {
+      padding: 8px 10px; font-size: 11px; color: var(--text-primary);
+      font-weight: 500; text-align: center;
+    }
+    .product-card-sm { min-width: 110px; }
+    .product-card-sm img { width: 110px; height: 95px; }
+    .product-card-sm .pc-name { padding: 6px 8px; font-size: 10px; }
+
+    /* -- TESTIMONIALS -- */
+    .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .testimonial {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px;
+    }
+    .test-stars { color: var(--accent); font-size: 11px; margin-bottom: 8px; letter-spacing: 3px; }
+    .test-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-style: italic;
+    }
+    .test-author { font-size: 11px; color: var(--text-muted); margin-top: 10px; font-weight: 500; }
+
+    .testimonial-mobile {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px; margin-bottom: 10px;
+    }
+
+    /* -- CTA -- */
+    .cta-section {
+      padding: 40px 32px; text-align: center;
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; color: var(--text-primary); margin-bottom: 10px; font-weight: 600;
+    }
+    .cta-section h2 span { color: var(--accent); }
+    .cta-section p { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; font-weight: 300; }
+    .cta-btn {
+      display: inline-block; padding: 13px 38px;
+      background: transparent; color: var(--accent);
+      border: 1.5px solid var(--accent); border-radius: 50px;
+      font-weight: 600; text-decoration: none; font-size: 13px;
+      letter-spacing: 0.8px; transition: all 0.3s;
+    }
+    .cta-btn:hover {
+      background: var(--accent); color: var(--bg-primary);
+      box-shadow: 0 8px 24px rgba(212,190,138,0.2);
+    }
+
+    .cta-section-mobile {
+      padding: 28px 16px; text-align: center;
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section-mobile h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;
+    }
+    .cta-section-mobile h2 span { color: var(--accent); }
+    .cta-section-mobile p { font-size: 12px; color: var(--text-secondary); margin-bottom: 18px; font-weight: 300; }
+    .cta-btn-sm {
+      display: inline-block; padding: 11px 28px;
+      background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 12px; letter-spacing: 0.8px;
+    }
+
+    /* -- FOOTER -- */
+    .hp-footer {
+      text-align: center; padding: 20px; background: var(--bg-secondary);
+      border-top: 1px solid var(--border); font-size: 11px;
+      color: var(--text-muted); font-weight: 300;
+    }
+    .hp-footer span { color: var(--accent); }
+
+    /* -- MODAL -- */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(12,12,14,0.8); backdrop-filter: blur(6px);
+      z-index: 1000; align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px; max-width: 380px;
+      width: 90%; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.95) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .modal-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 18px;
+    }
+    .modal-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: var(--accent);
+    }
+    .modal-close {
+      background: var(--bg-card); border: 1px solid var(--border);
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 14px; cursor: pointer; color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-events { display: flex; flex-direction: column; gap: 12px; }
+    .modal-event {
+      background: var(--bg-card); border-radius: 14px; padding: 16px;
+      border-left: 3px solid var(--accent);
+    }
+    .modal-event .me-type {
+      font-size: 10px; color: var(--accent); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .modal-event .me-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 600; margin: 4px 0;
+      color: var(--text-primary);
+    }
+    .modal-event .me-row {
+      font-size: 12px; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 6px; margin-top: 4px;
+      font-weight: 300;
+    }
+    .modal-event .me-label {
+      color: var(--accent); font-weight: 500; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.5px; min-width: 34px;
+    }
+
+    /* -- CATEGORY MODAL -- */
+    .cat-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; color: var(--text-secondary); line-height: 1.6;
+      margin-bottom: 16px; font-style: italic;
+    }
+    .cat-features {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;
+      padding: 14px 16px; background: var(--bg-card); border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .cat-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12px; color: var(--text-primary); font-weight: 400;
+    }
+    .cat-feature svg {
+      width: 14px; height: 14px; color: var(--accent); flex-shrink: 0;
+    }
+    .cat-price {
+      text-align: center; font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 600; color: var(--accent);
+      padding: 10px; margin-bottom: 16px;
+      background: var(--accent-glow); border-radius: 10px;
+      border: 1px solid var(--border-accent);
+    }
+    .cat-upcoming-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-muted); font-weight: 500;
+      margin-bottom: 8px; padding-top: 4px;
+    }
+    .cat-cta {
+      display: block; text-align: center; margin-top: 16px;
+      padding: 12px; background: var(--accent); color: var(--bg-primary);
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      font-size: 13px; letter-spacing: 0.8px; transition: all 0.3s;
+    }
+    .cat-cta:hover {
+      background: var(--accent-light);
+      box-shadow: 0 8px 24px rgba(212,190,138,0.2);
+    }
+
+    /* -- ADMIN / EDIT -- */
+    .admin-toggle {
+      position: fixed; bottom: 20px; right: 20px; z-index: 900;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--bg-elevated); border: 1px solid var(--border-accent);
+      color: var(--accent); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4); transition: all 0.2s;
+    }
+    .admin-toggle:hover { background: var(--accent); color: var(--bg-primary); }
+    .admin-toggle.active { background: var(--accent); color: var(--bg-primary); }
+    body.admin-mode .event-type-box,
+    body.admin-mode .event-type-box-sm {
+      outline: 1.5px dashed var(--border-accent); outline-offset: 2px;
+    }
+    .etb-actions {
+      display: none; justify-content: center; gap: 6px; margin-top: 10px;
+    }
+    body.admin-mode .etb-actions { display: flex; }
+    .etb-btn {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 4px 10px; border-radius: 6px;
+      font-size: 10px; cursor: pointer; transition: all 0.2s;
+      font-family: inherit; letter-spacing: 0.5px;
+    }
+    .etb-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .etb-btn-danger:hover { color: #ff7a72; border-color: #ff7a72; }
+    .add-category-tile {
+      background: var(--bg-warm); border: 1.5px dashed var(--border-accent);
+      border-radius: 16px; padding: 22px 16px; text-align: center;
+      cursor: pointer; transition: all 0.3s; display: none;
+      color: var(--accent);
+    }
+    body.admin-mode .add-category-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .add-category-tile:hover { background: var(--bg-card); border-color: var(--accent); }
+    .add-tile-plus { font-size: 28px; font-weight: 300; margin-bottom: 4px; }
+    .add-tile-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-weight: 600;
+    }
+
+    /* -- FORM -- */
+    .cat-form { display: flex; flex-direction: column; gap: 14px; }
+    .cat-form label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-muted); font-weight: 500; margin-bottom: 4px; display: block;
+    }
+    .cat-form input, .cat-form textarea, .cat-form select {
+      width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px; color: var(--text-primary);
+      font-family: inherit; font-size: 13px; transition: border-color 0.2s;
+    }
+    .cat-form textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+    .cat-form input:focus, .cat-form textarea:focus, .cat-form select:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .feature-row { display: flex; gap: 6px; margin-bottom: 6px; }
+    .feature-row input { flex: 1; }
+    .feature-row button {
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-muted); width: 32px; border-radius: 8px;
+      cursor: pointer; font-size: 14px; transition: all 0.2s;
+    }
+    .feature-row button:hover { color: #ff7a72; border-color: #ff7a72; }
+    .add-feature-btn {
+      background: transparent; border: 1px dashed var(--border-accent);
+      color: var(--accent); width: 100%; padding: 8px; border-radius: 8px;
+      cursor: pointer; font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: all 0.2s;
+    }
+    .add-feature-btn:hover { background: var(--accent-glow); }
+    .form-actions { display: flex; gap: 10px; margin-top: 6px; }
+    .btn-primary, .btn-secondary {
+      flex: 1; padding: 11px; border-radius: 50px; font-weight: 600;
+      font-size: 12px; letter-spacing: 0.8px; cursor: pointer; border: none;
+      text-transform: uppercase; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-primary { background: var(--accent); color: var(--bg-primary); }
+    .btn-primary:hover { background: var(--accent-light); }
+    .btn-secondary {
+      background: transparent; border: 1.5px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="split-container">
+
+  <!-- ===== LEFT: PHONE (MOBILE HOMEPAGE) ===== -->
+  <div class="panel">
+    <div class="panel-label">Mobile</div>
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-content">
+
+        <div class="hp-nav-mobile">
+          <div class="hp-logo-sm"><img src="logo.png" alt="Sweet Truck"></div>
+          <div class="hp-hamburger" id="hamburger-m" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mobile-menu" id="mobile-menu">
+            <a data-scroll="home-m" class="active">Home</a>
+            <a data-scroll="kalender-m">Kalender</a>
+            <a data-scroll="catering-m">Catering</a>
+            <a data-scroll="about-m">Über uns</a>
+            <a data-scroll="kontakt-m">Kontakt</a>
+          </div>
+        </div>
+
+        <div class="hp-hero-mobile" id="home-m">
+          <div class="hp-hero-icon" id="hero-icon-mobile"></div>
+          <h1>Wo süße Träume<br><span>wahr werden.</span></h1>
+          <p>Bubble Waffeln, Crepes & mehr — frisch zubereitet auf deinem Event.</p>
+          <a href="#" class="hp-hero-btn">Nächster Standort</a>
+        </div>
+
+        <div class="hp-subline-mobile">Penelope's Sweetness World</div>
+
+        <div class="event-types-mobile" id="catering-m"></div>
+
+        <div class="hp-section-mobile">
+          <div class="section-title-sm">Unsere <span>Bubble Waffeln</span></div>
+          <div class="section-sub-sm">Frisch vom Truck</div>
+          <div class="product-scroll">
+            <div class="product-card product-card-sm"><img src="img/w_applecrumble.webp" alt="Apple Crumble"><div class="pc-name">Apple Crumble</div></div>
+            <div class="product-card product-card-sm"><img src="img/w_karamell.webp" alt="Karamell Traum"><div class="pc-name">Karamell Traum</div></div>
+            <div class="product-card product-card-sm"><img src="img/w_nutella.webp" alt="Nutella-Banane"><div class="pc-name">Nutella-Banane</div></div>
+            <div class="product-card product-card-sm"><img src="img/w_pistazien.webp" alt="Pistazien"><div class="pc-name">Pistazien</div></div>
+            <div class="product-card product-card-sm"><img src="img/w_dubai.webp" alt="Dubai"><div class="pc-name">Dubai</div></div>
+          </div>
+        </div>
+
+        <div class="hp-section-mobile" id="kalender-m">
+          <div class="section-title-sm">Wo <span>findest du uns?</span></div>
+          <div class="section-sub-sm">Klick auf eine Waffel für Details</div>
+          <div class="calendar">
+            <div class="cal-header">
+              <button class="cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+              <h3 id="cal-month-label-m">April 2026</h3>
+              <button class="cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+            </div>
+            <div class="cal-grid" id="cal-grid-m"></div>
+          </div>
+        </div>
+
+        <div class="about-section-mobile" id="about-m">
+          <div class="about-img-sm">
+            <img src="img/team.webp" alt="Sweet Truck Team">
+          </div>
+          <h3>Wir sind <span>Sweet Truck</span></h3>
+          <p>Penelope & Tivadar — was als Idee begann, rollt heute als Sweet Truck durch Süddeutschland. Frische Bubble Waffeln, ehrliches Handwerk.</p>
+        </div>
+
+        <div class="hp-section-mobile">
+          <div class="section-title-sm">Das sagen <span>unsere Gäste</span></div>
+          <div class="section-sub-sm">Echte Stimmen, echte Events</div>
+          <div class="testimonial-mobile">
+            <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="test-text">"Die besten Waffeln ever! Alle Gäste waren begeistert."</div>
+            <div class="test-author">— Lisa M., Hochzeit</div>
+          </div>
+          <div class="testimonial-mobile">
+            <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="test-text">"Super unkompliziert und mega lecker. Kommt wieder!"</div>
+            <div class="test-author">— Thomas K., Firmenevent</div>
+          </div>
+        </div>
+
+        <div class="cta-section-mobile" id="kontakt-m">
+          <h2>Dein Event.<br><span>Unsere Waffeln.</span></h2>
+          <p>Schreib uns und wir rollen an.</p>
+          <a href="#" class="cta-btn-sm">Jetzt anfragen</a>
+        </div>
+
+        <div class="hp-footer">
+          &copy; 2026 <span>Sweet Truck</span> — Penelope's Sweetness World
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RIGHT: DESKTOP (HOMEPAGE) ===== -->
+  <div class="panel">
+    <div class="panel-label">Desktop</div>
+    <div class="desktop-frame">
+      <div class="desktop-topbar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="desktop-url">sweettruck.de</div>
+      </div>
+      <div class="desktop-content">
+
+        <nav class="hp-nav">
+          <div class="hp-logo"><img src="logo.png" alt="Sweet Truck"></div>
+          <div class="hp-nav-links">
+            <a data-scroll="home-d" class="active">Home</a>
+            <a data-scroll="kalender-d">Kalender</a>
+            <a data-scroll="catering-d">Catering</a>
+            <a data-scroll="about-d">Über uns</a>
+            <a data-scroll="kontakt-d">Kontakt</a>
+          </div>
+        </nav>
+
+        <div class="hp-hero" id="home-d">
+          <div class="hp-hero-icon" id="hero-icon-desktop"></div>
+          <h1>Wo süße Träume<br><span>wahr werden.</span></h1>
+          <p>Bubble Waffeln, Crepes & Kaffeespezialitäten — frisch zubereitet auf deinem Event. Wir kommen zu dir.</p>
+          <a href="#" class="hp-hero-btn">Nächster Standort</a>
+        </div>
+
+        <div class="hp-subline">Penelope's Sweetness World — Bubble Waffeln aus Aulendorf, unterwegs in ganz Süddeutschland</div>
+
+        <div class="event-types" id="catering-d"></div>
+
+        <div class="hp-section">
+          <div class="section-title">Unsere <span>Bubble Waffeln</span></div>
+          <div class="section-sub">Frisch zubereitet — direkt vom Truck</div>
+          <div class="product-scroll">
+            <div class="product-card"><img src="img/w_applecrumble.webp" alt="Apple Crumble"><div class="pc-name">Apple Crumble</div></div>
+            <div class="product-card"><img src="img/w_karamell.webp" alt="Karamell Traum"><div class="pc-name">Karamell Traum</div></div>
+            <div class="product-card"><img src="img/w_nutella.webp" alt="Nutella-Banane"><div class="pc-name">Nutella-Banane</div></div>
+            <div class="product-card"><img src="img/w_pistazien.webp" alt="Pistazien"><div class="pc-name">Pistazien</div></div>
+            <div class="product-card"><img src="img/w_raffaello.webp" alt="Raffaello"><div class="pc-name">Raffaello</div></div>
+            <div class="product-card"><img src="img/w_dubai.webp" alt="Dubai"><div class="pc-name">Dubai</div></div>
+          </div>
+        </div>
+
+        <div class="hp-section" id="kalender-d">
+          <div class="section-title">Wo <span>findest du uns?</span></div>
+          <div class="section-sub">Klick auf eine Waffel für Details zum Event</div>
+          <div class="calendar">
+            <div class="cal-header">
+              <button class="cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+              <h3 id="cal-month-label">April 2026</h3>
+              <button class="cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+            </div>
+            <div class="cal-grid" id="cal-grid"></div>
+          </div>
+        </div>
+
+        <div class="about-section" id="about-d">
+          <div class="about-img">
+            <img src="img/team.webp" alt="Sweet Truck Team">
+          </div>
+          <div class="about-text">
+            <h3>Wir sind <span>Sweet Truck</span></h3>
+            <p>Penelope & Tivadar — was als verrückte Idee in Aulendorf begann, rollt heute als Sweet Truck durch ganz Süddeutschland. Frische Bubble Waffeln, Crepes und Kaffeespezialitäten. Ehrliches Handwerk, gute Vibes, bis zu 300 km Radius.</p>
+          </div>
+        </div>
+
+        <div class="hp-section">
+          <div class="section-title">Das sagen <span>unsere Gäste</span></div>
+          <div class="section-sub">Echte Stimmen von echten Events</div>
+          <div class="testimonials">
+            <div class="testimonial">
+              <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="test-text">"Die besten Waffeln die wir je hatten! Alle Gäste waren begeistert. Absolut empfehlenswert."</div>
+              <div class="test-author">— Lisa M., Hochzeit</div>
+            </div>
+            <div class="testimonial">
+              <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="test-text">"Super unkomplizierte Planung und mega leckeres Ergebnis. Kommt definitiv wieder!"</div>
+              <div class="test-author">— Thomas K., Firmenevent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section" id="kontakt-d">
+          <h2>Dein Event. <span>Unsere Waffeln.</span></h2>
+          <p>Schreib uns — wir kümmern uns um den Rest.</p>
+          <a href="#" class="cta-btn">Jetzt anfragen</a>
+        </div>
+
+        <div class="hp-footer">
+          &copy; 2026 <span>Sweet Truck</span> — Penelope's Sweetness World
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN TOGGLE -->
+<button class="admin-toggle" id="admin-toggle" onclick="toggleAdmin()" title="Admin-Modus">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+</button>
+
+<!-- EVENT DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Events</h3>
+      <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    </div>
+    <div class="modal-events" id="modal-events"></div>
+  </div>
+</div>
+
+<script>
+  // SVG waffle icon — warm beige tone matching logo
+  const WAFFLE_MINI = `<svg viewBox="0 0 100 100" width="11" height="11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="10" width="80" height="80" rx="14" fill="#d4be8a" opacity="0.25" stroke="#d4be8a" stroke-width="3.5"/>
+    <line x1="10" y1="37" x2="90" y2="37" stroke="#d4be8a" stroke-width="2.5" opacity="0.4"/>
+    <line x1="10" y1="63" x2="90" y2="63" stroke="#d4be8a" stroke-width="2.5" opacity="0.4"/>
+    <line x1="37" y1="10" x2="37" y2="90" stroke="#d4be8a" stroke-width="2.5" opacity="0.4"/>
+    <line x1="63" y1="10" x2="63" y2="90" stroke="#d4be8a" stroke-width="2.5" opacity="0.4"/>
+  </svg>`;
+
+  // Inject hero logo
+  document.getElementById('hero-icon-desktop').innerHTML = `<img src="logo.png" alt="Sweet Truck">`;
+  document.getElementById('hero-icon-mobile').innerHTML = `<img src="logo.png" alt="Sweet Truck">`;
+
+  // ========== GOOGLE CALENDAR CONFIG ==========
+  // Schritt 1: Google Cloud Console → API Key erstellen
+  // Schritt 2: Google Calendar API aktivieren
+  // Schritt 3: Kalender auf "öffentlich" stellen (oder API Key berechtigen)
+  // Schritt 4: API_KEY und CALENDAR_ID hier eintragen
+  const GCAL_CONFIG = {
+    API_KEY: '',          // ← Dein Google API Key hier
+    CALENDAR_ID: '',      // ← Dein Kalender-ID (z.B. deine@gmail.com)
+    USE_GOOGLE: false,    // ← auf true setzen wenn API Key vorhanden
+  };
+
+  // ========== DATA ==========
+  // Dummy-Events (werden durch Google Calendar ersetzt wenn USE_GOOGLE = true)
+  let events = [
+    { id: 1, type: 'Markt', title: 'Wochenmarkt Altstadt', date: '2026-04-28', time: '09:00', location: 'Marktplatz 1, Aulendorf', note: 'Stammplatz' },
+    { id: 2, type: 'Festival', title: 'Street Food Festival', date: '2026-04-30', time: '14:00', location: 'Stadtpark, Ravensburg', note: '' },
+    { id: 3, type: 'Privat', title: 'Hochzeit Schmidt', date: '2026-05-03', time: '16:00', location: 'Schloss Aulendorf', note: '80 Gäste' },
+    { id: 4, type: 'Firmen', title: 'Sommerfest TechCorp', date: '2026-05-07', time: '11:00', location: 'Messeplatz, Friedrichshafen', note: '200 Personen' },
+    { id: 5, type: 'Markt', title: 'Feierabendmarkt', date: '2026-05-07', time: '16:00', location: 'Marienplatz, Ravensburg', note: '' },
+    { id: 6, type: 'Festival', title: 'Stadtfest Weingarten', date: '2026-05-10', time: '12:00', location: 'Münsterplatz, Weingarten', note: '2 Tage' },
+    { id: 7, type: 'Privat', title: 'Geburtstag Müller', date: '2026-05-15', time: '15:00', location: 'Seestraße 12, Friedrichshafen', note: '40 Gäste' },
+    { id: 8, type: 'Markt', title: 'Bauernmarkt', date: '2026-05-20', time: '08:00', location: 'Karlstraße, Biberach', note: '' },
+  ];
+  let nextId = 9;
+
+  const today = new Date();
+  let currentMonth = today.getMonth();
+  let currentYear = today.getFullYear();
+
+  // ========== GOOGLE CALENDAR FETCH ==========
+  async function fetchGoogleCalendar() {
+    if (!GCAL_CONFIG.USE_GOOGLE || !GCAL_CONFIG.API_KEY || !GCAL_CONFIG.CALENDAR_ID) return;
+
+    try {
+      const now = new Date();
+      const timeMin = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
+      const timeMax = new Date(now.getFullYear(), now.getMonth() + 6, 0).toISOString();
+
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_CONFIG.CALENDAR_ID)}/events?` +
+        `key=${GCAL_CONFIG.API_KEY}` +
+        `&timeMin=${timeMin}` +
+        `&timeMax=${timeMax}` +
+        `&singleEvents=true` +
+        `&orderBy=startTime` +
+        `&maxResults=100`;
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Google Calendar API Fehler: ' + res.status);
+      const data = await res.json();
+
+      if (data.items && data.items.length > 0) {
+        events = data.items.map((item, i) => {
+          const start = item.start.dateTime || item.start.date;
+          const dt = new Date(start);
+          const dateStr = dt.getFullYear() + '-' +
+            String(dt.getMonth() + 1).padStart(2, '0') + '-' +
+            String(dt.getDate()).padStart(2, '0');
+          const timeStr = item.start.dateTime
+            ? String(dt.getHours()).padStart(2, '0') + ':' + String(dt.getMinutes()).padStart(2, '0')
+            : 'Ganztags';
+
+          // Event-Typ aus Beschreibung oder Titel erkennen
+          const desc = (item.description || '').toLowerCase();
+          const title = (item.summary || '').toLowerCase();
+          let type = 'Markt'; // Default
+          if (desc.includes('privat') || desc.includes('hochzeit') || desc.includes('geburtstag') || title.includes('hochzeit') || title.includes('geburtstag')) type = 'Privat';
+          else if (desc.includes('firma') || desc.includes('firmen') || title.includes('firmen') || title.includes('sommerfest')) type = 'Firmen';
+          else if (desc.includes('festival') || desc.includes('stadtfest') || title.includes('festival') || title.includes('street food')) type = 'Festival';
+
+          // Typ-Override: Wenn in Beschreibung "[Typ: XYZ]" steht
+          const typeMatch = (item.description || '').match(/\[Typ:\s*(\w+)\]/i);
+          if (typeMatch) type = typeMatch[1];
+
+          return {
+            id: i + 1,
+            type: type,
+            title: item.summary || 'Event',
+            date: dateStr,
+            time: timeStr,
+            location: item.location || 'Standort folgt',
+            note: item.description ? item.description.replace(/\[Typ:.*?\]/gi, '').trim() : '',
+          };
+        });
+        nextId = events.length + 1;
+        console.log('✅ Google Calendar: ' + events.length + ' Events geladen');
+        renderCalendar();
+      }
+    } catch (err) {
+      console.warn('⚠️ Google Calendar konnte nicht geladen werden:', err.message);
+      console.log('ℹ️ Verwende Dummy-Events als Fallback.');
+    }
+  }
+
+  // Fetch on load
+  fetchGoogleCalendar();
+
+  // Auto-refresh alle 5 Minuten
+  setInterval(fetchGoogleCalendar, 5 * 60 * 1000);
+
+  const monthNames = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  const dayNames = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+
+  function renderCalendar() {
+    renderCalendarTo('cal-grid', 'cal-month-label');
+    renderCalendarTo('cal-grid-m', 'cal-month-label-m');
+  }
+
+  function renderCalendarTo(gridId, labelId) {
+    const grid = document.getElementById(gridId);
+    const label = document.getElementById(labelId);
+    if (!grid || !label) return;
+    label.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    let startDay = firstDay.getDay() - 1;
+    if (startDay < 0) startDay = 6;
+    const today = new Date();
+
+    let html = dayNames.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+
+    for (let i = 0; i < startDay; i++) {
+      html += '<div class="cal-day empty"></div>';
+    }
+
+    for (let d = 1; d <= lastDay.getDate(); d++) {
+      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const dayEvents = events.filter(e => e.date === dateStr);
+      const isToday = today.getDate() === d && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+
+      const classes = ['cal-day'];
+      if (dayEvents.length > 0) classes.push('has-event');
+      if (isToday) classes.push('today');
+
+      const waffles = dayEvents.length > 0
+        ? `<div class="waffles">${WAFFLE_MINI.repeat(dayEvents.length)}</div>`
+        : '';
+
+      const onclick = dayEvents.length > 0 ? `onclick="showModal('${dateStr}')"` : '';
+
+      html += `<div class="${classes.join(' ')}" ${onclick}>
+        <div class="day-num">${d}</div>
+        ${waffles}
+      </div>`;
+    }
+
+    grid.innerHTML = html;
+  }
+
+  function changeMonth(dir) {
+    currentMonth += dir;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  }
+
+  // Icon SVG library
+  const ICON_SVGS = {
+    cake: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8H4v8"/><path d="M3 13h18l-1-5H4l-1 5z"/><path d="M12 8V5"/><path d="M10 5a2 2 0 114 0c0 1-1 1.5-2 3-1-1.5-2-2-2-3z"/></svg>',
+    briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M3 13h18"/></svg>',
+    tent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21L12 4l9 17H3z"/><path d="M8 21l4-7 4 7"/><path d="M12 4v4"/></svg>',
+    rings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="15" r="5"/><circle cx="15" cy="15" r="5"/><path d="M7 7l2 3M17 7l-2 3"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>',
+    star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.6 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 8.9 8.6 12 2"/></svg>',
+    calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+    truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>'
+  };
+
+  // Default category data
+  const DEFAULT_CATEGORIES = {
+    privat: {
+      title: 'Private Feiern',
+      shortTitle: 'Privat',
+      icon: 'cake',
+      intro: 'Geburtstag, Gartenparty, Taufe — wir bringen den süßen Touch direkt zu dir.',
+      desc: 'Geburtstag, Gartenparty, Taufe — wir bringen den süßen Touch.',
+      features: ['Ab 20 Gäste', 'Bubble Waffeln frisch vom Truck', 'Flexible Menü-Auswahl', 'Inkl. Aufbau & Abbau'],
+      types: ['Privat'],
+      priceHint: 'ab 8€ pro Gast'
+    },
+    firmen: {
+      title: 'Firmenevents',
+      shortTitle: 'Firmen',
+      icon: 'briefcase',
+      intro: 'Team-Event, Sommerfest, Messe — professionell, unkompliziert, lecker.',
+      desc: 'Team-Event, Sommerfest, Messe — professionell & lecker.',
+      features: ['Ab 50 Personen', 'Firmenbranding möglich', 'Rechnungsstellung', 'Bis 300 km Anfahrt'],
+      types: ['Firmen'],
+      priceHint: 'Paket ab 450€'
+    },
+    festival: {
+      title: 'Festivals & Märkte',
+      shortTitle: 'Festival',
+      icon: 'tent',
+      intro: 'Street Food, Weihnachtsmarkt, Stadtfest — wir sind mit dem Truck dabei.',
+      desc: 'Street Food, Weihnachtsmarkt, Stadtfest — wir sind dabei.',
+      features: ['GEMA & Gewerbe geregelt', 'Eigener Strom möglich', 'Mehrtägig verfügbar', 'Event-erfahren'],
+      types: ['Festival', 'Markt'],
+      priceHint: 'Standgebühr nach Absprache'
+    },
+    hochzeit: {
+      title: 'Hochzeit',
+      shortTitle: 'Hochzeit',
+      icon: 'rings',
+      intro: 'Der süße Moment auf eurer Feier — unvergesslich für alle Gäste.',
+      desc: 'Der süße Moment — unvergesslich für alle Gäste.',
+      features: ['Bis 200 Gäste', 'Personalisiertes Menü', 'Late-Night Snack Option', 'Foto-freundlicher Truck'],
+      types: ['Privat'],
+      priceHint: 'Paket ab 650€'
+    }
+  };
+
+  // Load or init categories from localStorage
+  let categories;
+  try {
+    const saved = localStorage.getItem('sweettruck_categories');
+    categories = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+  } catch(e) {
+    categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+  }
+  function saveCategories() {
+    try { localStorage.setItem('sweettruck_categories', JSON.stringify(categories)); } catch(e) {}
+  }
+
+  // Admin mode
+  let adminMode = false;
+  function toggleAdmin() {
+    adminMode = !adminMode;
+    document.body.classList.toggle('admin-mode', adminMode);
+    document.getElementById('admin-toggle').classList.toggle('active', adminMode);
+    renderCategories();
+  }
+
+  function renderCategories() {
+    const desktop = document.getElementById('catering-d');
+    const mobile = document.getElementById('catering-m');
+    if (!desktop || !mobile) return;
+
+    const entries = Object.entries(categories);
+
+    desktop.innerHTML = entries.map(([key, cat]) => `
+      <div class="event-type-box" onclick="${adminMode ? `editCategory('${key}')` : `showCategory('${key}')`}">
+        <div class="etb-icon">${ICON_SVGS[cat.icon] || ICON_SVGS.star}</div>
+        <div class="etb-title">${cat.title}</div>
+        <div class="etb-desc">${cat.desc || cat.intro}</div>
+        <div class="etb-actions" onclick="event.stopPropagation()">
+          <button class="etb-btn" onclick="editCategory('${key}')">BEARBEITEN</button>
+          <button class="etb-btn etb-btn-danger" onclick="deleteCategory('${key}')">LÖSCHEN</button>
+        </div>
+      </div>
+    `).join('') + `
+      <div class="add-category-tile" onclick="addCategory()">
+        <div class="add-tile-plus">+</div>
+        <div class="add-tile-label">Kategorie anlegen</div>
+      </div>
+    `;
+
+    mobile.innerHTML = entries.map(([key, cat]) => `
+      <div class="event-type-box-sm" onclick="${adminMode ? `editCategory('${key}')` : `showCategory('${key}')`}">
+        <div class="etb-icon">${ICON_SVGS[cat.icon] || ICON_SVGS.star}</div>
+        <div class="etb-title">${cat.shortTitle || cat.title}</div>
+      </div>
+    `).join('') + `
+      <div class="event-type-box-sm add-category-tile" onclick="addCategory()" style="min-width:95px">
+        <div class="add-tile-plus">+</div>
+        <div class="add-tile-label" style="font-size:11px">Neu</div>
+      </div>
+    `;
+  }
+
+  function addCategory() {
+    const key = 'cat_' + Date.now();
+    categories[key] = {
+      title: 'Neue Kategorie',
+      shortTitle: 'Neu',
+      icon: 'star',
+      intro: 'Beschreibung hier einfügen.',
+      desc: 'Kurzbeschreibung.',
+      features: ['Feature 1'],
+      types: [],
+      priceHint: 'Auf Anfrage'
+    };
+    saveCategories();
+    renderCategories();
+    editCategory(key);
+  }
+
+  function deleteCategory(key) {
+    if (!confirm(`Kategorie „${categories[key].title}" wirklich löschen?`)) return;
+    delete categories[key];
+    saveCategories();
+    renderCategories();
+  }
+
+  function editCategory(key) {
+    const cat = categories[key];
+    if (!cat) return;
+
+    document.getElementById('modal-title').textContent = 'Kategorie bearbeiten';
+    document.getElementById('modal-events').innerHTML = `
+      <form class="cat-form" onsubmit="saveCategoryForm(event, '${key}')">
+        <div>
+          <label>Titel (lang)</label>
+          <input name="title" value="${escapeAttr(cat.title)}" required>
+        </div>
+        <div>
+          <label>Titel (kurz, mobile)</label>
+          <input name="shortTitle" value="${escapeAttr(cat.shortTitle || '')}">
+        </div>
+        <div>
+          <label>Icon</label>
+          <select name="icon">
+            ${Object.keys(ICON_SVGS).map(i => `<option value="${i}" ${cat.icon===i?'selected':''}>${i}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label>Kurzbeschreibung (Tile)</label>
+          <textarea name="desc" rows="2">${escapeAttr(cat.desc || '')}</textarea>
+        </div>
+        <div>
+          <label>Intro (Detail-Ansicht)</label>
+          <textarea name="intro" rows="3">${escapeAttr(cat.intro)}</textarea>
+        </div>
+        <div>
+          <label>Features</label>
+          <div id="feature-list">
+            ${cat.features.map((f, i) => featureRow(f, i)).join('')}
+          </div>
+          <button type="button" class="add-feature-btn" onclick="addFeatureRow()">+ Feature hinzufügen</button>
+        </div>
+        <div>
+          <label>Preis-Hinweis</label>
+          <input name="priceHint" value="${escapeAttr(cat.priceHint || '')}">
+        </div>
+        <div>
+          <label>Event-Typen (Komma-getrennt: Privat, Firmen, Festival, Markt)</label>
+          <input name="types" value="${escapeAttr((cat.types || []).join(', '))}">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal()">Abbrechen</button>
+          <button type="submit" class="btn-primary">Speichern</button>
+        </div>
+      </form>
+    `;
+    document.getElementById('modal-overlay').classList.add('active');
+  }
+
+  function featureRow(value, idx) {
+    return `
+      <div class="feature-row">
+        <input name="feature" value="${escapeAttr(value)}" placeholder="z.B. Ab 20 Gäste">
+        <button type="button" onclick="this.parentElement.remove()">×</button>
+      </div>
+    `;
+  }
+
+  function addFeatureRow() {
+    const list = document.getElementById('feature-list');
+    const wrap = document.createElement('div');
+    wrap.innerHTML = featureRow('', list.children.length);
+    list.appendChild(wrap.firstElementChild);
+  }
+
+  function saveCategoryForm(e, key) {
+    e.preventDefault();
+    const form = e.target;
+    const features = [...form.querySelectorAll('input[name="feature"]')]
+      .map(i => i.value.trim()).filter(Boolean);
+    const types = form.types.value.split(',').map(s => s.trim()).filter(Boolean);
+
+    categories[key] = {
+      title: form.title.value.trim(),
+      shortTitle: form.shortTitle.value.trim() || form.title.value.trim(),
+      icon: form.icon.value,
+      desc: form.desc.value.trim(),
+      intro: form.intro.value.trim(),
+      features,
+      types,
+      priceHint: form.priceHint.value.trim()
+    };
+    saveCategories();
+    renderCategories();
+    closeModal();
+  }
+
+  function escapeAttr(s) {
+    return String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function showCategory(key) {
+    const cat = categories[key];
+    if (!cat) return;
+
+    const relevant = events.filter(e => cat.types.includes(e.type)).slice(0, 4);
+
+    document.getElementById('modal-title').textContent = cat.title;
+    document.getElementById('modal-events').innerHTML = `
+      <div class="cat-intro">${cat.intro}</div>
+      <div class="cat-features">
+        ${cat.features.map(f => `
+          <div class="cat-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>${f}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="cat-price">${cat.priceHint}</div>
+      ${relevant.length > 0 ? `
+        <div class="cat-upcoming-label">Kommende ${cat.title}</div>
+        ${relevant.map(e => `
+          <div class="modal-event" style="cursor:pointer" onclick="showModal('${e.date}')">
+            <div class="me-type">${e.type}</div>
+            <div class="me-title">${e.title}</div>
+            <div class="me-row"><span class="me-label">Wann</span> ${formatDate(e.date)} · ${e.time} Uhr</div>
+            <div class="me-row"><span class="me-label">Wo</span> ${e.location}</div>
+          </div>
+        `).join('')}
+      ` : ''}
+      <a href="#" class="cat-cta">Anfragen</a>
+    `;
+    document.getElementById('modal-overlay').classList.add('active');
+  }
+
+  function showModal(dateStr) {
+    const dayEvents = events.filter(e => e.date === dateStr);
+    if (dayEvents.length === 0) return;
+
+    document.getElementById('modal-title').textContent = formatDate(dateStr);
+    document.getElementById('modal-events').innerHTML = dayEvents.map(e => `
+      <div class="modal-event">
+        <div class="me-type">${e.type}</div>
+        <div class="me-title">${e.title}</div>
+        <div class="me-row"><span class="me-label">Wann</span> ${e.time} Uhr</div>
+        <div class="me-row"><span class="me-label">Wo</span> ${e.location}</div>
+        ${e.note ? `<div class="me-row"><span class="me-label">Info</span> ${e.note}</div>` : ''}
+      </div>
+    `).join('');
+
+    document.getElementById('modal-overlay').classList.add('active');
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modal-overlay')) {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
+  }
+
+  function formatDate(dateStr) {
+    const [y, m, d] = dateStr.split('-');
+    return `${d}.${m}.${y}`;
+  }
+
+  renderCalendar();
+  renderCategories();
+
+  // ========== NAV SCROLL ==========
+  function scrollToSection(id, scroller, links) {
+    const target = document.getElementById(id);
+    if (!target || !scroller) return;
+    const top = target.offsetTop - 8;
+    scroller.scrollTo({ top, behavior: 'smooth' });
+    links.forEach(l => l.classList.toggle('active', l.dataset.scroll === id));
+  }
+
+  // Desktop nav
+  const desktopScroller = document.querySelector('.desktop-content');
+  const desktopLinks = document.querySelectorAll('.hp-nav-links a');
+  desktopLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToSection(link.dataset.scroll, desktopScroller, desktopLinks);
+    });
+  });
+
+  // Mobile nav
+  const mobileScroller = document.querySelector('.phone-content');
+  const mobileLinks = document.querySelectorAll('.mobile-menu a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToSection(link.dataset.scroll, mobileScroller, mobileLinks);
+      toggleMobileMenu();
+    });
+  });
+
+  function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.getElementById('hamburger-m').classList.toggle('open');
+  }
+
+  // Active-state on scroll
+  function updateActive(scroller, links, suffix) {
+    const pos = scroller.scrollTop + 60;
+    let current = links[0]?.dataset.scroll;
+    links.forEach(l => {
+      const el = document.getElementById(l.dataset.scroll);
+      if (el && el.offsetTop <= pos) current = l.dataset.scroll;
+    });
+    links.forEach(l => l.classList.toggle('active', l.dataset.scroll === current));
+  }
+  desktopScroller?.addEventListener('scroll', () => updateActive(desktopScroller, desktopLinks, 'd'));
+  mobileScroller?.addEventListener('scroll', () => updateActive(mobileScroller, mobileLinks, 'm'));
+</script>
+
+</body>
+</html>

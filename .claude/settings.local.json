@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -L -A Mozilla/5.0 https://www.sweettruck.de/assets/js/index-eNcmiG3v.js)",
+      "Bash(curl -s -L -A Mozilla/5.0 https://www.sweettruck.de/assets/css/index-SzCvnmHI.css)",
+      "Bash(tr ';' '\\\\n')",
+      "Bash(curl -s -L \"https://www.sweettruck.de/\" -o /tmp/sweettruck.html)",
+      "Read(//tmp/**)",
+      "WebFetch(domain:www.sweettruck.de)",
+      "Bash(curl -s -L \"https://www.sweettruck.de/\")"
+    ]
+  }
+}
