@@ -796,7 +796,8 @@
     .cal-day .event-dots { display: flex; gap: 0; margin-top: 0; position: absolute; inset: 0; }
     .cal-day .event-dot {
       width: 100%; height: 100%; position: absolute; inset: 0;
-      object-fit: contain; padding: 2px; opacity: 0.9;
+      object-fit: contain; padding: 4px; opacity: 0.85;
+      filter: brightness(0) invert(1);
     }
     .cal-day .event-dots .event-dot:nth-child(1) { left: -10%; right: auto; width: 60%; }
     .cal-day .event-dots .event-dot:nth-child(2) { left: auto; right: -10%; width: 60%; }
@@ -2593,7 +2594,7 @@
       if (dayEvents.length > 0) classes.push('has-event');
       if (isToday) classes.push('today');
       if (isPast && dayEvents.length > 0) classes.push('past-event');
-      const WAFFLE_DOT = '<svg class="event-dot" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.2"/><circle class="wb" cx="60" cy="55" r="18" style="--d:0"/><circle class="wb" cx="100" cy="55" r="18" style="--d:1"/><circle class="wb" cx="140" cy="55" r="18" style="--d:2"/><circle class="wb" cx="60" cy="95" r="18" style="--d:3"/><circle class="wb" cx="100" cy="95" r="18" style="--d:4"/><circle class="wb" cx="140" cy="95" r="18" style="--d:5"/><circle class="wb" cx="60" cy="135" r="18" style="--d:6"/><circle class="wb" cx="100" cy="135" r="18" style="--d:7"/><circle class="wb" cx="140" cy="135" r="18" style="--d:8"/></svg>';
+      const WAFFLE_DOT = '<img class="event-dot" src="img/waffle_icon.svg" alt="Event">';
       const dots = dayEvents.length > 0 ? `<div class="event-dots">${WAFFLE_DOT.repeat(Math.min(dayEvents.length, 3))}</div>` : '';
       let tooltipHtml = '';
       if (dayEvents.length > 0) {
