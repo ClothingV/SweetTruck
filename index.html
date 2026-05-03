@@ -64,11 +64,12 @@
       width: 100%; height: 1.5px; background: var(--accent);
     }
     .nav-cta {
-      padding: 8px 20px; border: 1px solid var(--accent); border-radius: 50px;
-      color: var(--accent) !important; font-size: 11px !important; font-weight: 500 !important;
-      letter-spacing: 1.5px !important; transition: all 0.3s;
+      padding: 12px 24px; border: 1px solid var(--accent); border-radius: 50px;
+      color: var(--accent) !important; font-size: 9px !important; font-weight: 500 !important;
+      letter-spacing: 1.2px !important; transition: all 0.3s;
       font-family: 'DM Sans', sans-serif !important; text-transform: uppercase !important;
-      background: transparent; margin-left: 8px;
+      background: transparent; margin-left: 8px; line-height: 1 !important;
+      display: inline-flex !important; align-items: center; justify-content: center;
     }
     .nav-cta:hover {
       background: var(--accent); color: var(--bg-primary) !important;
@@ -1620,10 +1621,8 @@
     <a href="#" onclick="event.preventDefault();openCalendarPage()">EVENTS</a>
     <a href="#" onclick="event.preventDefault();openCateringPage()">CATERING</a>
     <a href="#" onclick="event.preventDefault();openContactPage()">KONTAKT</a>
-    <a href="mailto:info@sweettruck.de" class="nav-cta">JETZT BUCHEN</a>
   </div>
   <div class="hp-nav-right">
-    <a href="mailto:info@sweettruck.de" class="nav-cta nav-cta-mobile">BUCHEN</a>
     <div class="hp-hamburger" id="hamburger" onclick="toggleMobileMenu()" role="button" tabindex="0" aria-label="Menü öffnen" aria-expanded="false">
       <span></span><span></span><span></span>
     </div>
