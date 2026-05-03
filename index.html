@@ -1606,38 +1606,40 @@
 
     /* ── LOYALTY & GUTSCHEINE ── */
     .loyalty-section {
-      padding: 32px 16px; text-align: center;
+      padding: 24px 12px; text-align: center;
       background: var(--bg-warm);
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
     .loyalty-cards {
-      display: flex; flex-direction: column; gap: 16px;
+      display: flex; flex-direction: row; gap: 10px;
       max-width: 900px; margin: 0 auto;
     }
     .loyalty-card {
       background: var(--bg-card); border: 1px solid var(--border-accent);
-      border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
-      transition: all 0.3s;
+      border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+      transition: all 0.3s; flex: 1;
     }
     .loyalty-card:hover {
       border-color: var(--accent); transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(212,190,138,0.15);
     }
     .loyalty-card-img {
-      width: 100%; height: 200px; object-fit: cover;
+      width: 100%; height: 140px; object-fit: cover;
     }
-    .loyalty-card-body { padding: 18px 16px; text-align: left; }
+    .loyalty-card-body { padding: 10px 10px; text-align: left; }
     .loyalty-card-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 600; color: var(--accent); margin-bottom: 8px;
+      font-size: 16px; font-weight: 600; color: var(--accent); margin-bottom: 4px;
     }
     .loyalty-card-desc {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+      font-size: 10px; color: var(--text-secondary); line-height: 1.5;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .loyalty-card-badge {
-      display: inline-block; margin-top: 10px; padding: 5px 14px;
+      display: inline-block; margin-top: 8px; padding: 4px 10px;
       background: var(--accent-glow); border: 1px solid var(--border-accent);
-      border-radius: 50px; font-size: 11px; color: var(--accent); font-weight: 600;
+      border-radius: 50px; font-size: 9px; color: var(--accent); font-weight: 600;
     }
     @media (min-width: 768px) {
       .loyalty-section { padding: 40px 32px; }
