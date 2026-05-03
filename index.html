@@ -1579,6 +1579,50 @@
       .cookie-btn { padding: 7px 14px; font-size: 11px; }
     }
 
+    /* ── PARTNER SLIDER ── */
+    .partner-section {
+      padding: 28px 16px; text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+    .partner-section .section-title { margin-bottom: 4px; }
+    .partner-section .section-sub { margin-bottom: 20px; }
+    .partner-track-wrap {
+      overflow: hidden; position: relative;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .partner-track {
+      display: flex; gap: 40px; align-items: center;
+      animation: partnerScroll 25s linear infinite;
+      width: max-content;
+    }
+    .partner-track:hover { animation-play-state: paused; }
+    .partner-logo {
+      height: 40px; width: auto; max-width: 140px;
+      object-fit: contain; opacity: 0.6;
+      filter: grayscale(1) brightness(1.8);
+      transition: all 0.3s; flex-shrink: 0;
+    }
+    .partner-logo:hover {
+      opacity: 1; filter: grayscale(0) brightness(1);
+    }
+    @keyframes partnerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (min-width: 768px) {
+      .partner-section { padding: 36px 32px; }
+      .partner-logo { height: 50px; max-width: 160px; }
+      .partner-track { gap: 50px; }
+    }
+    @media (min-width: 1025px) {
+      .partner-section { padding: 40px 32px; }
+      .partner-logo { height: 55px; max-width: 180px; }
+      .partner-track { gap: 60px; }
+    }
+
     /* ── REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1784,6 +1828,35 @@
           <div class="tl-desc">Unser zweiter Truck ist da! Ab sofort gleichzeitig auf zwei Events — doppelt süß.</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTNER ===== -->
+<section class="partner-section">
+  <div class="section-title">Unsere <span>Partner</span></div>
+  <div class="section-sub">Vertrauen, das verbindet</div>
+  <div class="partner-track-wrap">
+    <div class="partner-track">
+      <img src="img/partners/3d3ad8cb-d271-1ea4-4fe9-f2e37dfcb9c2.png" alt="Blum" class="partner-logo">
+      <img src="img/partners/Beurer-Logo-2017.png" alt="Beurer" class="partner-logo">
+      <img src="img/partners/Gaeubodenbaecker-Hahn.webp" alt="Gäubodenbäcker Hahn" class="partner-logo">
+      <img src="img/partners/image-911x166.png" alt="Weggenmann" class="partner-logo">
+      <img src="img/partners/iveco.webp" alt="Iveco" class="partner-logo">
+      <img src="img/partners/logo-Holzbau_Bayern_Wohnungsbau@2x.webp" alt="Holzbau Bayern" class="partner-logo">
+      <img src="img/partners/partner_mueller_hov.png" alt="Müller" class="partner-logo">
+      <img src="img/partners/SOL_Logo-DE_RGB_2025_DE_geschlossen_typo-weiss-2.svg" alt="SOL" class="partner-logo">
+      <img src="img/partners/Universitätsklinikum_Ulm_logo.svg" alt="Universitätsklinikum Ulm" class="partner-logo">
+      <!-- Duplikat für nahtlosen Loop -->
+      <img src="img/partners/3d3ad8cb-d271-1ea4-4fe9-f2e37dfcb9c2.png" alt="Blum" class="partner-logo">
+      <img src="img/partners/Beurer-Logo-2017.png" alt="Beurer" class="partner-logo">
+      <img src="img/partners/Gaeubodenbaecker-Hahn.webp" alt="Gäubodenbäcker Hahn" class="partner-logo">
+      <img src="img/partners/image-911x166.png" alt="Weggenmann" class="partner-logo">
+      <img src="img/partners/iveco.webp" alt="Iveco" class="partner-logo">
+      <img src="img/partners/logo-Holzbau_Bayern_Wohnungsbau@2x.webp" alt="Holzbau Bayern" class="partner-logo">
+      <img src="img/partners/partner_mueller_hov.png" alt="Müller" class="partner-logo">
+      <img src="img/partners/SOL_Logo-DE_RGB_2025_DE_geschlossen_typo-weiss-2.svg" alt="SOL" class="partner-logo">
+      <img src="img/partners/Universitätsklinikum_Ulm_logo.svg" alt="Universitätsklinikum Ulm" class="partner-logo">
     </div>
   </div>
 </section>
