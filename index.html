@@ -1294,9 +1294,14 @@
     .tl-desc {
       font-size: 10px; color: var(--text-muted); line-height: 1.4;
     }
+    .tl-slider-dots { display: none; }
     @media (max-width: 767px) {
-      .timeline-stops { flex-direction: column; gap: 16px; align-items: center; }
-      .tl-stop { width: 80%; }
+      .timeline-road { overflow: hidden; padding: 0; }
+      .timeline-stops {
+        display: flex; flex-direction: row; gap: 0;
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .tl-stop { width: 100%; min-width: 100%; flex-shrink: 0; padding: 0 20px; }
       .timeline-road-line { display: none; }
       .timeline-truck { display: none; }
       .tl-stop-dot { margin-bottom: 8px; }
@@ -1304,6 +1309,17 @@
       .tl-title { font-size: 14px; }
       .tl-desc { font-size: 12px; }
       .tl-stop-card { padding: 16px 14px; }
+      .tl-slider-dots {
+        display: flex; justify-content: center; gap: 8px; margin-top: 16px;
+      }
+      .tl-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: var(--border); transition: all 0.3s; cursor: pointer;
+      }
+      .tl-dot.active {
+        background: var(--accent); width: 20px; border-radius: 4px;
+        box-shadow: 0 0 8px rgba(212,190,138,0.4);
+      }
     }
     @media (min-width: 768px) {
       .tl-year { font-size: 26px; }
@@ -1827,6 +1843,7 @@
         </div>
       </div>
     </div>
+    <div class="tl-slider-dots" id="tl-dots"></div>
   </div>
 </section>
 
@@ -2887,6 +2904,58 @@
       }
     }
   });
+
+  // ========== TIMELINE SLIDER (MOBILE) ==========
+  let tlSlide = 0;
+  const tlStops = document.querySelectorAll('.tl-stop');
+  const tlDotsEl = document.getElementById('tl-dots');
+  let tlAutoInterval;
+
+  function renderTlDots() {
+    if (!tlDotsEl) return;
+    tlDotsEl.innerHTML = '';
+    for (let i = 0; i < tlStops.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'tl-dot' + (i === tlSlide ? ' active' : '');
+      dot.onclick = () => { tlSlide = i; updateTlSlider(); };
+      tlDotsEl.appendChild(dot);
+    }
+  }
+
+  function updateTlSlider() {
+    const track = document.querySelector('.timeline-stops');
+    if (track && window.innerWidth < 768) {
+      track.style.transform = `translateX(-${tlSlide * 100}%)`;
+    } else if (track) {
+      track.style.transform = '';
+    }
+    renderTlDots();
+  }
+
+  function tlNext() {
+    tlSlide = (tlSlide + 1) % tlStops.length;
+    updateTlSlider();
+  }
+
+  if (tlStops.length > 0) {
+    renderTlDots();
+    tlAutoInterval = setInterval(tlNext, 4000);
+    // Touch swipe
+    const tlRoad = document.querySelector('.timeline-road');
+    if (tlRoad) {
+      let tlTouchX = 0;
+      tlRoad.addEventListener('touchstart', e => { tlTouchX = e.touches[0].clientX; }, {passive:true});
+      tlRoad.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientX - tlTouchX;
+        if (Math.abs(diff) > 50) {
+          if (diff < 0) tlSlide = Math.min(tlSlide + 1, tlStops.length - 1);
+          else tlSlide = Math.max(tlSlide - 1, 0);
+          updateTlSlider();
+        }
+      }, {passive:true});
+    }
+    window.addEventListener('resize', updateTlSlider);
+  }
 
   // ========== INIT ==========
   renderCalendar();
