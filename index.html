@@ -1604,6 +1604,57 @@
       .cookie-btn { padding: 7px 14px; font-size: 11px; }
     }
 
+    /* ── LOYALTY & GUTSCHEINE ── */
+    .loyalty-section {
+      padding: 32px 16px; text-align: center;
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .loyalty-cards {
+      display: flex; flex-direction: column; gap: 16px;
+      max-width: 900px; margin: 0 auto;
+    }
+    .loyalty-card {
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+      transition: all 0.3s;
+    }
+    .loyalty-card:hover {
+      border-color: var(--accent); transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,190,138,0.15);
+    }
+    .loyalty-card-img {
+      width: 100%; height: 200px; object-fit: cover;
+    }
+    .loyalty-card-body { padding: 18px 16px; text-align: left; }
+    .loyalty-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: var(--accent); margin-bottom: 8px;
+    }
+    .loyalty-card-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+    }
+    .loyalty-card-badge {
+      display: inline-block; margin-top: 10px; padding: 5px 14px;
+      background: var(--accent-glow); border: 1px solid var(--border-accent);
+      border-radius: 50px; font-size: 11px; color: var(--accent); font-weight: 600;
+    }
+    @media (min-width: 768px) {
+      .loyalty-section { padding: 40px 32px; }
+      .loyalty-cards { flex-direction: row; gap: 20px; }
+      .loyalty-card { flex: 1; }
+      .loyalty-card-img { height: 240px; }
+      .loyalty-card-title { font-size: 22px; }
+      .loyalty-card-desc { font-size: 14px; }
+    }
+    @media (min-width: 1025px) {
+      .loyalty-section { padding: 48px 60px; }
+      .loyalty-cards { gap: 28px; }
+      .loyalty-card-img { height: 280px; }
+      .loyalty-card-body { padding: 22px 20px; }
+      .loyalty-card-title { font-size: 24px; }
+    }
+
     /* ── PARTNER SLIDER ── */
     .partner-section {
       padding: 28px 16px; text-align: center;
@@ -1843,6 +1894,30 @@
       </div>
     </div>
     <div class="tl-slider-dots" id="tl-dots"></div>
+  </div>
+</section>
+
+<!-- ===== LOYALTY & GUTSCHEINE ===== -->
+<section class="loyalty-section">
+  <div class="section-title">Stempelkarte & <span>Gutscheine</span></div>
+  <div class="section-sub">Treue wird belohnt — süße Überraschungen garantiert</div>
+  <div class="loyalty-cards">
+    <div class="loyalty-card">
+      <img src="img/loyalty_card.jpg" alt="Sweet Truck Loyalty Card" class="loyalty-card-img">
+      <div class="loyalty-card-body">
+        <div class="loyalty-card-title">Loyalty Card</div>
+        <div class="loyalty-card-desc">Ihre Treue bedeutet uns viel! Mit unserer Stempelkarte sammeln Sie bei jedem Besuch Stempel — und die 6. Bubble Waffel gibt's gratis. Einfach am Truck abholen und losstempeln.</div>
+        <div class="loyalty-card-badge">Jede 6. Waffel gratis</div>
+      </div>
+    </div>
+    <div class="loyalty-card">
+      <img src="img/gutschein.jpg" alt="Sweet Truck Gutschein" class="loyalty-card-img">
+      <div class="loyalty-card-body">
+        <div class="loyalty-card-title">Gutscheine</div>
+        <div class="loyalty-card-desc">Das perfekte Geschenk für alle Naschkatzen! Unsere Gutscheine im Wert von 20 € sind direkt am Sweet Truck erhältlich — ideal für Geburtstage, Feiertage oder einfach so.</div>
+        <div class="loyalty-card-badge">Ab 20 € erhältlich</div>
+      </div>
+    </div>
   </div>
 </section>
 
