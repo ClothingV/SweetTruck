@@ -704,11 +704,29 @@
     .footer-credit { font-size: 10px; opacity: 0.5; }
     .footer-credit span { color: var(--accent); }
     @media (min-width: 768px) {
-      .footer-main { grid-template-columns: 1.2fr 0.8fr 1fr; padding: 44px 32px; gap: 40px; }
-      .footer-bottom { flex-direction: row; justify-content: center; gap: 16px; padding: 18px 32px; }
+      .footer-main { grid-template-columns: 1.5fr 0.8fr 1.2fr; padding: 44px 40px; gap: 48px; }
+      .footer-brand-logo { height: 42px; margin-bottom: 12px; }
+      .footer-brand-slogan { font-size: 15px; margin-bottom: 18px; }
+      .footer-col-title { font-size: 17px; margin-bottom: 16px; }
+      .footer-links li { margin-bottom: 10px; }
+      .footer-links a { font-size: 14px; }
+      .footer-contact-row { font-size: 14px; margin-bottom: 12px; }
+      .footer-contact-row svg { width: 18px; height: 18px; }
+      .footer-social svg { width: 22px; height: 22px; }
+      .footer-social { gap: 16px; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; padding: 18px 40px; }
+      .footer-bottom-links { gap: 20px; }
+      .footer-bottom-links a { font-size: 12px; }
     }
     @media (min-width: 1025px) {
-      .footer-main { padding: 50px 60px; }
+      .footer-main { padding: 56px 80px; gap: 60px; }
+      .footer-brand-logo { height: 48px; margin-bottom: 14px; }
+      .footer-brand-slogan { font-size: 16px; }
+      .footer-col-title { font-size: 18px; margin-bottom: 18px; }
+      .footer-links a { font-size: 14px; }
+      .footer-contact-row { font-size: 14px; }
+      .footer-social svg { width: 24px; height: 24px; }
+      .footer-bottom { padding: 20px 80px; }
     }
 
     /* ── CALENDAR ── */
