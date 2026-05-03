@@ -114,7 +114,7 @@
     /* ── HERO ── */
     .hp-hero {
       position: relative; overflow: hidden;
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
       padding: 40px 20px; text-align: center;
       min-height: 75vh;
       background: url('img/hero_mobile.jpg') center center / cover no-repeat;
@@ -177,7 +177,7 @@
 
     @media (min-width: 768px) {
       .hp-hero {
-        align-items: flex-start; justify-content: center;
+        align-items: flex-start; justify-content: flex-start;
         padding: 60px 40px; text-align: left;
         min-height: 95vh;
         background-image: url('img/hero_desktop.jpg');
