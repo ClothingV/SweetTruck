@@ -2474,7 +2474,7 @@
       if (dayEvents.length > 0) classes.push('has-event');
       if (isToday) classes.push('today');
       if (isPast && dayEvents.length > 0) classes.push('past-event');
-      const WAFFLE_DOT = '<svg class="event-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#d4be8a" stroke="#c4a870" stroke-width="0.5"/><circle cx="8" cy="8" r="2.2" fill="#a3884e"/><circle cx="16" cy="8" r="2.2" fill="#a3884e"/><circle cx="8" cy="16" r="2.2" fill="#a3884e"/><circle cx="16" cy="16" r="2.2" fill="#a3884e"/><circle cx="12" cy="12" r="2.2" fill="#a3884e"/></svg>';
+      const WAFFLE_DOT = '<img class="event-dot" src="img/waffle_icon.svg" alt="Event">';
       const dots = dayEvents.length > 0 ? `<div class="event-dots">${WAFFLE_DOT.repeat(Math.min(dayEvents.length, 3))}</div>` : '';
       let tooltipHtml = '';
       if (dayEvents.length > 0) {
