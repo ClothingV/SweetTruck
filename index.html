@@ -451,16 +451,17 @@
     .ci-back {
       transform: rotateY(180deg);
       background: #232327; border: 1px solid var(--border-accent);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 16px; text-align: center;
-      z-index: 3;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding: 12px 10px; text-align: center;
+      z-index: 3; overflow-y: auto;
     }
     .ci-back-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 15px; font-weight: 600; color: var(--accent); margin-bottom: 8px;
+      font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px;
+      flex-shrink: 0;
     }
     .ci-back-desc {
-      font-size: 12px; color: var(--text-primary); line-height: 1.6;
+      font-size: 9px; color: var(--text-primary); line-height: 1.5;
     }
     @media (min-width: 768px) {
       .ci-back-name { font-size: 18px; }
