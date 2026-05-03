@@ -10,7 +10,7 @@
   <meta property="og:description" content="Bubble Waffeln, Crepes & Kaffeespezialitäten — frisch zubereitet auf Ihrem Event.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.sweettruck.de">
-  <meta property="og:image" content="img/truck_hero.jpg">
+  <meta property="og:image" content="https://sweet-truck.vercel.app/img/hero_desktop.jpg">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="canonical" href="https://www.sweettruck.de">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,10 @@
     body {
       font-family: 'DM Sans', system-ui, sans-serif;
       background: var(--bg-primary); color: var(--text-primary); min-height: 100vh;
+      -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
     }
+    img { -webkit-user-drag: none; user-drag: none; }
+    @media print { body { display: none !important; } }
 
     /* ── NAV ── */
     .hp-nav {
@@ -848,7 +851,6 @@
       padding: 10px 12px; min-width: 160px; max-width: min(220px, calc(100vw - 20px));
       z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.12); pointer-events: none;
     }
-    .cal-day.has-event:hover .cal-tooltip { display: none; }
     .cal-tooltip-event { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
     .cal-tooltip-event:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
     .cal-tooltip-title { font-size: 12px; font-weight: 600; color: var(--text-primary); }
@@ -1782,9 +1784,6 @@
     <p class="hero-desc">Wir bringen handgemachte Desserts, feine Drinks und ganz viel Liebe zu Ihrem Event.</p>
     <a href="mailto:info@sweettruck.de" class="hp-hero-btn">JETZT BUCHEN &rarr;</a>
   </div>
-  <div class="hero-img">
-    <img src="img/hero_truck_studio.png" alt="Sweet Truck">
-  </div>
   <div class="hero-scroll-hint">&#8964;</div>
 </section>
 
@@ -1991,6 +1990,7 @@
       <a href="https://www.tiktok.com/@sweettruck_" target="_blank" rel="noopener noreferrer" title="TikTok">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
       </a>
+  </div>
   </div>
   <div class="payment-bar">
     <span class="payment-bar-label">Zahlungsarten</span>
@@ -2246,7 +2246,7 @@
     <a href="/" class="hp-logo" onclick="event.preventDefault();if(document.querySelector('.calendar-page.active'))closeCalendarPage();if(document.querySelector('.catering-page.active'))closeCateringPage();if(document.querySelector('.contact-page.active'))closeContactPage();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="Sweet Truck"></a>
     <div class="cal-nav-links">
       <a href="#" onclick="event.preventDefault();closeContactPage()">HOME</a>
-      <a href="#" onclick="event.preventDefault();openCalendarPage();closeContactPage()">EVENTS</a>
+      <a href="#" onclick="event.preventDefault();closeContactPage();openCalendarPage()">EVENTS</a>
       <a href="#" onclick="event.preventDefault();closeContactPage();openCateringPage()">CATERING</a>
     </div>
     <div class="overlay-nav-right">
@@ -2255,7 +2255,7 @@
     </div>
     <div class="overlay-mobile-nav">
       <a href="#" onclick="event.preventDefault();closeOverlayMenu(this);closeContactPage()">Home</a>
-      <a href="#" onclick="event.preventDefault();closeOverlayMenu(this);openCalendarPage();closeContactPage()">Events</a>
+      <a href="#" onclick="event.preventDefault();closeOverlayMenu(this);closeContactPage();openCalendarPage()">Events</a>
       <a href="#" onclick="event.preventDefault();closeOverlayMenu(this);closeContactPage();openCateringPage()">Catering</a>
     </div>
   </nav>
@@ -2702,12 +2702,19 @@
 
   // ========== ICS EXPORT ==========
   function addToCalendar(e) {
-    const dtStart = e.date.replace(/-/g,'') + 'T' + e.time.replace(':','') + '00';
-    const hh = parseInt(e.time.split(':')[0], 10);
-    const mm = e.time.split(':')[1] || '00';
-    const endHH = String((hh + 1) % 24).padStart(2, '0');
-    const dtEnd = e.date.replace(/-/g,'') + 'T' + endHH + mm + '00';
-    const ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//SweetTruck//DE\nBEGIN:VEVENT\nSUMMARY:' + e.title + '\nLOCATION:' + e.location + '\nDTSTART;TZID=Europe/Berlin:' + dtStart + '\nDTEND;TZID=Europe/Berlin:' + dtEnd + '\nEND:VEVENT\nEND:VCALENDAR';
+    let dtLines;
+    if (e.time === 'Ganztägig' || !e.time.includes(':')) {
+      const dateOnly = e.date.replace(/-/g,'');
+      const nextDay = new Date(e.date); nextDay.setDate(nextDay.getDate()+1);
+      const dateEnd = nextDay.toISOString().slice(0,10).replace(/-/g,'');
+      dtLines = 'DTSTART;VALUE=DATE:' + dateOnly + '\nDTEND;VALUE=DATE:' + dateEnd;
+    } else {
+      const times = e.time.split(' – ');
+      const startTime = times[0].replace(':','') + '00';
+      const endTime = times[1] ? times[1].replace(':','') + '00' : String((parseInt(times[0].split(':')[0])+1)%24).padStart(2,'0') + times[0].split(':')[1] + '00';
+      dtLines = 'DTSTART;TZID=Europe/Berlin:' + e.date.replace(/-/g,'') + 'T' + startTime + '\nDTEND;TZID=Europe/Berlin:' + e.date.replace(/-/g,'') + 'T' + endTime;
+    }
+    const ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//SweetTruck//DE\nBEGIN:VEVENT\nSUMMARY:' + e.title + '\nLOCATION:' + e.location + '\n' + dtLines + '\nEND:VEVENT\nEND:VCALENDAR';
     const blob = new Blob([ics], {type:'text/calendar'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -3118,6 +3125,19 @@
       document.getElementById('cookie-float').classList.add('visible');
     }
   }, 2000);
+</script>
+
+<script>
+  // ========== COPY PROTECTION ==========
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', e => e.preventDefault());
+  });
 </script>
 
 </body>
