@@ -2541,23 +2541,16 @@
           const dt = new Date(start);
           const dateStr = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
           const timeStr = item.start.dateTime ? String(dt.getHours()).padStart(2, '0') + ':' + String(dt.getMinutes()).padStart(2, '0') : 'Ganztags';
-          const desc = (item.description || '').toLowerCase();
-          const title = (item.summary || '').toLowerCase();
-          let type = 'Markt';
-          if (desc.includes('privat') || desc.includes('hochzeit') || desc.includes('geburtstag') || title.includes('hochzeit') || title.includes('geburtstag')) type = 'Privat';
-          else if (desc.includes('firma') || desc.includes('firmen') || title.includes('firmen') || title.includes('sommerfest')) type = 'Firmen';
-          else if (desc.includes('festival') || desc.includes('stadtfest') || title.includes('festival') || title.includes('street food')) type = 'Festival';
-          const typeMatch = (item.description || '').match(/\[Typ:\s*(\w+)\]/i);
-          if (typeMatch) type = typeMatch[1];
           return {
-            id: i + 1, type, title: item.summary || 'Event', date: dateStr, time: timeStr,
-            location: item.location || 'Standort folgt',
-            note: item.description ? item.description.replace(/\[Typ:.*?\]/gi, '').trim() : '',
+            id: i + 1, type: '', title: item.summary || 'Event', date: dateStr, time: timeStr,
+            location: item.location || '',
+            note: item.description || '',
           };
         });
         renderCalendar();
+        renderUpcomingList();
       }
-    } catch (err) { /* Silent fail */ }
+    } catch (err) { console.error('GCal Error:', err); }
   }
   fetchGoogleCalendar();
   if (GCAL_CONFIG.USE_GOOGLE) setInterval(fetchGoogleCalendar, 5 * 60 * 1000);
@@ -2661,7 +2654,6 @@
           <div class="cal-upcoming-name">${e.title}</div>
           <div class="cal-upcoming-meta">${e.time} Uhr · ${e.location}</div>
         </div>
-        <div class="cal-upcoming-type ${tc}">${e.type}</div>
       </div>`;
     }).join('');
   }
@@ -2778,9 +2770,8 @@
       const tc = getEventTypeClass(e.type);
       return `
       <div class="modal-event">
-        <div class="modal-event-bar ${tc}"></div>
+        <div class="modal-event-bar" style="background:var(--accent)"></div>
         <div class="modal-event-body">
-          <div class="me-type-badge ${tc}">${e.type}</div>
           <div class="me-countdown">${getCountdown(e.date)}</div>
           <div class="me-title">${e.title}</div>
           <div class="me-row"><span class="me-label">Wann</span> ${e.time} Uhr</div>
