@@ -1673,7 +1673,7 @@
 
 <!-- ===== NAV ===== -->
 <nav class="hp-nav" id="main-nav">
-  <div class="hp-logo"><img src="logo.png" alt="Sweet Truck"></div>
+  <a href="/" class="hp-logo" onclick="event.preventDefault();if(document.querySelector('.calendar-page.active'))closeCalendarPage();if(document.querySelector('.catering-page.active'))closeCateringPage();if(document.querySelector('.contact-page.active'))closeContactPage();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="Sweet Truck"></a>
   <div class="hp-nav-links">
     <a data-scroll="home" class="active">HOME</a>
     <a data-scroll="about">ÜBER UNS</a>
@@ -1903,7 +1903,7 @@
 <!-- ===== CALENDAR PAGE (fullscreen overlay) ===== -->
 <div class="calendar-page" id="calendar-page">
   <nav class="calendar-page-nav">
-    <div class="hp-logo"><img src="logo.png" alt="Sweet Truck"></div>
+    <a href="/" class="hp-logo" onclick="event.preventDefault();if(document.querySelector('.calendar-page.active'))closeCalendarPage();if(document.querySelector('.catering-page.active'))closeCateringPage();if(document.querySelector('.contact-page.active'))closeContactPage();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="Sweet Truck"></a>
     <div class="cal-nav-links">
       <a href="#" onclick="event.preventDefault();closeCalendarPage()">HOME</a>
       <a href="#" onclick="event.preventDefault();closeCalendarPage();setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),300)">ÜBER UNS</a>
@@ -2006,7 +2006,7 @@
 <!-- ===== CATERING PAGE ===== -->
 <div class="catering-page" id="catering-page">
   <nav class="calendar-page-nav">
-    <div class="hp-logo"><img src="logo.png" alt="Sweet Truck"></div>
+    <a href="/" class="hp-logo" onclick="event.preventDefault();if(document.querySelector('.calendar-page.active'))closeCalendarPage();if(document.querySelector('.catering-page.active'))closeCateringPage();if(document.querySelector('.contact-page.active'))closeContactPage();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="Sweet Truck"></a>
     <div class="cal-nav-links">
       <a href="#" onclick="event.preventDefault();closeCateringPage()">HOME</a>
       <a href="#" onclick="event.preventDefault();closeCateringPage();setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),300)">ÜBER UNS</a>
@@ -2175,7 +2175,7 @@
 <!-- ===== CONTACT PAGE ===== -->
 <div class="contact-page" id="contact-page">
   <nav class="calendar-page-nav">
-    <div class="hp-logo"><img src="logo.png" alt="Sweet Truck"></div>
+    <a href="/" class="hp-logo" onclick="event.preventDefault();if(document.querySelector('.calendar-page.active'))closeCalendarPage();if(document.querySelector('.catering-page.active'))closeCateringPage();if(document.querySelector('.contact-page.active'))closeContactPage();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="Sweet Truck"></a>
     <div class="cal-nav-links">
       <a href="#" onclick="event.preventDefault();closeContactPage()">HOME</a>
       <a href="#" onclick="event.preventDefault();closeContactPage();setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),300)">ÜBER UNS</a>
