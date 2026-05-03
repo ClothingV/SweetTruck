@@ -661,11 +661,8 @@
       padding: 0; font-size: 13px; color: var(--text-muted); font-weight: 400;
     }
     .footer-main {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
       padding: 28px 16px; max-width: 1100px; margin: 0 auto;
-    }
-    .footer-col:first-child {
-      grid-column: 1 / -1;
     }
     .footer-col { }
     .footer-col-title {
@@ -708,7 +705,6 @@
     .footer-credit span { color: var(--accent); }
     @media (min-width: 768px) {
       .footer-main { grid-template-columns: 1.2fr 0.8fr 1fr; padding: 44px 32px; gap: 40px; }
-      .footer-col:first-child { grid-column: auto; }
       .footer-bottom { flex-direction: row; justify-content: center; gap: 16px; padding: 18px 32px; }
     }
     @media (min-width: 1025px) {
