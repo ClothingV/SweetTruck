@@ -793,10 +793,14 @@
     }
     .cal-day .day-num { font-weight: 600; font-size: 13px; line-height: 1; margin-bottom: 1px; color: var(--text-primary); }
     .cal-day.empty .day-num { color: var(--text-muted); font-weight: 400; }
-    .cal-day .event-dots { display: flex; gap: 3px; margin-top: 3px; }
+    .cal-day .event-dots { display: flex; gap: 0; margin-top: 0; position: absolute; inset: 0; }
     .cal-day .event-dot {
-      width: 22px; height: 22px;
+      width: 100%; height: 100%; position: absolute; inset: 0;
+      object-fit: contain; padding: 4px; opacity: 0.85;
     }
+    .cal-day .event-dots .event-dot:nth-child(1) { left: -15%; right: auto; width: 65%; }
+    .cal-day .event-dots .event-dot:nth-child(2) { left: auto; right: -15%; width: 65%; }
+    .cal-day .event-dots .event-dot:only-child { left: 10%; right: 10%; width: 80%; }
     /* ── Event day ── */
     .cal-day.has-event {
       cursor: pointer;
@@ -869,8 +873,7 @@
       .cal-grid { gap: 5px; padding: 16px; }
       .cal-day { min-height: 56px; border-radius: 12px; font-size: 14px; padding: 6px 4px; }
       .cal-day .day-num { font-size: 14px; margin-bottom: 2px; }
-      .cal-day .event-dots { gap: 4px; margin-top: 4px; }
-      .cal-day .event-dot { width: 28px; height: 28px; }
+      .cal-day .event-dot { padding: 6px; }
       .cal-day-name { font-size: 11px; padding: 8px 0; letter-spacing: 2px; }
       .cal-day.today .day-num { width: 26px; height: 26px; }
       .cal-next-event { padding: 12px 20px; }
