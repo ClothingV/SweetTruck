@@ -1747,12 +1747,21 @@
       padding: 28px 16px; text-align: center;
       background: var(--bg); overflow: hidden;
     }
-    .feedback-slider {
-      display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory;
-      padding: 20px 8px; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; -ms-overflow-style: none;
+    .feedback-slider-wrap {
+      overflow: hidden; position: relative;
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
     }
-    .feedback-slider::-webkit-scrollbar { display: none; }
+    .feedback-slider {
+      display: flex; gap: 32px; padding: 20px 0;
+      width: max-content; will-change: transform;
+      animation: feedbackScroll 35s linear infinite;
+    }
+    .feedback-slider:hover { animation-play-state: paused; }
+    @keyframes feedbackScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     .phone-mockup {
       flex: 0 0 auto; width: 220px; scroll-snap-align: center;
       background: #111; border-radius: 28px; padding: 10px 8px;
@@ -2040,36 +2049,69 @@
 <section class="feedback-section">
   <div class="section-title">Kunden <span>Feedback</span></div>
   <div class="section-sub">Was unsere Gäste sagen</div>
-  <div class="feedback-slider">
-    <div class="phone-mockup">
-      <div class="phone-notch"></div>
-      <div class="phone-screen"><img src="img/feedback_wochenblatt.webp" alt="Wochenblatt Artikel über Sweet Truck"></div>
-      <div class="phone-home"></div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-notch"></div>
-      <div class="phone-screen"><img src="img/feedback_gaeste.webp" alt="Kundennachricht — Ich liebe meine Gäste"></div>
-      <div class="phone-home"></div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-notch"></div>
-      <div class="phone-screen"><img src="img/feedback_beeren.webp" alt="Kundenbewertung — 9/10 Beeren Waffel"></div>
-      <div class="phone-home"></div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-notch"></div>
-      <div class="phone-screen"><img src="img/feedback_kinder.webp" alt="Kinder zahlen am Sweet Truck"></div>
-      <div class="phone-home"></div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-notch"></div>
-      <div class="phone-screen"><img src="img/feedback_herz.webp" alt="Geldschein als Herz gefaltet"></div>
-      <div class="phone-home"></div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-notch"></div>
-      <div class="phone-screen"><img src="img/feedback_zeitung.webp" alt="Schwäbische Zeitung über Sweet Truck"></div>
-      <div class="phone-home"></div>
+  <div class="feedback-slider-wrap">
+    <div class="feedback-slider">
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_wochenblatt.webp" alt="Wochenblatt Artikel über Sweet Truck"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_gaeste.webp" alt="Kundennachricht — Ich liebe meine Gäste"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_beeren.webp" alt="Kundenbewertung — 9/10 Beeren Waffel"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_kinder.webp" alt="Kinder zahlen am Sweet Truck"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_herz.webp" alt="Geldschein als Herz gefaltet"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_zeitung.webp" alt="Schwäbische Zeitung über Sweet Truck"></div>
+        <div class="phone-home"></div>
+      </div>
+      <!-- Duplikat für nahtlosen Loop -->
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_wochenblatt.webp" alt="Wochenblatt Artikel über Sweet Truck"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_gaeste.webp" alt="Kundennachricht — Ich liebe meine Gäste"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_beeren.webp" alt="Kundenbewertung — 9/10 Beeren Waffel"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_kinder.webp" alt="Kinder zahlen am Sweet Truck"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_herz.webp" alt="Geldschein als Herz gefaltet"></div>
+        <div class="phone-home"></div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="img/feedback_zeitung.webp" alt="Schwäbische Zeitung über Sweet Truck"></div>
+        <div class="phone-home"></div>
+      </div>
     </div>
   </div>
 </section>
