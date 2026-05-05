@@ -1385,16 +1385,16 @@
       font-size: 14px; color: var(--text-muted); max-width: 500px; margin: 0 auto;
     }
     .contact-quick-btns {
-      display: flex; gap: 12px; justify-content: center; margin-bottom: 28px;
-      flex-wrap: wrap;
+      display: flex; gap: 8px; justify-content: center; margin-bottom: 28px;
+      flex-wrap: nowrap;
     }
     .contact-quick-btn {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 24px; border-radius: 50px;
-      font-size: 13px; font-weight: 600; text-decoration: none;
-      transition: all 0.3s; letter-spacing: 0.5px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 14px; border-radius: 50px; flex: 1;
+      font-size: 11px; font-weight: 600; text-decoration: none;
+      transition: all 0.3s; letter-spacing: 0.3px; white-space: nowrap;
     }
-    .contact-quick-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .contact-quick-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
     .cqb-phone { background: var(--bg-card); border: 1px solid var(--border-accent); color: var(--accent); }
     .cqb-phone:hover { background: var(--bg-elevated); }
     .cqb-wa { background: #25D366; color: #fff; border: 1px solid #25D366; }
