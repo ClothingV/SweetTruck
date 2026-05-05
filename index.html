@@ -10,7 +10,7 @@
   <meta property="og:description" content="Bubble Waffeln, Crepes & Kaffeespezialitäten — frisch zubereitet auf Ihrem Event.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.sweettruck.de">
-  <meta property="og:image" content="https://sweet-truck.vercel.app/img/hero_desktop.jpg">
+  <meta property="og:image" content="https://www.sweettruck.de/img/hero_desktop.jpg">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="canonical" href="https://www.sweettruck.de">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1746,7 +1746,7 @@
     /* ── FEEDBACK SLIDER ── */
     .feedback-section {
       padding: 28px 16px; text-align: center;
-      background: var(--bg); overflow: hidden;
+      background: var(--bg-primary); overflow: hidden;
     }
     .feedback-slider-wrap {
       overflow: hidden; position: relative;
@@ -2013,7 +2013,7 @@
 </section>
 
 <!-- ===== KUNDENFEEDBACK BANNER ===== -->
-<section class="feedback-banner" role="img" aria-label="Kundenfeedback — Diese Wafeln waren Wahnsinn! Danke!"></section>
+<section class="feedback-banner" role="img" aria-label="Kundenfeedback — Diese Waffeln waren Wahnsinn! Danke!"></section>
 
 <!-- ===== PARTNER ===== -->
 <section class="partner-section">
@@ -2439,7 +2439,7 @@
     </div>
     <div class="contact-layout">
       <div class="contact-map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10754!2d9.6363!3d47.9531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c1d998b4e9c6d%3A0x3f5b7e1d4f5e4a2b!2s88326%20Aulendorf!5e0!3m2!1sde!2sde!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10754!2d9.6363!3d47.9531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c1d998b4e9c6d%3A0x3f5b7e1d4f5e4a2b!2s88326%20Aulendorf!5e0!3m2!1sde!2sde!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps — Sweet Truck Standort Aulendorf"></iframe>
       </div>
       <div class="contact-info-panel">
         <div class="contact-info-title">Sweet Truck</div>
@@ -2870,8 +2870,8 @@
       dtLines = 'DTSTART;VALUE=DATE:' + dateOnly + '\nDTEND;VALUE=DATE:' + dateEnd;
     } else {
       const times = e.time.split(' – ');
-      const startTime = times[0].replace(':','') + '00';
-      const endTime = times[1] ? times[1].replace(':','') + '00' : String((parseInt(times[0].split(':')[0])+1)%24).padStart(2,'0') + times[0].split(':')[1] + '00';
+      const startTime = times[0].replace(/:/g,'').padEnd(4,'0') + '00';
+      const endTime = times[1] ? times[1].replace(/:/g,'').padEnd(4,'0') + '00' : String((parseInt(times[0].split(':')[0])+1)%24).padStart(2,'0') + (times[0].split(':')[1]||'00') + '00';
       dtLines = 'DTSTART;TZID=Europe/Berlin:' + e.date.replace(/-/g,'') + 'T' + startTime + '\nDTEND;TZID=Europe/Berlin:' + e.date.replace(/-/g,'') + 'T' + endTime;
     }
     const ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//SweetTruck//DE\nBEGIN:VEVENT\nSUMMARY:' + e.title + '\nLOCATION:' + e.location + '\n' + dtLines + '\nEND:VEVENT\nEND:VCALENDAR';
