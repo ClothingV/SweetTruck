@@ -123,7 +123,7 @@
       background: url('img/hero_mobile.jpg') center center / cover no-repeat;
     }
     .hp-hero::before {
-      content: ''; position: absolute; inset: 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
       z-index: 1;
     }
@@ -381,12 +381,12 @@
     .flip-card-inner {
       position: relative; width: 100%; height: 100%;
       transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-      transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d;
     }
     .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
     .flip-card-front, .flip-card-back {
-      position: absolute; inset: 0; backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; backface-visibility: hidden;
+      -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden;
       border-radius: 16px; overflow: hidden;
     }
     .flip-card-front { z-index: 2; }
@@ -473,7 +473,8 @@
     }
     .carousel-item.ci-flipped .ci-inner { transform: rotateY(180deg); }
     .ci-front, .ci-back {
-      position: absolute; inset: 0; backface-visibility: hidden;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; backface-visibility: hidden;
+      -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden;
       border-radius: inherit; overflow: hidden;
     }
     .ci-front { z-index: 2; }
@@ -750,7 +751,7 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.04);
     }
     .calendar::before {
-      content: ''; position: absolute; inset: 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background-image: radial-gradient(circle, rgba(212,190,138,0.04) 2px, transparent 2px);
       background-size: 18px 18px; pointer-events: none; z-index: 0;
     }
@@ -804,9 +805,9 @@
     }
     .cal-day .day-num { font-weight: 600; font-size: 13px; line-height: 1; margin-bottom: 1px; color: var(--text-primary); }
     .cal-day.empty .day-num { color: var(--text-muted); font-weight: 400; }
-    .cal-day .event-dots { display: flex; gap: 0; margin-top: 0; position: absolute; inset: 0; }
+    .cal-day .event-dots { display: flex; gap: 0; margin-top: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
     .cal-day .event-dot {
-      width: 100%; height: 100%; position: absolute; inset: 0;
+      width: 100%; height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       object-fit: contain; padding: 4px; opacity: 0.85;
       filter: brightness(0) invert(1);
     }
@@ -892,7 +893,7 @@
 
     /* ── CALENDAR PAGE (fullscreen overlay) ── */
     .calendar-page {
-      display: none; position: fixed; inset: 0; z-index: 200;
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
       background: var(--bg-primary); overflow-y: auto;
       animation: fadeIn 0.3s ease;
     }
@@ -1063,7 +1064,7 @@
 
     /* ── MODAL ── */
     .modal-overlay {
-      display: none; position: fixed; inset: 0;
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(12,12,14,0.85); backdrop-filter: blur(6px);
       z-index: 300; align-items: center; justify-content: center;
     }
@@ -1182,7 +1183,7 @@
 
     /* ── LEGAL OVERLAYS ── */
     .legal-overlay {
-      display: none; position: fixed; inset: 0;
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(12,12,14,0.85); backdrop-filter: blur(8px);
       z-index: 2000; align-items: center; justify-content: center;
     }
@@ -1237,7 +1238,7 @@
 
     /* ── WAFFLE LOADER ── */
     .waffle-loader {
-      position: fixed; inset: 0; z-index: 99999;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99999;
       background: #131315;
       display: flex; align-items: center; justify-content: center;
       transition: opacity 0.6s ease, visibility 0.6s;
@@ -1390,7 +1391,7 @@
 
     /* ── CONTACT PAGE ── */
     .contact-page {
-      display: none; position: fixed; inset: 0; z-index: 200;
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
       background: var(--bg-primary); overflow-y: auto;
       animation: fadeIn 0.3s ease;
     }
@@ -1481,7 +1482,7 @@
 
     /* ── CATERING PAGE ── */
     .catering-page {
-      display: none; position: fixed; inset: 0; z-index: 200;
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
       background: var(--bg-primary); overflow-y: auto;
       animation: fadeIn 0.3s ease;
     }
@@ -2347,7 +2348,7 @@
     <div class="catering-section">
       <div class="catering-img" style="padding:0;border:3px solid var(--accent-dark);border-radius:16px;overflow:hidden;max-width:250px;position:relative;cursor:pointer" onclick="window.open('https://www.instagram.com/reel/DDRsaLltfgT/','_blank')">
         <img src="img/schoco_bombe_new.webp" alt="Heiße Schokoladen Bombe" style="width:100%;display:block;object-fit:contain;background:#f5f0e8">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.2);transition:background 0.3s" onmouseover="this.style.background='rgba(0,0,0,0.35)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.2);transition:background 0.3s" onmouseover="this.style.background='rgba(0,0,0,0.35)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
           <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3)">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
           </div>
