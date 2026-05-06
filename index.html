@@ -384,10 +384,6 @@
       transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
     }
     .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-    @media (hover: hover) {
-      .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-      .flip-card:hover .flip-card-front::after { display: none; }
-    }
     .flip-card-front, .flip-card-back {
       position: absolute; inset: 0; backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
