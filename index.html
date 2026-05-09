@@ -3140,11 +3140,11 @@
     });
   });
 
-  let carouselAuto = setInterval(carouselNext, 4000);
+  let carouselAuto = setInterval(carouselNext, 8000);
   const carouselWrap = document.getElementById('carousel-wrap');
   if (carouselWrap) {
     carouselWrap.addEventListener('mouseenter', () => clearInterval(carouselAuto));
-    carouselWrap.addEventListener('mouseleave', () => { carouselAuto = setInterval(carouselNext, 4000); });
+    carouselWrap.addEventListener('mouseleave', () => { carouselAuto = setInterval(carouselNext, 8000); });
     // Touch swipe
     let touchStartX = 0;
     carouselWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
@@ -3252,7 +3252,7 @@
   // ========== PAUSE CAROUSEL ON HIDDEN ==========
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) clearInterval(carouselAuto);
-    else carouselAuto = setInterval(carouselNext, 4000);
+    else carouselAuto = setInterval(carouselNext, 8000);
   });
 
   // ========== KEYBOARD NAV FOR CAROUSEL ==========
