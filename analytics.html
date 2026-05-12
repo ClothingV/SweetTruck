@@ -427,7 +427,7 @@
       <tbody>${rows.map(r => {
         const pct = max > 0 ? (Number(r.views) / max * 100) : 0;
         return `<tr>
-          <td>${escHtml(r[key] || '-')}</td>
+          <td>${escHtml(key === 'country' ? mapCountry(r[key]) : (r[key] || '-'))}</td>
           <td><span class="views-bar" style="width:${pct}px"></span>${Number(r.views).toLocaleString('de-DE')}</td>
         </tr>`;
       }).join('')}</tbody>
@@ -494,6 +494,26 @@
         cutout: '55%'
       }
     });
+  }
+
+  var countryNames = {
+    DE:'Deutschland',AT:'Österreich',CH:'Schweiz',LI:'Liechtenstein',
+    FR:'Frankreich',IT:'Italien',ES:'Spanien',PT:'Portugal',
+    NL:'Niederlande',BE:'Belgien',LU:'Luxemburg',
+    GB:'Großbritannien',IE:'Irland',US:'USA',CA:'Kanada',
+    PL:'Polen',CZ:'Tschechien',SK:'Slowakei',HU:'Ungarn',
+    DK:'Dänemark',SE:'Schweden',NO:'Norwegen',FI:'Finnland',
+    GR:'Griechenland',TR:'Türkei',RU:'Russland',UA:'Ukraine',
+    RO:'Rumänien',BG:'Bulgarien',HR:'Kroatien',SI:'Slowenien',
+    RS:'Serbien',JP:'Japan',CN:'China',KR:'Südkorea',IN:'Indien',
+    AU:'Australien',NZ:'Neuseeland',BR:'Brasilien',MX:'Mexiko',
+    ZA:'Südafrika',AE:'Ver. Arabische Emirate',SA:'Saudi-Arabien',
+    TH:'Thailand',VN:'Vietnam',SG:'Singapur',TW:'Taiwan'
+  };
+
+  function mapCountry(val) {
+    if (!val) return 'Unbekannt';
+    return countryNames[val.toUpperCase()] || val;
   }
 
   function escHtml(s) {
