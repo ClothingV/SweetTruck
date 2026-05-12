@@ -250,22 +250,47 @@
       font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;
     }
     @media (max-width: 767px) {
-      .section-item { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
-      .section-name { font-size: 12px; flex-basis: 100%; }
-      .section-bar-wrap { flex-basis: 100%; order: 3; }
-      .section-stat-val { font-size: 18px; }
-      .section-stats { gap: 16px; }
-      .mini-charts { grid-template-columns: 1fr 1fr; gap: 6px; }
-      .mini-chart .chart-wrap { max-height: 120px; }
-      .dash-header { flex-direction: column; align-items: flex-start; }
+      /* Dashboard */
+      .dashboard { padding: 10px; }
+      .dash-header { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 10px; }
+      .dash-header-left { gap: 6px; }
+      .dash-logo { height: 22px; }
+      .dash-title { font-size: 16px; }
       .dash-controls { width: 100%; justify-content: space-between; }
-      .dash-select { flex: 1; }
-      .data-table th { font-size: 8px; padding: 5px 6px; }
-      .data-table td { font-size: 11px; padding: 6px; }
+      .dash-select { flex: 1; font-size: 10px; padding: 5px 8px; }
+      .dash-logout { font-size: 9px; padding: 5px 10px; }
+
+      /* Stat Cards */
+      .stat-cards { gap: 6px; margin-bottom: 10px; }
+      .stat-card { padding: 10px 6px; border-radius: 10px; }
+      .stat-value { font-size: 20px; }
+      .stat-label { font-size: 8px; }
+
+      /* Charts */
+      .chart-grid { gap: 6px; margin-bottom: 10px; }
       .chart-card { padding: 10px; border-radius: 10px; }
-      .chart-card h3 { font-size: 13px; margin-bottom: 8px; }
-      .chart-grid { gap: 8px; }
-      .chart-grid .chart-full { grid-column: 1 / -1; }
+      .chart-card h3 { font-size: 12px; margin-bottom: 6px; }
+
+      /* Mini Charts */
+      .mini-charts { gap: 6px; margin-bottom: 6px; }
+      .mini-chart { padding: 8px !important; }
+      .mini-chart h3 { font-size: 11px !important; margin-bottom: 4px !important; }
+      .mini-chart .chart-wrap { max-height: 100px; }
+      .mini-chart .chart-wrap canvas { max-height: 100px; }
+
+      /* Section List */
+      .section-item { flex-wrap: wrap; gap: 4px; padding: 8px 6px; }
+      .section-name { font-size: 12px; flex-basis: 40%; }
+      .section-bar-wrap { display: none; }
+      .section-stats { gap: 14px; }
+      .section-stat { min-width: 40px; }
+      .section-stat-val { font-size: 16px; }
+      .section-stat-label { font-size: 7px; }
+
+      /* Tables */
+      .data-table th { font-size: 8px; padding: 4px 4px; }
+      .data-table td { font-size: 10px; padding: 5px 4px; word-break: break-all; }
+      .data-table .views-bar { display: none; }
     }
 
     /* Loading */
