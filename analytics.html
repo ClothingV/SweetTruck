@@ -262,6 +262,10 @@
       .dash-select { flex: 1; }
       .data-table th { font-size: 8px; padding: 5px 6px; }
       .data-table td { font-size: 11px; padding: 6px; }
+      .chart-card { padding: 10px; border-radius: 10px; }
+      .chart-card h3 { font-size: 13px; margin-bottom: 8px; }
+      .chart-grid { gap: 8px; }
+      .chart-grid .chart-full { grid-column: 1 / -1; }
     }
 
     /* Loading */
@@ -455,7 +459,7 @@
           <h3>Herkunft</h3>
           ${renderTable(data.referrers || [], 'referrer')}
         </div>
-        <div class="chart-card chart-full">
+        <div class="chart-card">
           <h3>Länder</h3>
           ${renderTable(data.countries || [], 'country')}
         </div>
