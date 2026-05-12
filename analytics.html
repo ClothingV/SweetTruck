@@ -43,17 +43,21 @@
     }
     .login-box {
       background: var(--bg-card); border: 1px solid var(--border-accent);
-      border-radius: 20px; padding: 40px 32px; max-width: 380px; width: 100%;
+      border-radius: 20px; padding: 50px 40px; max-width: 480px; width: 100%;
       text-align: center;
       box-shadow: 0 12px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
     }
-    .login-logo { height: 48px; margin-bottom: 16px; }
+    .login-logo { height: 56px; margin-bottom: 20px; }
+    .login-greeting {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 600; color: var(--accent); margin-bottom: 6px;
+    }
     .login-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;
+      font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;
     }
     .login-title span { color: var(--accent); }
-    .login-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+    .login-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
     .login-input {
       width: 100%; padding: 14px 18px; border-radius: 12px;
       border: 1px solid var(--border); background: var(--bg-secondary);
@@ -177,7 +181,8 @@
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <img src="logo.png" alt="Sweet Truck" class="login-logo">
-    <h1 class="login-title"><span>Analytics</span> Dashboard</h1>
+    <h1 class="login-greeting">Hallo Penelope</h1>
+    <h2 class="login-title"><span>Analytics</span> Dashboard</h2>
     <p class="login-sub">Melden Sie sich an, um Ihre Website-Statistiken zu sehen.</p>
     <input type="password" class="login-input" id="passInput" placeholder="Passwort eingeben" autocomplete="off">
     <button class="login-btn" id="loginBtn">ANMELDEN</button>
