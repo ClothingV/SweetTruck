@@ -42,8 +42,9 @@
       pointer-events: none; z-index: 0; overflow: hidden;
     }
     .waffle-icon {
-      position: absolute; opacity: 0.06; font-size: 40px;
+      position: absolute; opacity: 0.045;
       animation: floatWaffle 20s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(212,190,138,0.15));
     }
     @keyframes floatWaffle {
       0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -428,14 +429,16 @@
 // Floating waffles
 (function() {
   var bg = document.getElementById('waffleBg');
-  var waffles = ['\u{1F9C7}', '\u{2615}', '\u{1F366}', '\u{1F370}'];
-  for (var i = 0; i < 18; i++) {
-    var el = document.createElement('span');
+  for (var i = 0; i < 15; i++) {
+    var el = document.createElement('img');
     el.className = 'waffle-icon';
-    el.textContent = waffles[i % waffles.length];
-    el.style.left = (Math.random() * 95) + '%';
-    el.style.top = (Math.random() * 95) + '%';
-    el.style.fontSize = (28 + Math.random() * 30) + 'px';
+    el.src = 'img/waffle_icon.svg';
+    el.alt = '';
+    var size = 30 + Math.random() * 40;
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.style.left = (Math.random() * 92) + '%';
+    el.style.top = (Math.random() * 92) + '%';
     el.style.animationDelay = (Math.random() * 15) + 's';
     el.style.animationDuration = (15 + Math.random() * 15) + 's';
     bg.appendChild(el);
