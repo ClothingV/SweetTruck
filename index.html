@@ -3365,12 +3365,80 @@
 <script>
   // ========== ANALYTICS TRACKING ==========
   (function() {
-    var data = { path: location.pathname, referrer: document.referrer || '' };
+    // Track page view
     fetch('/api/track', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || '' })
     }).catch(function() {});
+
+    // Section tracking — welche Bereiche wie lange angeschaut werden
+    var sections = [
+      { el: '#home', name: 'Startseite' },
+      { el: '.hp-section', name: 'Bubble Waffeln' },
+      { el: '#about', name: 'Über uns' },
+      { el: '#catering', name: 'Event-Typen' }
+    ];
+    var currentSection = null;
+    var sectionStart = null;
+
+    function sendSection(name, seconds) {
+      if (seconds < 2) return;
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: location.pathname, section: name, duration_seconds: seconds })
+      }).catch(function() {});
+    }
+
+    function checkVisibleSection() {
+      var found = null;
+      // Check overlay pages first
+      var cal = document.querySelector('.calendar-page.active');
+      var cat = document.querySelector('.catering-page.active');
+      var con = document.querySelector('.contact-page.active');
+      if (cal) found = 'Kalender';
+      else if (cat) found = 'Catering';
+      else if (con) found = 'Kontakt';
+      else {
+        for (var i = 0; i < sections.length; i++) {
+          var el = document.querySelector(sections[i].el);
+          if (el) {
+            var r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.3) {
+              found = sections[i].name;
+              break;
+            }
+          }
+        }
+      }
+      if (found !== currentSection) {
+        if (currentSection && sectionStart) {
+          var dur = Math.round((Date.now() - sectionStart) / 1000);
+          sendSection(currentSection, dur);
+        }
+        currentSection = found;
+        sectionStart = Date.now();
+      }
+    }
+
+    var scrollTimer;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(checkVisibleSection, 200);
+    }, { passive: true });
+    setInterval(checkVisibleSection, 3000);
+    checkVisibleSection();
+
+    // Send last section on page leave
+    window.addEventListener('beforeunload', function() {
+      if (currentSection && sectionStart) {
+        var dur = Math.round((Date.now() - sectionStart) / 1000);
+        if (dur >= 2) {
+          navigator.sendBeacon('/api/track', new Blob([JSON.stringify({ path: location.pathname, section: currentSection, duration_seconds: dur })], { type: 'application/json' }));
+        }
+      }
+    });
   })();
 </script>
 

@@ -360,7 +360,7 @@
     const totalViews = data.totalViews || 0;
     const uniqueDays = (data.viewsPerDay || []).length;
     const avgPerDay = uniqueDays > 0 ? Math.round(totalViews / uniqueDays) : 0;
-    const topPage = (data.topPages && data.topPages[0]) ? data.topPages[0].path : '-';
+    const avgDur = data.avgDuration || 0;
 
     $('dashContent').innerHTML = `
       <div class="stat-cards">
@@ -373,8 +373,8 @@
           <div class="stat-label">Pro Tag</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">${(data.topPages || []).length}</div>
-          <div class="stat-label">Seiten besucht</div>
+          <div class="stat-value">${formatDuration(avgDur)}</div>
+          <div class="stat-label">Verweildauer</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">${(data.countries || []).length}</div>
@@ -399,6 +399,10 @@
         </div>
       </div>
       <div class="chart-grid">
+        <div class="chart-card chart-full">
+          <h3>Bereiche — Verweildauer</h3>
+          ${renderSectionTable(data.sections || [])}
+        </div>
         <div class="chart-card">
           <h3>Top Seiten</h3>
           ${renderTable(data.topPages || [], 'path')}
@@ -514,6 +518,25 @@
   function mapCountry(val) {
     if (!val) return 'Unbekannt';
     return countryNames[val.toUpperCase()] || val;
+  }
+
+  function formatDuration(sec) {
+    sec = Number(sec);
+    if (sec < 60) return sec + 's';
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function renderSectionTable(rows) {
+    if (!rows.length) return '<p style="color:var(--text-muted);font-size:12px;">Noch keine Daten.</p>';
+    var max = Math.max(...rows.map(function(r) { return Number(r.avg_seconds); }));
+    return '<table class="data-table"><thead><tr><th>Bereich</th><th>Aufrufe</th><th>Verweildauer</th></tr></thead><tbody>' +
+      rows.map(function(r) {
+        var pct = max > 0 ? (Number(r.avg_seconds) / max * 80) : 0;
+        return '<tr><td>' + escHtml(r.section || '-') + '</td><td>' + Number(r.views).toLocaleString('de-DE') +
+          '</td><td><span class="views-bar" style="width:' + pct + 'px"></span>' + formatDuration(r.avg_seconds) + '</td></tr>';
+      }).join('') + '</tbody></table>';
   }
 
   function escHtml(s) {

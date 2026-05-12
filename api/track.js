@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { path, referrer } = req.body || {};
+  const { path, referrer, section, duration_seconds } = req.body || {};
   if (!path) return res.status(400).json({ error: 'path required' });
 
   const ua = req.headers['user-agent'] || '';
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${supabaseKey}`,
         'Prefer': 'return=minimal',
       },
-      body: JSON.stringify({ path, referrer: referrer || null, user_agent: ua, device, browser, country }),
+      body: JSON.stringify({ path, referrer: referrer || null, user_agent: ua, device, browser, country, section: section || null, duration_seconds: duration_seconds || null }),
     });
 
     if (!response.ok) {
