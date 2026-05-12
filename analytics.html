@@ -251,8 +251,17 @@
     }
     @media (max-width: 767px) {
       .section-item { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
+      .section-name { font-size: 12px; flex-basis: 100%; }
       .section-bar-wrap { flex-basis: 100%; order: 3; }
-      .section-stat-val { font-size: 14px; }
+      .section-stat-val { font-size: 18px; }
+      .section-stats { gap: 16px; }
+      .mini-charts { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .mini-chart .chart-wrap { max-height: 120px; }
+      .dash-header { flex-direction: column; align-items: flex-start; }
+      .dash-controls { width: 100%; justify-content: space-between; }
+      .dash-select { flex: 1; }
+      .data-table th { font-size: 8px; padding: 5px 6px; }
+      .data-table td { font-size: 11px; padding: 6px; }
     }
 
     /* Loading */
@@ -441,10 +450,6 @@
         <div class="chart-card chart-full">
           <h3>Bereiche — Verweildauer</h3>
           ${renderSectionTable(data.sections || [])}
-        </div>
-        <div class="chart-card">
-          <h3>Top Seiten</h3>
-          ${renderTable(data.topPages || [], 'path')}
         </div>
         <div class="chart-card">
           <h3>Herkunft</h3>
