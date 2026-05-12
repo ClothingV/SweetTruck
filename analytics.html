@@ -216,6 +216,45 @@
       background: var(--accent); margin-right: 6px; vertical-align: middle;
     }
 
+    /* Section List */
+    .section-list { list-style: none; padding: 0; margin: 0; }
+    .section-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; border-bottom: 1px solid var(--border);
+      gap: 10px;
+    }
+    .section-item:last-child { border-bottom: none; }
+    .section-name {
+      font-size: 13px; color: var(--text-primary); font-weight: 500;
+      flex: 1; min-width: 0;
+    }
+    .section-bar-wrap {
+      flex: 2; height: 6px; background: rgba(47,47,51,0.6);
+      border-radius: 3px; overflow: hidden;
+    }
+    .section-bar {
+      height: 100%; background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+      border-radius: 3px; transition: width 0.6s ease;
+    }
+    .section-stats {
+      display: flex; gap: 12px; flex-shrink: 0;
+    }
+    .section-stat {
+      text-align: right; min-width: 50px;
+    }
+    .section-stat-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-weight: 700; color: var(--accent); line-height: 1;
+    }
+    .section-stat-label {
+      font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    @media (max-width: 767px) {
+      .section-item { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
+      .section-bar-wrap { flex-basis: 100%; order: 3; }
+      .section-stat-val { font-size: 14px; }
+    }
+
     /* Loading */
     .loading {
       text-align: center; padding: 40px 16px; color: var(--text-muted);
@@ -530,13 +569,17 @@
 
   function renderSectionTable(rows) {
     if (!rows.length) return '<p style="color:var(--text-muted);font-size:12px;">Noch keine Daten.</p>';
-    var max = Math.max(...rows.map(function(r) { return Number(r.avg_seconds); }));
-    return '<table class="data-table"><thead><tr><th>Bereich</th><th>Aufrufe</th><th>Verweildauer</th></tr></thead><tbody>' +
-      rows.map(function(r) {
-        var pct = max > 0 ? (Number(r.avg_seconds) / max * 80) : 0;
-        return '<tr><td>' + escHtml(r.section || '-') + '</td><td>' + Number(r.views).toLocaleString('de-DE') +
-          '</td><td><span class="views-bar" style="width:' + pct + 'px"></span>' + formatDuration(r.avg_seconds) + '</td></tr>';
-      }).join('') + '</tbody></table>';
+    var maxSec = Math.max(...rows.map(function(r) { return Number(r.avg_seconds); }));
+    return '<ul class="section-list">' + rows.map(function(r) {
+      var pct = maxSec > 0 ? (Number(r.avg_seconds) / maxSec * 100) : 0;
+      return '<li class="section-item">' +
+        '<span class="section-name">' + escHtml(r.section || '-') + '</span>' +
+        '<div class="section-bar-wrap"><div class="section-bar" style="width:' + pct + '%"></div></div>' +
+        '<div class="section-stats">' +
+          '<div class="section-stat"><div class="section-stat-val">' + Number(r.views).toLocaleString('de-DE') + '</div><div class="section-stat-label">Aufrufe</div></div>' +
+          '<div class="section-stat"><div class="section-stat-val">' + formatDuration(r.avg_seconds) + '</div><div class="section-stat-label">Ø Zeit</div></div>' +
+        '</div></li>';
+    }).join('') + '</ul>';
   }
 
   function escHtml(s) {

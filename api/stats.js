@@ -15,23 +15,27 @@ export default async function handler(req, res) {
   const days = parseInt(req.query.days) || 30;
 
   try {
-    const response = await fetch(`${supabaseUrl}/rest/v1/rpc/get_analytics`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`,
-      },
-      body: JSON.stringify({ days_back: days }),
-    });
+    const [analyticsRes, visitsRes] = await Promise.all([
+      fetch(`${supabaseUrl}/rest/v1/rpc/get_analytics`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` },
+        body: JSON.stringify({ days_back: days }),
+      }),
+      fetch(`${supabaseUrl}/rest/v1/rpc/get_recent_visits`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` },
+        body: JSON.stringify({ days_back: days, max_rows: 200 }),
+      }),
+    ]);
 
-    if (!response.ok) {
-      const text = await response.text();
-      return res.status(500).json({ error: text, url: supabaseUrl, status: response.status });
+    if (!analyticsRes.ok) {
+      const text = await analyticsRes.text();
+      return res.status(500).json({ error: text });
     }
 
-    const data = await response.json();
-    return res.status(200).json({ days, ...data });
+    const data = await analyticsRes.json();
+    const visits = visitsRes.ok ? await visitsRes.json() : [];
+    return res.status(200).json({ days, ...data, recentVisits: visits });
   } catch (err) {
     return res.status(500).json({ error: err.message, stack: err.stack });
   }
