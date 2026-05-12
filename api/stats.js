@@ -27,12 +27,12 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const text = await response.text();
-      return res.status(500).json({ error: text });
+      return res.status(500).json({ error: text, url: supabaseUrl, status: response.status });
     }
 
     const data = await response.json();
     return res.status(200).json({ days, ...data });
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message, stack: err.stack });
   }
 }
