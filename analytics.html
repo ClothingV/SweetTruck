@@ -258,10 +258,11 @@
     if (!storedPass) return;
     $('loginError').style.display = 'none';
     loadData().then(ok => {
-      if (ok) {
+      if (ok === true) {
         $('loginScreen').style.display = 'none';
         $('dashboard').style.display = 'block';
       } else {
+        if (ok !== 'error') $('loginError').textContent = 'Falsches Passwort. Bitte erneut versuchen.';
         $('loginError').style.display = 'block';
         storedPass = '';
       }
@@ -275,13 +276,19 @@
         headers: { 'x-analytics-pass': storedPass }
       });
       if (res.status === 401) return false;
-      if (!res.ok) return false;
-      const data = await res.json();
+      if (!res.ok) {
+        var errData = await res.text();
+        console.error('API Error:', res.status, errData);
+        $('loginError').textContent = 'Server-Fehler: ' + res.status;
+        return 'error';
+      }
+      var data = await res.json();
       renderDashboard(data);
       return true;
     } catch (e) {
       console.error(e);
-      return false;
+      $('loginError').textContent = 'Verbindungsfehler: ' + e.message;
+      return 'error';
     }
   }
 
