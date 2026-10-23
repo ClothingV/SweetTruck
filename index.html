@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18163183755"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18163183755');
+
+    // Conversion-Tracking: Telefon, WhatsApp, E-Mail Klicks
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+      if (href.startsWith('tel:')) {
+        gtag('event', 'conversion', { send_to: 'AW-18163183755/ads_conversion_Aj_nlatk_r_s_1' });
+      } else if (href.startsWith('mailto:')) {
+        gtag('event', 'conversion', { send_to: 'AW-18163183755/ads_conversion_Aj_nlatk_r_s_1' });
+      } else if (href.includes('wa.me')) {
+        gtag('event', 'conversion', { send_to: 'AW-18163183755/ads_conversion_Aj_nlatk_r_s_1' });
+      }
+    });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sweet Truck — Penelope's Sweetness World</title>
@@ -1982,6 +2004,27 @@
 
 <div class="section-divider"></div>
 
+<!-- ===== CREPES CAROUSEL ===== -->
+<section class="hp-section">
+  <div class="section-title">Unsere <span>Crêpes</span></div>
+  <div class="section-sub">Frisch zubereitet — direkt vom Truck</div>
+  <div class="carousel-wrap" id="crepe-carousel-wrap">
+    <div class="carousel-stage" id="crepe-carousel-stage">
+      <div class="carousel-item" data-ci="0"><div class="ci-inner"><div class="ci-front"><img src="img/crepe_cookies_cream.jpg" alt="Cookies &amp; Cream Sushi Crêpe" loading="lazy"><div class="ci-name">Cookies &amp; Cream Sushi Crêpe</div></div><div class="ci-back"><div class="ci-back-name">Cookies &amp; Cream Sushi Crêpe</div><div class="ci-back-desc">Frisch zubereiteter Crêpe mit cremiger Cookies &amp; Cream Creme, luftiger Sahne und knusprigen Oreo Stückchen, aufgerollt und als Sushi serviert. Dazu gibt es hausgemachte Cookies und unsere leckere Cookies &amp; Cream Sauce.</div></div></div></div>
+      <div class="carousel-item" data-ci="1"><div class="ci-inner"><div class="ci-front"><img src="img/crepe_apfelstrudel.jpg" alt="Apfelstrudel Sushi Crêpe" loading="lazy"><div class="ci-name">Apfelstrudel Sushi Crêpe</div></div><div class="ci-back"><div class="ci-back-name">Apfelstrudel Sushi Crêpe</div><div class="ci-back-desc">Apfelstrudel Crêpe mit zarter weißer Schokolade, luftiger Sahne und aromatischem Apfel Zimt Ragout, aufgerollt und als Sushi serviert. Dazu gibt es cremige Vanillesauce und knusprige Crumble Streusel.</div></div></div></div>
+      <div class="carousel-item" data-ci="2"><div class="ci-inner"><div class="ci-front"><img src="img/crepe_schwarzwaelder.jpg" alt="Schwarzwälder Crêpe" loading="lazy"><div class="ci-name">Schwarzwälder Crêpe</div></div><div class="ci-back"><div class="ci-back-name">Schwarzwälder Crêpe</div><div class="ci-back-desc">Schwarzwälder Crêpe mit cremigem Nutella, luftiger Sahne und fruchtigem Sauerkirsch Gelee, aufgerollt und als Sushi serviert. Verfeinert mit Nutella-Sauce und feinen Schokoladenraspeln.</div></div></div></div>
+      <div class="carousel-item" data-ci="3"><div class="ci-inner"><div class="ci-front"><img src="img/crepe_nutella_banane.jpg" alt="Nutella Banane Sushi Crêpe" loading="lazy"><div class="ci-name">Nutella Banane Sushi Crêpe</div></div><div class="ci-back"><div class="ci-back-name">Nutella Banane Sushi Crêpe</div><div class="ci-back-desc">Nutella Banane Crêpe mit cremigem Nutella, luftiger Sahne und frischer Banane, aufgerollt und als Sushi serviert. Getoppt mit Nutella Sauce und einer kleinen Tafel Schokolade.</div></div></div></div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-arrow" type="button" aria-label="Vorherige Crêpe" onclick="crepeCarouselPrev()">&#8249;</button>
+      <div class="carousel-dots" id="crepe-carousel-dots"></div>
+      <button class="carousel-arrow" type="button" aria-label="Nächste Crêpe" onclick="crepeCarouselNext()">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- ===== TIMELINE ===== -->
 <section class="timeline-section">
   <div class="section-title">Unsere <span>Geschichte</span></div>
@@ -2338,6 +2381,29 @@
           <li>Karamell-Traum</li>
           <li>Banane-Nutella</li>
           <li>Raffaello</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:2px solid var(--accent);margin:0;opacity:0.5">
+
+    <!-- Crêpes -->
+    <div class="catering-section">
+      <div class="catering-img" style="padding:0;border:3px solid var(--accent-dark);border-radius:16px;overflow:hidden;max-width:280px">
+        <img src="img/crepe_cookies_cream.jpg" class="crepe-cat-slide" alt="Cookies &amp; Cream Sushi Crêpe" style="width:100%;display:block;object-fit:contain;background:#f5f0e8">
+        <img src="img/crepe_apfelstrudel.jpg" class="crepe-cat-slide" alt="Apfelstrudel Sushi Crêpe" style="width:100%;display:none;object-fit:contain;background:#f5f0e8">
+        <img src="img/crepe_schwarzwaelder.jpg" class="crepe-cat-slide" alt="Schwarzwälder Crêpe" style="width:100%;display:none;object-fit:contain;background:#f5f0e8">
+        <img src="img/crepe_nutella_banane.jpg" class="crepe-cat-slide" alt="Nutella Banane Sushi Crêpe" style="width:100%;display:none;object-fit:contain;background:#f5f0e8">
+      </div>
+      <div class="catering-text">
+        <h3>Unsere <span>Crêpes</span></h3>
+        <p>Unsere Sushi-Crêpes sind eine moderne Interpretation des klassischen Crêpes: frisch zubereitet, gefüllt, aufgerollt und in mundgerechte Stücke geschnitten — so wie bei Sushi serviert. Ein optisches und geschmackliches Highlight für jedes Event.</p>
+        <div class="catering-list-title">Für Catering bieten wir 4 Geschmacksrichtungen an:</div>
+        <ul class="catering-list">
+          <li>Cookies &amp; Cream</li>
+          <li>Apfelstrudel</li>
+          <li>Schwarzwälder</li>
+          <li>Nutella Banane</li>
         </ul>
       </div>
     </div>
@@ -2870,6 +2936,15 @@
     slides[wafCatIdx].style.display = 'block';
   }, 2500);
 
+  let crepeCatIdx = 0;
+  setInterval(() => {
+    const slides = document.querySelectorAll('.crepe-cat-slide');
+    if (!slides.length) return;
+    slides[crepeCatIdx].style.display = 'none';
+    crepeCatIdx = (crepeCatIdx + 1) % slides.length;
+    slides[crepeCatIdx].style.display = 'block';
+  }, 2500);
+
   function goToNextEvent() {
     const now = new Date(); now.setHours(0,0,0,0);
     const upcoming = events
@@ -3098,62 +3173,79 @@
   window.addEventListener('scroll', updateActiveNav, { passive: true });
 
   // ========== 3D CAROUSEL ==========
-  const carouselItems = document.querySelectorAll('#carousel-stage .carousel-item');
-  const totalItems = carouselItems.length;
-  let carouselIndex = 0;
+  function createCarousel(stageId, dotsId, wrapId) {
+    const items = document.querySelectorAll('#' + stageId + ' .carousel-item');
+    const total = items.length;
+    let index = 0;
+    let auto;
 
-  function updateCarousel() {
-    carouselItems.forEach((item, i) => {
-      item.className = 'carousel-item';
-      const diff = i - carouselIndex;
-      const wrappedDiff = ((diff + totalItems + Math.floor(totalItems/2)) % totalItems) - Math.floor(totalItems/2);
-      if (wrappedDiff === 0) item.classList.add('ci-active');
-      else if (wrappedDiff === -1) item.classList.add('ci-left');
-      else if (wrappedDiff === 1) item.classList.add('ci-right');
-      else if (wrappedDiff === -2) item.classList.add('ci-far-left');
-      else if (wrappedDiff === 2) item.classList.add('ci-far-right');
-      else item.classList.add('ci-hidden');
-    });
-    const dotsEl = document.getElementById('carousel-dots');
-    if (dotsEl) {
-      dotsEl.innerHTML = '';
-      for (let i = 0; i < totalItems; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-        dot.onclick = () => { carouselIndex = i; updateCarousel(); };
-        dotsEl.appendChild(dot);
+    function update() {
+      items.forEach((item, i) => {
+        item.className = 'carousel-item';
+        const diff = i - index;
+        const wrappedDiff = ((diff + total + Math.floor(total/2)) % total) - Math.floor(total/2);
+        if (wrappedDiff === 0) item.classList.add('ci-active');
+        else if (wrappedDiff === -1) item.classList.add('ci-left');
+        else if (wrappedDiff === 1) item.classList.add('ci-right');
+        else if (wrappedDiff === -2) item.classList.add('ci-far-left');
+        else if (wrappedDiff === 2) item.classList.add('ci-far-right');
+        else item.classList.add('ci-hidden');
+      });
+      const dotsEl = document.getElementById(dotsId);
+      if (dotsEl) {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === index ? ' active' : '');
+          dot.onclick = () => { index = i; update(); };
+          dotsEl.appendChild(dot);
+        }
       }
     }
-  }
 
-  function carouselNext() { carouselIndex = (carouselIndex + 1) % totalItems; updateCarousel(); }
-  function carouselPrev() { carouselIndex = (carouselIndex - 1 + totalItems) % totalItems; updateCarousel(); }
+    function next() { index = (index + 1) % total; update(); }
+    function prev() { index = (index - 1 + total) % total; update(); }
 
-  carouselItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const idx = parseInt(item.dataset.ci);
-      if (item === carouselItems[carouselIndex]) {
-        item.classList.toggle('ci-flipped');
-      } else {
-        carouselIndex = idx; updateCarousel();
-      }
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const idx = parseInt(item.dataset.ci);
+        if (idx === index) {
+          item.classList.toggle('ci-flipped');
+        } else {
+          index = idx; update();
+        }
+      });
     });
-  });
 
-  let carouselAuto = setInterval(carouselNext, 8000);
-  const carouselWrap = document.getElementById('carousel-wrap');
-  if (carouselWrap) {
-    carouselWrap.addEventListener('mouseenter', () => clearInterval(carouselAuto));
-    carouselWrap.addEventListener('mouseleave', () => { carouselAuto = setInterval(carouselNext, 8000); });
-    // Touch swipe
-    let touchStartX = 0;
-    carouselWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    carouselWrap.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(diff) > 40) { if (diff > 0) carouselPrev(); else carouselNext(); }
-    }, { passive: true });
+    auto = setInterval(next, 8000);
+    const wrap = document.getElementById(wrapId);
+    if (wrap) {
+      wrap.addEventListener('mouseenter', () => clearInterval(auto));
+      wrap.addEventListener('mouseleave', () => { auto = setInterval(next, 8000); });
+      // Touch swipe
+      let touchStartX = 0;
+      wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      wrap.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(diff) > 40) { if (diff > 0) prev(); else next(); }
+      }, { passive: true });
+    }
+    update();
+
+    return {
+      next, prev,
+      pause() { clearInterval(auto); },
+      resume() { auto = setInterval(next, 8000); }
+    };
   }
-  updateCarousel();
+
+  const waffleCarousel = createCarousel('carousel-stage', 'carousel-dots', 'carousel-wrap');
+  const crepeCarousel = createCarousel('crepe-carousel-stage', 'crepe-carousel-dots', 'crepe-carousel-wrap');
+
+  function carouselNext() { waffleCarousel.next(); }
+  function carouselPrev() { waffleCarousel.prev(); }
+  function crepeCarouselNext() { crepeCarousel.next(); }
+  function crepeCarouselPrev() { crepeCarousel.prev(); }
 
   // ========== CALENDAR HEADER UPGRADE ==========
   document.querySelectorAll('.calendar').forEach(cal => {
@@ -3251,8 +3343,8 @@
 
   // ========== PAUSE CAROUSEL ON HIDDEN ==========
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) clearInterval(carouselAuto);
-    else carouselAuto = setInterval(carouselNext, 8000);
+    if (document.hidden) { waffleCarousel.pause(); crepeCarousel.pause(); }
+    else { waffleCarousel.resume(); crepeCarousel.resume(); }
   });
 
   // ========== KEYBOARD NAV FOR CAROUSEL ==========
